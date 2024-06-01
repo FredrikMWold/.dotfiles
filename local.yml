@@ -77,6 +77,10 @@
     - name: symlink dotfiles with stow
       shell: cd ~/.dotfiles && stow config
       become_user: fredrik
+    - name: set zsh as default shell
+      user:
+        name: fredrik
+        shell: /usr/bin/zsh
     - name: clear font cache
       shell: fc-cache -f -v
       become_user: fredrik
