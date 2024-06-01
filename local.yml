@@ -10,6 +10,7 @@
     - name: add vscode repository
       apt_repository:
         repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
+        filename: vscode
     - name: add flathub repository
       flatpak_remote:
         name: flathub
@@ -69,10 +70,4 @@
       become_user: fredrik
     - name: clear font cache
       shell: fc-cache -f -v
-      become_user: fredrik
-    - name: link dotfile script to bin
-      file:
-        src: ~/.dotfiles/bin/dotfiles
-        dest: ~/bin/dotfiles
-        state: link
       become_user: fredrik
