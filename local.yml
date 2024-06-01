@@ -11,6 +11,15 @@
       apt_repository:
         repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
         filename: vscode
+    - name: add chrome repository
+      apt_repository:
+        repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
+        filename: google-chrome
+    - name: add go repository
+      apt_repository:
+        repo: ppa:longsleep/golang-backports
+    - name: install gum
+      command: go install github.com/charmbracelet/gum@latest
     - name: add flathub repository
       flatpak_remote:
         name: flathub
