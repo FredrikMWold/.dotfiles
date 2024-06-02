@@ -2,6 +2,10 @@
 
 LOG_OUTPUT=$(git log --oneline)
 FILTER_OUTPUT=$(echo "$LOG_OUTPUT" | gum choose)
+if [ -z "$FILTER_OUTPUT" ]; then
+    echo "No commit selected"
+    exit 1
+fi
 CUT_OUTPUT=$(echo "$FILTER_OUTPUT" | cut -d' ' -f1)
 
 git rebase -i $CUT_OUTPUT

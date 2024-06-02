@@ -18,12 +18,12 @@
     - name: add go repository
       apt_repository:
         repo: ppa:longsleep/golang-backports
-    - name: install gum
-      command: go install github.com/charmbracelet/gum@latest
     - name: add flathub repository
       flatpak_remote:
         name: flathub
         flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+    - name: install gum
+      command: go install github.com/charmbracelet/gum@latest
     - name: install stow
       apt:
         name: stow
@@ -56,6 +56,10 @@
       flatpak:
         name: com.slack.Slack
         state: present
+    - name: install streamio
+      flatpak:
+        name: com.stremio.Stremio
+        state: present
     - name: install osrs
       flatpak:
         name: com.adamcake.Bolt
@@ -77,10 +81,6 @@
     - name: symlink dotfiles with stow
       shell: cd ~/.dotfiles && stow config
       become_user: fredrik
-    - name: set zsh as default shell
-      user:
-        name: fredrik
-        shell: /usr/bin/zsh
     - name: clear font cache
       shell: fc-cache -f -v
       become_user: fredrik
