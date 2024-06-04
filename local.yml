@@ -28,6 +28,10 @@
       apt:
         name: stow
         state: latest
+    - name: install go
+      apt:
+        name: golang-go
+        state: latest
     - name: install htop
       apt:
         name: htop
