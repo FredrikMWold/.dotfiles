@@ -22,15 +22,15 @@
       flatpak_remote:
         name: flathub
         flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+    - name: install go
+      apt:
+        name: golang-go
+        state: latest
     - name: install gum
       command: go install github.com/charmbracelet/gum@latest
     - name: install stow
       apt:
         name: stow
-        state: latest
-    - name: install go
-      apt:
-        name: golang-go
         state: latest
     - name: install htop
       apt:
