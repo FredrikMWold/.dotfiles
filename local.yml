@@ -36,6 +36,10 @@
       apt:
         name: htop
         state: latest
+    - name: install jq
+      apt:
+        name: jq
+        state: latest
     - name: install vscode
       apt:
         name: code
