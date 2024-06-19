@@ -44,7 +44,25 @@
       apt:
         name: jq
         state: latest
-    - name: install vscode
+    - name: install xclip
+      apt:
+        name: xclip
+        state: latest
+    - name: install python3
+      apt:
+        name: python3
+        state: latest
+    - name: install python3-pip
+      apt:
+        name: python3-pip
+        state: latest
+    - name: update pip
+      shell: pip3 install --upgrade pip
+      become_user: fredrik
+    - name: install keeper-cli
+      command: pip3 install keepercommander
+      become_user: fredrik
+    - name: install vscodes
       apt:
         name: code
         state: latest

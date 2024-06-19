@@ -1,0 +1,6 @@
+#!/bin/bash
+
+SELECTED_PASSWORD=$(gum spin --spinner dot --title "Getting password list..." -- keeper list --format csv | awk ' {if(NR>1) print}' | awk -F',' '{print $3, $1}' | awk 'NF > 0' | gum choose)
+echo "Selected password: $(echo $SELECTED_PASSWORD | awk '{print $1}')"
+gum spin --spinner dot --title "Decrypting password..." keeper find-password "$(echo $SELECTED_PASSWORD | awk '{print $2}')" | xclip -selection clipboard
+echo "Password copied to clipboard"
