@@ -28,6 +28,10 @@
         state: latest
     - name: install gum
       command: go install github.com/charmbracelet/gum@latest
+      become_user: fredrik
+    - name: install radix-cli
+      command: go install github.com/equinor/radix-cli/cli/rx@latest
+      become_user: fredrik
     - name: install stow
       apt:
         name: stow

@@ -3,31 +3,25 @@
 APPLICATIONS=$(gum spin --title "Getting your applications" -- rx get application)
 while true
 do
-    echo Choose application:
-    SELECTED_APPLICATION=$(gum choose $APPLICATIONS)
+    SELECTED_APPLICATION=$(gum choose --header "Choose application:" $APPLICATIONS)
     if [ -z "$SELECTED_APPLICATION" ]; then
         break
     fi
-
     APPLICATION_DATA=$(gum spin --title "Getting application data" -- rx get application -a $SELECTED_APPLICATION)
 
     ENVIRONMENTS=$(echo $APPLICATION_DATA | jq -r '.environments | .[].name')
-    echo Choose environment:
-    SELECTED_ENVIRONMENT=$(gum choose $ENVIRONMENTS)
+    SELECTED_ENVIRONMENT=$(gum choose --header "Choose environment:" $ENVIRONMENTS)
     if [ -z "$SELECTED_ENVIRONMENT" ]; then
         break
     fi
 
     BRANCHES=$(echo $APPLICATION_DATA | jq -r '.environments | .[].branchMapping')
-    echo Choose branch:
-    SELECTED_BRANCH=$(gum choose $BRANCHES)
+    SELECTED_BRANCH=$(gum choose --header "Choose branch:" $BRANCHES)
     if [ -z "$SELECTED_BRANCH" ]; then
         break
     fi
 
-    echo application: $SELECTED_APPLICATION
-    echo environment: $SELECTED_ENVIRONMENT
-    echo branch: $SELECTED_BRANCH
-    gum confirm --affirmative "Deploy" --negative "Cancel" "build-deploy" && rx create pipeline-job build-deploy -a $SELECTED_APPLICATION --api-environment $SELECTED_ENVIRONMENT -b $SELECTED_BRANCH
+    CONFIRM_TEXT="build-deploy\n\napplication: $SELECTED_APPLICATION\nenvironment: $SELECTED_ENVIRONMENT\nbranch: $SELECTED_BRANCH"
+    gum confirm --affirmative "Deploy" --negative "Cancel" "$(echo -e $CONFIRM_TEXT)" && rx create pipeline-job build-deploy -a $SELECTED_APPLICATION --api-environment $SELECTED_ENVIRONMENT -b $SELECTED_BRANCH
 
 done
