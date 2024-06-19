@@ -1,0 +1,33 @@
+#!/bin/bash
+
+APPLICATIONS=$(gum spin --title "Getting your applications" -- rx get application)
+while true
+do
+    echo Choose application:
+    SELECTED_APPLICATION=$(gum choose $APPLICATIONS)
+    if [ -z "$SELECTED_APPLICATION" ]; then
+        break
+    fi
+
+    APPLICATION_DATA=$(gum spin --title "Getting application data" -- rx get application -a $SELECTED_APPLICATION)
+
+    ENVIRONMENTS=$(echo $APPLICATION_DATA | jq -r '.environments | .[].name')
+    echo Choose environment:
+    SELECTED_ENVIRONMENT=$(gum choose $ENVIRONMENTS)
+    if [ -z "$SELECTED_ENVIRONMENT" ]; then
+        break
+    fi
+
+    BRANCHES=$(echo $APPLICATION_DATA | jq -r '.environments | .[].branchMapping')
+    echo Choose branch:
+    SELECTED_BRANCH=$(gum choose $BRANCHES)
+    if [ -z "$SELECTED_BRANCH" ]; then
+        break
+    fi
+
+    echo application: $SELECTED_APPLICATION
+    echo environment: $SELECTED_ENVIRONMENT
+    echo branch: $SELECTED_BRANCH
+    gum confirm --affirmative "Deploy" --negative "Cancel" "build-deploy" && rx create pipeline-job build-deploy -a $SELECTED_APPLICATION --api-environment $SELECTED_ENVIRONMENT -b $SELECTED_BRANCH
+
+done
