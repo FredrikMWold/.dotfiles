@@ -1,0 +1,14 @@
+#!/bin/bash
+
+APPLICATIONS=$(gum spin --title "Getting your applications" -- rx get application)
+while true
+do
+    SELECTED_APPLICATION=$(gum choose --header "Choose application:" $APPLICATIONS)
+    if [ -z "$SELECTED_APPLICATION" ]; then
+        break
+    fi
+    APPLICATION_DATA=$(gum spin --title "Getting application data" -- rx get application -a $SELECTED_APPLICATION)
+
+    PIPLINE_JOBS=$(echo $APPLICATION_DATA | jq -r '.jobs | map("\(.created) \(.environments | .[0]) \(.status) \(.pipeline)") | join("\n")')
+    (echo "Created Environment Status Pipeline"; echo "$PIPLINE_JOBS") | column -t | gum pager
+done
