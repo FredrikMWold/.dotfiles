@@ -66,6 +66,12 @@
       apt:
         name: code
         state: latest
+    - name: install ollama
+      shell: curl -fsSL https://ollama.com/install.sh | sh
+      become: true
+    - name: install deepseekcoder
+      shell: ollama pull deepseek-coder-v2
+      become_user: fredrik
     - name: install chrome
       apt:
         name: google-chrome-stable
