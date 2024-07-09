@@ -2,121 +2,24 @@
   connection: local
   become: true
   tasks:
-    - name: pull dotfile repo
-      git:
-        repo: https://github.com/FredrikMWold/.dotfiles.git
-        dest: ~/.dotfiles
-      become_user: fredrik
-    - name: add vscode repository
-      apt_repository:
-        repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
-        filename: vscode
-    - name: add chrome repository
-      apt_repository:
-        repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
-        filename: google-chrome
-    - name: add go repository
-      apt_repository:
-        repo: ppa:longsleep/golang-backports
-    - name: add flathub repository
-      flatpak_remote:
-        name: flathub
-        flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
-    - name: install go
-      apt:
-        name: golang-go
-        state: latest
-    - name: install gum
-      command: go install github.com/charmbracelet/gum@latest
-      become_user: fredrik
-    - name: install radix-cli
-      command: go install github.com/equinor/radix-cli/cli/rx@latest
-      become_user: fredrik
-    - name: install stow
-      apt:
-        name: stow
-        state: latest
-    - name: install htop
-      apt:
-        name: htop
-        state: latest
-    - name: install jq
-      apt:
-        name: jq
-        state: latest
-    - name: install xclip
-      apt:
-        name: xclip
-        state: latest
-    - name: install python3
-      apt:
-        name: python3
-        state: latest
-    - name: install python3-pip
-      apt:
-        name: python3-pip
-        state: latest
-    - name: update pip
-      shell: pip3 install --upgrade pip
-      become_user: fredrik
-    - name: install keeper-cli
-      command: pip3 install keepercommander
-      become_user: fredrik
-    - name: install vscodes
-      apt:
-        name: code
-        state: latest
-    - name: install ollama
-      shell: curl -fsSL https://ollama.com/install.sh | sh
-      become: true
-    - name: install deepseekcoder
-      shell: ollama pull deepseek-coder-v2
-      become_user: fredrik
-    - name: install chrome
-      apt:
-        name: google-chrome-stable
-        state: latest
-    - name: install flameshot
-      apt:
-        name: flameshot
-        state: latest
-    - name: install zsh
-      apt:
-        name: zsh
-        state: latest
-    - name: install teams
-      flatpak:
-        name: com.github.IsmaelMartinez.teams_for_linux
-        state: present
-    - name: install slack
-      flatpak:
-        name: com.slack.Slack
-        state: present
-    - name: install streamio
-      flatpak:
-        name: com.stremio.Stremio
-        state: present
-    - name: install osrs
-      flatpak:
-        name: com.adamcake.Bolt
-        state: present
-    - name: check if oh-my-zsh is installed
-      stat:
-        path: ~/.oh-my-zsh
-      register: oh_my_zsh
-      become_user: fredrik
-    - name: install oh-my-zsh
-      shell: sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
-      when: not oh_my_zsh.stat.exists
-      become_user: fredrik
-    - name: remove old .zshrc
-      file:
-        path: ~/.zshrc
-        state: absent
-      become_user: fredrik
+    - name: add apt repositries
+      import_tasks: playbooks/add_apt_repos.yml
+
+    - name: flatpak setup
+      import_tasks: playbooks/flatpak_setup.yml
+
+    - name: apt setup
+      import_tasks: playbooks/apt_setup.yml
+
+    - name: go setup
+      import_tasks: playbooks/go_setup.yml
+
+    - name: terminal setup
+      import_tasks: playbooks/terminal_setup.yml
+
+    - name: python setup
+      import_tasks: playbooks/python_setup.yml
+
     - name: symlink dotfiles with stow
       shell: cd ~/.dotfiles && stow config
-      become_user: fredrik
-    - name: clear font cache
-      shell: fc-cache -f -v
       become_user: fredrik

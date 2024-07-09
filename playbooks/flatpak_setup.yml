@@ -1,0 +1,24 @@
+- name: add flathub repository
+  flatpak_remote:
+    name: flathub
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+
+- name: install teams
+  flatpak:
+    name: com.github.IsmaelMartinez.teams_for_linux
+    state: present
+
+- name: install slack
+  flatpak:
+    name: com.slack.Slack
+    state: present
+
+- name: install streamio
+  flatpak:
+    name: com.stremio.Stremio
+    state: present
+
+- name: install osrs
+  flatpak:
+    name: com.adamcake.Bolt
+    state: present
