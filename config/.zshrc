@@ -120,3 +120,7 @@ PATH=~/.console-ninja/.bin:$PATH
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+alias tp='tmux select-window -t $(gum choose $(tmux list-windows -F "#{window_name}"))'
+alias tnw='tmux new-window -n'
+alias trw='tmux rename-window'

@@ -52,3 +52,8 @@
   apt:
     name: python3-pip
     state: latest
+
+- name: install tmux
+  apt:
+    name: tmux
+    state: latest

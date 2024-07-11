@@ -1,5 +1,22 @@
 #!/bin/bash
 
+SELECTED_APPLICATION=$1
+
+get_application_data() {
+    APPLICATION_DATA=$(gum spin --title "Getting application data" -- rx get application -a $1)
+    echo $APPLICATION_DATA | jq -r '.jobs | map("\(.created) \(.environments | .[0]) \(.status) \(.pipeline)") | join("\n")'
+}
+
+print_pipeline_jobs() {
+    (echo "Created Environment Status Pipeline"; echo "$1") | column -t | gum pager
+}
+
+if [ ! -z "$SELECTED_APPLICATION" ]; then
+    PIPLINE_JOBS=$(get_application_data $SELECTED_APPLICATION)
+    print_pipeline_jobs "$PIPLINE_JOBS"
+    exit 1
+fi
+
 APPLICATIONS=$(gum spin --title "Getting your applications" -- rx get application)
 while true
 do
@@ -7,8 +24,6 @@ do
     if [ -z "$SELECTED_APPLICATION" ]; then
         break
     fi
-    APPLICATION_DATA=$(gum spin --title "Getting application data" -- rx get application -a $SELECTED_APPLICATION)
-
-    PIPLINE_JOBS=$(echo $APPLICATION_DATA | jq -r '.jobs | map("\(.created) \(.environments | .[0]) \(.status) \(.pipeline)") | join("\n")')
-    (echo "Created Environment Status Pipeline"; echo "$PIPLINE_JOBS") | column -t | gum pager
+    PIPLINE_JOBS=$(get_application_data $SELECTED_APPLICATION)
+    print_pipeline_jobs "$PIPLINE_JOBS"
 done
