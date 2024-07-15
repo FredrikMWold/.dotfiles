@@ -20,9 +20,6 @@
     - name: python setup
       import_tasks: playbooks/python_setup.yml
 
-    - name: snap setup
-      import_tasks: playbooks/snap_setup.yml
-
     - name: symlink dotfiles with stow
       shell: cd ~/.dotfiles && stow config
       become_user: fredrik

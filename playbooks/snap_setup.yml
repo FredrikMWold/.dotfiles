@@ -1,6 +1,0 @@
-- name: install alacritty
-  become_user: fredrik
-  snap:
-    name: alacritty
-    state: present
-    classic: yes
