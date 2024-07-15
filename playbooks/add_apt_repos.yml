@@ -2,12 +2,15 @@
   apt_repository:
     repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
     filename: vscode
+  become_user: fredrik
 
 - name: add chrome repository
   apt_repository:
     repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
     filename: google-chrome
+  become_user: fredrik
 
 - name: add go repository
   apt_repository:
     repo: ppa:longsleep/golang-backports
+  become_user: fredrik

@@ -2,58 +2,70 @@
   apt:
     name: golang-go
     state: latest
+  become_user: fredrik
 
 - name: install chrome
   apt:
     name: google-chrome-stable
     state: latest
+  become_user: fredrik
 
 - name: install vscodes
   apt:
     name: code
     state: latest
+  become_user: fredrik
 
 - name: install flameshot
   apt:
     name: flameshot
     state: latest
+  become_user: fredrik
 
 - name: install zsh
   apt:
     name: zsh
     state: latest
+  become_user: fredrik
 
 - name: install stow
   apt:
     name: stow
     state: latest
+  become_user: fredrik
 
 - name: install htop
   apt:
     name: htop
     state: latest
+  become_user: fredrik
 
 - name: install jq
   apt:
     name: jq
     state: latest
+  become_user: fredrik
 
 - name: install xclip
   apt:
     name: xclip
     state: latest
+  become_user: fredrik
 
 - name: install python3
   apt:
     name: python3
     state: latest
+  become_user: fredrik
 
 - name: install python3-pip
   apt:
     name: python3-pip
     state: latest
+  become_user: fredrik
 
 - name: install kitty
   apt:
     name: kitty
     state: latest
+  become_user: fredrik
