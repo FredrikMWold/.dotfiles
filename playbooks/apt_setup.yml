@@ -63,9 +63,3 @@
     name: python3-pip
     state: latest
   become_user: fredrik
-
-- name: install kitty
-  apt:
-    name: kitty
-    state: latest
-  become_user: fredrik

@@ -734,7 +734,7 @@ tab_title_template "{title[title.rfind('/')+1:]}"
 #: Color scheme {{{
 
 # foreground #dddddd
-# background #1C1C1C
+background #1C1C1C
 
 #: The foreground and background colors
 
@@ -1468,9 +1468,3 @@ tab_title_template "{title[title.rfind('/')+1:]}"
 #: }}}
 
 #: }}}
-
-
-# BEGIN_KITTY_THEME
-# Catppuccin-Mocha
-include current-theme.conf
-# END_KITTY_THEME

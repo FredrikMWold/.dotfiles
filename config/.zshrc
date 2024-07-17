@@ -11,6 +11,7 @@ export PATH=/home/fredrik/bin:$PATH
 export PATH=/home/fredrik/go/bin:$PATH
 export PATH="$HOME/.local/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
+export PATH=/home/fredrik/.local/kitty.app/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
