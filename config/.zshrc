@@ -102,6 +102,8 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='mvim'
 # fi
 
+export EDITOR='code'
+
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -128,4 +130,4 @@ alias trw='tmux rename-window'
 
 . "$HOME/.atuin/bin/env"
 
-eval "$(atuin init zsh)"
+eval "$(atuin init zsh --disable-up-arrow)"
