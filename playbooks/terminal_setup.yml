@@ -18,6 +18,10 @@
   when: not oh_my_zsh.stat.exists
   become_user: fredrik
 
+- name: install atuin
+  shell: curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
+  become_user: fredrik
+
 - name: remove old .zshrc
   file:
     path: ~/.zshrc
