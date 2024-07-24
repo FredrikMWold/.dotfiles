@@ -20,6 +20,14 @@
     - name: python setup
       import_tasks: playbooks/python_setup.yml
 
+    - name: copy ssh files
+      copy:
+        src: "{{playbook_dir}}/.ssh"
+        dest: ~/
+        owner: fredrik
+        group: fredrik
+      become_user: fredrik
+
     - name: symlink dotfiles with stow
       shell: cd ~/.dotfiles && stow config
       become_user: fredrik
