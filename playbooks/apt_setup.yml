@@ -69,3 +69,9 @@
     name: fzf
     state: latest
   become_user: fredrik
+
+- name: install github cli
+  apt:
+    name: gh
+    state: latest
+  become_user: fredrik
