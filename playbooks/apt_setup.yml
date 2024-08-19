@@ -64,12 +64,6 @@
     state: latest
   become_user: fredrik
 
-- name: install fzf
-  apt:
-    name: fzf
-    state: latest
-  become_user: fredrik
-
 - name: install github cli
   apt:
     name: gh
