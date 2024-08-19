@@ -1,0 +1,26 @@
+configuration{
+    modi: "drun,window";
+    icon-theme: "Oranchelo";
+    show-icons: true;
+    terminal: "kitty";
+    drun-display-format: "{icon} {name}";
+    location: 0;
+    kb-mode-previous: "Control+Shift+Left";
+    kb-mode-next: "Control+Shift+Right";
+    disable-history: false;
+    hide-scrollbar: true;
+    display-drun: "   Apps ";
+    display-window: " 󰕰  Window";
+    sidebar-mode: true;
+    window-format: "{n} {t}";
+    filebrowser {
+        show-hidden: true;
+    }
+    window {
+        close-on-delete: false;
+    }
+}
+
+
+
+@theme "catppuccin-mocha"

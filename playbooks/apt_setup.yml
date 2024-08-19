@@ -69,3 +69,9 @@
     name: gh
     state: latest
   become_user: fredrik
+
+- name: install rofi
+  apt:
+    name: rofi
+    state: latest
+  become_user: fredrik
