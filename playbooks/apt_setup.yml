@@ -2,76 +2,89 @@
   apt:
     name: golang-go
     state: latest
+  become: yes
   become_user: fredrik
 
 - name: install chrome
   apt:
     name: google-chrome-stable
     state: latest
+  become: yes
   become_user: fredrik
 
 - name: install vscodes
   apt:
     name: code
     state: latest
+  become: yes
   become_user: fredrik
 
 - name: install flameshot
   apt:
     name: flameshot
     state: latest
+  become: yes
   become_user: fredrik
 
 - name: install zsh
   apt:
     name: zsh
     state: latest
+  become: yes
   become_user: fredrik
 
 - name: install stow
   apt:
     name: stow
     state: latest
+  become: yes
   become_user: fredrik
 
 - name: install htop
   apt:
     name: htop
     state: latest
+  become: yes
   become_user: fredrik
 
 - name: install jq
   apt:
     name: jq
     state: latest
+  become: yes
   become_user: fredrik
 
 - name: install xclip
   apt:
     name: xclip
     state: latest
+  become: yes
   become_user: fredrik
 
 - name: install python3
   apt:
     name: python3
     state: latest
+  become: yes
   become_user: fredrik
 
 - name: install python3-pip
   apt:
     name: python3-pip
     state: latest
+  become: yes
   become_user: fredrik
 
 - name: install github cli
   apt:
     name: gh
     state: latest
+  become: yes
   become_user: fredrik
 
 - name: install rofi
   apt:
     name: rofi
     state: latest
-  become_user: fredrik
+  become: true
+  become_method: sudo
