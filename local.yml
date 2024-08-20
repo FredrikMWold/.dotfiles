@@ -4,34 +4,19 @@
   tasks:
     - name: add apt repositries
       import_tasks: playbooks/add_apt_repos.yml
-      become: yes
-      become_user: fredrik
 
     - name: flatpak setup
       import_tasks: playbooks/flatpak_setup.yml
-      become: yes
-      become_user: fredrik
-
-    - name: apt setup
-      import_tasks: playbooks/apt_setup.yml
-      become: yes
-      become_user: fredrik
 
     - name: go setup
       import_tasks: playbooks/go_setup.yml
-      become: yes
-      become_user: fredrik
 
     - name: terminal setup
       import_tasks: playbooks/terminal_setup.yml
-      become: yes
-      become_user: fredrik
 
     - name: python setup
       import_tasks: playbooks/python_setup.yml
-      become: yes
-      become_user: fredrik
-      
+
     - name: copy ssh files
       copy:
         src: "{{playbook_dir}}/.ssh"

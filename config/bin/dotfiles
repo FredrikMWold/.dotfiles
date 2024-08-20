@@ -6,10 +6,101 @@ if ! [ -x "$(command -v ansible)" ]; then
   sudo apt install ansible -y
 fi
 
+if ! [ -x "$(command -v flameshot)" ]; then
+    echo "flameshot is not installed. Installing now..."
+    sudo apt-get install -y flameshot
+else
+    echo "flameshot is already installed."
+fi
+
+if ! [ -x "$(command -v zsh)" ]; then
+    echo "zsh is not installed. Installing now..."
+    sudo apt-get install -y zsh
+else
+    echo "zsh is already installed."
+fi
+
+if ! [ -x "$(command -v stow)" ]; then
+    echo "stow is not installed. Installing now..."
+    sudo apt-get install -y stow
+else
+    echo "stow is already installed."
+fi
+
+if ! [ -x "$(command -v htop)" ]; then
+    echo "htop is not installed. Installing now..."
+    sudo apt-get install -y htop
+else
+    echo "htop is already installed."
+fi
+
+if ! [ -x "$(command -v jq)" ]; then
+    echo "jq is not installed. Installing now..."
+    sudo apt-get install -y jq
+else
+    echo "jq is already installed."
+fi
+
+if ! [ -x "$(command -v xclip)" ]; then
+    echo "xclip is not installed. Installing now..."
+    sudo apt-get install -y xclip
+else
+    echo "xclip is already installed."
+fi
+
+if ! [ -x "$(command -v python3)" ]; then
+    echo "python3 is not installed. Installing now..."
+    sudo apt-get install -y python3
+else
+    echo "python3 is already installed."
+fi
+
+if ! [ -x "$(command -v pip3)" ]; then
+    echo "python3-pip is not installed. Installing now..."
+    sudo apt-get install -y python3-pip
+else
+    echo "python3-pip is already installed."
+fi
+
+if ! [ -x "$(command -v gh)" ]; then
+    echo "gh is not installed. Installing now..."
+    sudo apt-get install -y gh
+else
+    echo "gh is already installed."
+fi
+
+if ! [ -x "$(command -v rofi)" ]; then
+    echo "rofi is not installed. Installing now..."
+    sudo apt-get install -y rofi
+else
+    echo "rofi is already installed."
+fi
+
 
 if [ -x "$(command -v ansible)" ]; then
   sudo ANSIBLE_ASK_VAULT_PASS=True ansible-pull -U https://github.com/FredrikMWold/.dotfiles.git
   chsh -s $(which zsh)
 else
   echo "Ansible is not installed. Please install it first."
+fi
+
+if ! [ -x "$(command -v go)" ]; then
+    echo "golang-go is not installed. Installing now..."
+    sudo apt-get install -y golang-go
+else
+    echo "golang-go is already installed."
+fi
+
+if [ -x "$(command -v google-chrome)" ]; then
+    echo "google-chrome-stable is not installed. Installing now..."
+    sudo apt-get install -y google-chrome-stable
+else
+    echo "google-chrome-stable is already installed."
+fi
+
+if [ -x "$(command -v code)" ]; then
+    echo "code is not installed. Installing now..."
+    sudo apt-get install -y code
+else
+    echo "code is already installed."
 fi
