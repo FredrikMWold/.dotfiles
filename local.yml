@@ -2,20 +2,21 @@
   connection: local
   become: true
   tasks:
-    - name: add apt repositries
-      import_tasks: playbooks/add_apt_repos.yml
-
     - name: flatpak setup
       import_tasks: playbooks/flatpak_setup.yml
+      become_user: fredrik
 
     - name: go setup
       import_tasks: playbooks/go_setup.yml
+      become_user: fredrik
 
     - name: terminal setup
       import_tasks: playbooks/terminal_setup.yml
+      become_user: fredrik
 
     - name: python setup
       import_tasks: playbooks/python_setup.yml
+      become_user: fredrik
 
     - name: copy ssh files
       copy:
@@ -27,4 +28,8 @@
 
     - name: symlink dotfiles with stow
       shell: cd ~/.dotfiles && stow config
+      become_user: fredrik
+
+    - name: add apt repositries
+      import_tasks: playbooks/add_apt_repos.yml
       become_user: fredrik
