@@ -128,6 +128,7 @@ export NVM_DIR="$HOME/.nvm"
 alias tp='tmux select-window -t $(gum choose $(tmux list-windows -F "#{window_name}"))'
 alias tnw='tmux new-window -n'
 alias trw='tmux rename-window'
+alias test='wmctrl -a "Fredrik'\''s Kitty"'
 
 . "$HOME/.atuin/bin/env"
 
