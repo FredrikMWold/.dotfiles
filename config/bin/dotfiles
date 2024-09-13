@@ -3,6 +3,7 @@
 sudo apt update -y && sudo apt upgrade -y
 
 if ! [ -x "$(command -v ansible)" ]; then
+  ssh-keygen -t rsa -f ~/.ssh/id_rsa -q -N ""
   sudo apt install ansible -y
 fi
 
@@ -11,6 +12,13 @@ if ! [ -x "$(command -v flameshot)" ]; then
     sudo apt-get install -y flameshot
 else
     echo "flameshot is already installed."
+fi
+
+if ! [ -x "$(command -v curl)" ]; then
+    echo "curl is not installed. Installing now..."
+    sudo apt-get install -y curl
+else
+    echo "curl is already installed."
 fi
 
 if ! [ -x "$(command -v zsh)" ]; then
@@ -76,31 +84,50 @@ else
     echo "rofi is already installed."
 fi
 
-
-if [ -x "$(command -v ansible)" ]; then
-  sudo ANSIBLE_ASK_VAULT_PASS=True ansible-pull -U https://github.com/FredrikMWold/.dotfiles.git
-  chsh -s $(which zsh)
+if ! [ -x "$(command -v flatpak)" ]; then
+    echo "flatpak is not installed. Installing now..."
+    sudo apt install -y flatpak
 else
-  echo "Ansible is not installed. Please install it first."
+    echo "flatpak is already installed."
 fi
 
 if ! [ -x "$(command -v go)" ]; then
     echo "golang-go is not installed. Installing now..."
-    sudo apt-get install -y golang-go
+    sudo add-apt-repository ppa:longsleep/golang-backports
+    sudo apt update
+    sudo apt install -y golang-go
 else
     echo "golang-go is already installed."
 fi
 
-if [ -x "$(command -v google-chrome)" ]; then
+if ! [ -x "$(command -v google-chrome)" ]; then
     echo "google-chrome-stable is not installed. Installing now..."
-    sudo apt-get install -y google-chrome-stable
+    wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub > linux_signing_key.pub
+    sudo install -D -o root -g root -m 644 linux_signing_key.pub /etc/apt/keyrings/linux_signing_key.pub
+    sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/linux_signing_key.pub] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
+    sudo apt update
+    sudo apt install -y google-chrome-stable
 else
     echo "google-chrome-stable is already installed."
 fi
 
-if [ -x "$(command -v code)" ]; then
+if ! [ -x "$(command -v code)" ]; then
     echo "code is not installed. Installing now..."
-    sudo apt-get install -y code
+    sudo apt install software-properties-common apt-transport-https wget -y
+    wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+    sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+    sudo apt update
+    sudo apt install -y code
 else
     echo "code is already installed."
 fi
+
+
+if [ -x "$(command -v ansible)" ]; then
+  sudo ANSIBLE_ASK_VAULT_PASS=True ansible-pull -U https://github.com/FredrikMWold/.dotfiles.git
+  chsh -s $(which zsh)  
+else
+  echo "Ansible is not installed. Please install it first."
+fi
+
+cd ~/.dotfiles && stow config --adopt && git reset --hard HEAD && stow config

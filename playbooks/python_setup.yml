@@ -1,7 +1,0 @@
-- name: update pip
-  shell: pip3 install --upgrade pip
-  become_user: fredrik
-
-- name: install keeper-cli
-  shell: pip3 install keepercommander
-  become_user: fredrik
