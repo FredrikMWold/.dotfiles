@@ -76,4 +76,5 @@
         dest: ~/
         owner: fredrik
         group: fredrik
+        mode: 0700
       become_user: fredrik

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 sudo apt update -y && sudo apt upgrade -y
+cd ~/.dotfiles && git pull
 
 if ! [ -x "$(command -v ansible)" ]; then
   ssh-keygen -t rsa -f ~/.ssh/id_rsa -q -N ""
@@ -137,7 +138,7 @@ pip3 install keepercommander --break-system-packages
 
 
 if [ -x "$(command -v ansible)" ]; then
-  sudo ANSIBLE_ASK_VAULT_PASS=True ansible-pull -U https://github.com/FredrikMWold/.dotfiles.git
+  sudo ANSIBLE_ASK_VAULT_PASS=True ansible-playbook ~/.dotfiles/local.yml 
   chsh -s $(which zsh)  
 else
   echo "Ansible is not installed. Please install it first."
@@ -147,3 +148,4 @@ PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm
 
 
 cd ~/.dotfiles && stow config --adopt && git reset --hard HEAD && stow config
+cd ~/.dotfiles && git remote set-url origin git@github.com:FredrikMWold/.dotfiles.git
