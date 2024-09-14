@@ -7,5 +7,3 @@
 	rebase = true
 [rerere]
 	enabled = true
-[credential "https://github.com"]
-	helper = !/usr/bin/gh auth git-credential
