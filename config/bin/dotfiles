@@ -131,6 +131,9 @@ fi
 
 go install github.com/jesseduffield/lazygit@latest
 go install github.com/FredrikMWold/radix-tui@latest
+pip3 install --upgrade pip --break-system-packages
+pip3 install psutil --break-system-packages
+pip3 install keepercommander --break-system-packages
 
 
 if [ -x "$(command -v ansible)" ]; then
@@ -142,7 +145,5 @@ fi
 
 PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash'
 
-pip3 install --upgrade pip --break-system-packages
-pip3 install psutil --break-system-packages
 
 cd ~/.dotfiles && stow config --adopt && git reset --hard HEAD && stow config
