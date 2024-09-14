@@ -137,7 +137,9 @@ else
   echo "Ansible is not installed. Please install it first."
 fi
 
-pip3 install --update pip --break-system-packages
+PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash'
+
+pip3 install --upgrade pip --break-system-packages
 pip3 install psutil --break-system-packages
 
 cd ~/.dotfiles && stow config --adopt && git reset --hard HEAD && stow config
