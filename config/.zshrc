@@ -141,6 +141,7 @@ alias tp='tmux select-window -t $(gum choose $(tmux list-windows -F "#{window_na
 alias tnw='tmux new-window -n'
 alias trw='tmux rename-window'
 alias cd='z'
+alias cat='batcat --paging=never'
 alias ll='eza -lha'
 
 . "$HOME/.atuin/bin/env"

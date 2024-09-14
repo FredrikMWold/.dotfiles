@@ -80,6 +80,13 @@ else
     echo "eza is already installed."
 fi
 
+if ! [ -x "$(command -v bat)" ]; then
+    echo "bat is not installed. Installing now..."
+    sudo apt-get install -y bat
+else
+    echo "bat is already installed."
+fi
+
 if ! [ -x "$(command -v pip3)" ]; then
     echo "python3-pip is not installed. Installing now..."
     sudo apt-get install -y python3-pip
