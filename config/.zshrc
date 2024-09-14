@@ -16,6 +16,18 @@ export PATH=/home/fredrik/.local/kitty.app/bin:$PATH
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_CUSTOM="$HOME/.dotfiles/config/.oh-my-zsh/custom"
+export FZF_DEFAULT_OPTS=" \
+--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+--color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
+--color=selected-bg:#45475a \
+--height='40%' \
+--padding=1 \
+--margin=1 \
+--border \
+--pointer='→'" \
+
+zstyle ':fzf-tab:*' fzf-pad 4
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -128,7 +140,6 @@ export NVM_DIR="$HOME/.nvm"
 alias tp='tmux select-window -t $(gum choose $(tmux list-windows -F "#{window_name}"))'
 alias tnw='tmux new-window -n'
 alias trw='tmux rename-window'
-alias test='wmctrl -a "Fredrik'\''s Kitty"'
 alias cd='z'
 alias ll='eza -lha'
 
