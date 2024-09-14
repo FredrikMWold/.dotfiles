@@ -3,6 +3,15 @@
 sudo apt update -y && sudo apt upgrade -y
 cd ~/.dotfiles && git pull
 
+if ! [ -x "$(command -v stow)" ]; then
+    echo "stow is not installed. Installing now..."
+    sudo apt-get install -y stow
+else
+    echo "stow is already installed."
+fi
+
+cd ~/.dotfiles && stow config --no-folding
+
 if ! [ -x "$(command -v ansible)" ]; then
   ssh-keygen -t rsa -f ~/.ssh/id_rsa -q -N ""
   sudo apt install ansible -y
@@ -34,13 +43,6 @@ if ! [ -x "$(command -v zsh)" ]; then
     sudo apt-get install -y zsh
 else
     echo "zsh is already installed."
-fi
-
-if ! [ -x "$(command -v stow)" ]; then
-    echo "stow is not installed. Installing now..."
-    sudo apt-get install -y stow
-else
-    echo "stow is already installed."
 fi
 
 if ! [ -x "$(command -v htop)" ]; then
@@ -146,6 +148,4 @@ fi
 
 PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash'
 
-
-cd ~/.dotfiles && stow config --adopt && git reset --hard HEAD && stow config
 cd ~/.dotfiles && git remote set-url origin git@github.com:FredrikMWold/.dotfiles.git
