@@ -38,7 +38,7 @@
     - name: playbooks/terminal4_setup.yml
       community.general.dconf:
         key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom1/command
-        value: "'rofi -show window'"
+        value: "'rofi -show combi -modes combi -combi-modes \"window,drun\"'"
         state: present
       become_user: fredrik
 

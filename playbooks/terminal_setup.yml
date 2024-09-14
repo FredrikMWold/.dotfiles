@@ -1,6 +1,6 @@
 - name: check if oh-my-zsh is installed
   stat:
-    path: ~/.oh-my-zsh
+    path: ~/.oh-my-zsh/.oh_my_zsh.sh
   register: oh_my_zsh
   become_user: fredrik
 
@@ -15,7 +15,9 @@
   become_user: fredrik
 
 - name: install oh-my-zsh
-  shell: sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
+  shell: | 
+     rm -r ~/.oh-my-zsh
+     sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
   when: not oh_my_zsh.stat.exists
   become_user: fredrik
 
@@ -32,12 +34,6 @@
 
 - name: install atuin
   shell: curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
-  become_user: fredrik
-
-- name: remove old .zshrc
-  file:
-    path: ~/.zshrc
-    state: absent
   become_user: fredrik
 
 - name: clear font cache
