@@ -7,6 +7,13 @@ if ! [ -x "$(command -v ansible)" ]; then
   sudo apt install ansible -y
 fi
 
+if ! [ -x "$(command -v wmctrl)" ]; then
+    echo "wmctrl is not installed. Installing now..."
+    sudo apt-get install -y wmctrl
+else
+    echo "wmctrl is already installed."
+fi
+
 if ! [ -x "$(command -v flameshot)" ]; then
     echo "flameshot is not installed. Installing now..."
     sudo apt-get install -y flameshot
@@ -129,5 +136,8 @@ if [ -x "$(command -v ansible)" ]; then
 else
   echo "Ansible is not installed. Please install it first."
 fi
+
+pip3 install --update pip --break-system-packages
+pip3 install psutil --break-system-packages
 
 cd ~/.dotfiles && stow config --adopt && git reset --hard HEAD && stow config

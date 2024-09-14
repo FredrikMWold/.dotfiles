@@ -14,6 +14,62 @@
       import_tasks: playbooks/terminal_setup.yml
       become_user: fredrik
 
+    - name: playbooks/terminal_setup.yml
+      community.general.dconf:
+        key: /org/gnome/shell/extensions/dash-to-dock/dock-fixed
+        value: "false"
+        state: present
+      become_user: fredrik
+
+    - name: playbooks/terminal2_setup.yml
+      community.general.dconf:
+        key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings
+        value: "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom2/']"
+        state: present
+      become_user: fredrik
+
+    - name: playbooks/terminal3_setup.yml
+      community.general.dconf:
+        key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom1/name
+        value: "'Open program'"
+        state: present
+      become_user: fredrik
+
+    - name: playbooks/terminal4_setup.yml
+      community.general.dconf:
+        key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom1/command
+        value: "'rofi -show combi'"
+        state: present
+      become_user: fredrik
+
+    - name: playbooks/terminal5_setup.yml
+      community.general.dconf:
+        key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom1/binding
+        value: "'<Super>space'"
+        state: present
+      become_user: fredrik
+
+    - name: playbooks/terminal3_setup.yml
+      community.general.dconf:
+        key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom2/name
+        value: "'Show terminal'"
+        state: present
+      become_user: fredrik
+
+    - name: playbooks/terminal4_setup.yml
+      community.general.dconf:
+        key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom2/command
+        value: "'wmctrl -a fredriks-kitty'"
+        state: present
+      become_user: fredrik
+
+    - name: playbooks/terminal5_setup.yml
+      community.general.dconf:
+        key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom2/binding
+        value: "'<Super>t'"
+        state: present
+      become_user: fredrik
+
     - name: copy ssh files
       copy:
         src: "{{playbook_dir}}/.ssh"
