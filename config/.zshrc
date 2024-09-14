@@ -129,8 +129,11 @@ alias tp='tmux select-window -t $(gum choose $(tmux list-windows -F "#{window_na
 alias tnw='tmux new-window -n'
 alias trw='tmux rename-window'
 alias test='wmctrl -a "Fredrik'\''s Kitty"'
+alias cd='z'
+alias ll='eza -lha'
 
 . "$HOME/.atuin/bin/env"
 
 eval "$(atuin init zsh --disable-up-arrow)"
+eval "$(zoxide init zsh)"
 

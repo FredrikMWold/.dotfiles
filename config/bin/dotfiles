@@ -73,6 +73,13 @@ else
     echo "python3 is already installed."
 fi
 
+if ! [ -x "$(command -v eza)" ]; then
+    echo "eza is not installed. Installing now..."
+    sudo apt-get install -y eza
+else
+    echo "eza is already installed."
+fi
+
 if ! [ -x "$(command -v pip3)" ]; then
     echo "python3-pip is not installed. Installing now..."
     sudo apt-get install -y python3-pip
@@ -147,6 +154,7 @@ else
 fi
 
 PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash'
+curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 
 cd ~/.dotfiles && git remote set-url origin git@github.com:FredrikMWold/.dotfiles.git
 cd ~/.dotfiles && stow config --no-folding
