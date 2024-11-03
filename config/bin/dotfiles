@@ -10,6 +10,13 @@ else
     echo "v4l2loopback-dkms is already installed."
 fi
 
+if ! dpkg -l | grep -q "^ii  adb"; then                                                                                                   ✔  18:22:46  
+    echo "adb is not installed. Installing..."
+    sudo apt install -y adb
+else
+    echo "adb is already installed."
+fi
+
 if ! [ -x "$(command -v stow)" ]; then
     echo "stow is not installed. Installing now..."
     sudo apt-get install -y stow
