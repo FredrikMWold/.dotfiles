@@ -21,13 +21,18 @@ export FZF_DEFAULT_OPTS=" \
 --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
 --color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
 --color=selected-bg:#45475a \
---height='40%' \
+--height='60%' \
 --padding=1 \
 --margin=1 \
 --border \
 --pointer='→'" \
 
 zstyle ':fzf-tab:*' fzf-pad 4
+zstyle ':fzf-tab:*' fzf-min-height 10
+zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --height='60%' --padding=1 --margin=1 --border --pointer='→' --bind=tab:accept
+zstyle ':fzf-tab:*' continuous-trigger 'tab'
+# preview directory's content with eza when completing cd
+zstyle ':fzf-tab:complete:z:*' fzf-preview 'eza -1 --color=always $realpath'
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -137,9 +142,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-alias tp='tmux select-window -t $(gum choose $(tmux list-windows -F "#{window_name}"))'
-alias tnw='tmux new-window -n'
-alias trw='tmux rename-window'
 alias cd='z'
 alias cat='batcat --paging=never'
 alias ll='eza -lha'

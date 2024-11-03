@@ -3,14 +3,21 @@
 sudo apt update -y && sudo apt upgrade -y
 cd ~/.dotfiles && git pull
 
+if ! dpkg -l | grep -q "^ii  v4l2loopback-dkms"; then
+    echo "v4l2loopback-dkms is not installed. Installing..."
+    sudo apt install -y v4l2loopback-dkms
+else
+    echo "v4l2loopback-dkms is already installed."
+fi
+
 if ! [ -x "$(command -v stow)" ]; then
     echo "stow is not installed. Installing now..."
     sudo apt-get install -y stow
+    cd ~/.dotfiles && stow config --no-folding
 else
     echo "stow is already installed."
 fi
 
-cd ~/.dotfiles && stow config --no-folding
 
 if ! [ -x "$(command -v ansible)" ]; then
   ssh-keygen -t rsa -f ~/.ssh/id_rsa -q -N ""
@@ -162,6 +169,7 @@ fi
 
 PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash'
 curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+flatpak override --user --device=all com.obsproject.Studio
 
 cd ~/.dotfiles && git remote set-url origin git@github.com:FredrikMWold/.dotfiles.git
 cd ~/.dotfiles && stow config --no-folding

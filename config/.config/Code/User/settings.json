@@ -70,5 +70,8 @@
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "autoBarrel.files.disableRecursiveBarrelling": true
+  "autoBarrel.files.disableRecursiveBarrelling": true,
+  "github.copilot.advanced": {
+    
+  }
 }

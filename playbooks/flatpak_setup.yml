@@ -27,3 +27,15 @@
     name: com.adamcake.Bolt
     state: present
   become_user: fredrik
+
+- name: install obs
+  flatpak:
+    name: com.obsproject.Studio
+    state: present
+  become_user: fredrik
+
+- name: install obs driod cam plugin
+  flatpak:
+    name: com.obsproject.Studio.Plugin.DroidCam
+    state: present
+  become_user: fredrik
