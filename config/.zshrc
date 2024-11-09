@@ -150,4 +150,3 @@ alias ll='eza -lha'
 
 eval "$(atuin init zsh --disable-up-arrow)"
 eval "$(zoxide init zsh)"
-
