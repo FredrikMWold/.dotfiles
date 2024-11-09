@@ -146,6 +146,14 @@ alias cd='z'
 alias cat='batcat --paging=never'
 alias ll='eza -lha'
 
+cc() {
+    if [ -n "$1" ]; then
+        cd "$1" && /usr/bin/code .
+    else
+        /usr/bin/code .
+    fi
+}
+
 . "$HOME/.atuin/bin/env"
 
 eval "$(atuin init zsh --disable-up-arrow)"
