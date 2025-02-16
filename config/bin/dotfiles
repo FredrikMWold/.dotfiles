@@ -3,20 +3,6 @@
 sudo apt update -y && sudo apt upgrade -y
 cd ~/.dotfiles && git pull
 
-if ! dpkg -l | grep -q "^ii  v4l2loopback-dkms"; then
-    echo "v4l2loopback-dkms is not installed. Installing..."
-    sudo apt install -y v4l2loopback-dkms
-else
-    echo "v4l2loopback-dkms is already installed."
-fi
-
-if ! dpkg -l | grep -q "^ii  adb"; then                                                                                                   
-    echo "adb is not installed. Installing..."
-    sudo apt install -y adb
-else
-    echo "adb is already installed."
-fi
-
 if ! [ -x "$(command -v stow)" ]; then
     echo "stow is not installed. Installing now..."
     sudo apt-get install -y stow
@@ -164,10 +150,6 @@ go install github.com/jesseduffield/lazygit@latest
 go install github.com/charmbracelet/gum@latest
 go install github.com/equinor/radix-cli/cli/rx@latest
 go install github.com/FredrikMWold/radix-tui@latest
-pip3 install --upgrade pip --break-system-packages
-pip3 install psutil --break-system-packages
-pip3 install keepercommander --break-system-packages
-
 
 if [ -x "$(command -v ansible)" ]; then
   sudo ANSIBLE_ASK_VAULT_PASS=True ansible-playbook ~/.dotfiles/local.yml 
@@ -178,8 +160,9 @@ fi
 
 PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash'
 curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
-flatpak override --user --device=all com.obsproject.Studio
 
+
+# Clean up
 fc-cache -f -v
 cd ~/.dotfiles && git remote set-url origin git@github.com:FredrikMWold/.dotfiles.git
 cd ~/.dotfiles && stow config --no-folding
