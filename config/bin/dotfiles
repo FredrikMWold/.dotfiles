@@ -5,7 +5,7 @@ cd ~/.dotfiles && git pull
 
 if ! [ -x "$(command -v stow)" ]; then
     echo "stow is not installed. Installing now..."
-    sudo apt-get install -y stow
+    sudo apt install -y stow
     cd ~/.dotfiles && stow config --no-folding
 else
     echo "stow is already installed."
@@ -19,91 +19,91 @@ fi
 
 if ! [ -x "$(command -v wmctrl)" ]; then
     echo "wmctrl is not installed. Installing now..."
-    sudo apt-get install -y wmctrl
+    sudo apt install -y wmctrl
 else
     echo "wmctrl is already installed."
 fi
 
 if ! [ -x "$(command -v flameshot)" ]; then
     echo "flameshot is not installed. Installing now..."
-    sudo apt-get install -y flameshot
+    sudo apt install -y flameshot
 else
     echo "flameshot is already installed."
 fi
 
 if ! [ -x "$(command -v curl)" ]; then
     echo "curl is not installed. Installing now..."
-    sudo apt-get install -y curl
+    sudo apt install -y curl
 else
     echo "curl is already installed."
 fi
 
 if ! [ -x "$(command -v zsh)" ]; then
     echo "zsh is not installed. Installing now..."
-    sudo apt-get install -y zsh
+    sudo apt install -y zsh
 else
     echo "zsh is already installed."
 fi
 
 if ! [ -x "$(command -v htop)" ]; then
     echo "htop is not installed. Installing now..."
-    sudo apt-get install -y htop
+    sudo apt install -y htop
 else
     echo "htop is already installed."
 fi
 
 if ! [ -x "$(command -v jq)" ]; then
     echo "jq is not installed. Installing now..."
-    sudo apt-get install -y jq
+    sudo apt install -y jq
 else
     echo "jq is already installed."
 fi
 
 if ! [ -x "$(command -v xclip)" ]; then
     echo "xclip is not installed. Installing now..."
-    sudo apt-get install -y xclip
+    sudo apt install -y xclip
 else
     echo "xclip is already installed."
 fi
 
 if ! [ -x "$(command -v python3)" ]; then
     echo "python3 is not installed. Installing now..."
-    sudo apt-get install -y python3
+    sudo apt install -y python3
 else
     echo "python3 is already installed."
 fi
 
 if ! [ -x "$(command -v eza)" ]; then
     echo "eza is not installed. Installing now..."
-    sudo apt-get install -y eza
+    sudo apt install -y eza
 else
     echo "eza is already installed."
 fi
 
 if ! [ -x "$(command -v bat)" ]; then
     echo "bat is not installed. Installing now..."
-    sudo apt-get install -y bat
+    sudo apt install -y bat
 else
     echo "bat is already installed."
 fi
 
 if ! [ -x "$(command -v pip3)" ]; then
     echo "python3-pip is not installed. Installing now..."
-    sudo apt-get install -y python3-pip
+    sudo apt install -y python3-pip
 else
     echo "python3-pip is already installed."
 fi
 
 if ! [ -x "$(command -v gh)" ]; then
     echo "gh is not installed. Installing now..."
-    sudo apt-get install -y gh
+    sudo apt install -y gh
 else
     echo "gh is already installed."
 fi
 
 if ! [ -x "$(command -v rofi)" ]; then
     echo "rofi is not installed. Installing now..."
-    sudo apt-get install -y rofi
+    sudo apt install -y rofi
 else
     echo "rofi is already installed."
 fi
