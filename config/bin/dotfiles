@@ -158,12 +158,11 @@ go install github.com/charmbracelet/gum@latest
 go install github.com/equinor/radix-cli/cli/rx@latest
 go install github.com/FredrikMWold/radix-tui@latest
 
-if [ -x "$(command -v ansible)" ]; then
-  sudo ANSIBLE_ASK_VAULT_PASS=True ansible-playbook ~/.dotfiles/local.yml 
-  chsh -s $(which zsh)  
-else
-  echo "Ansible is not installed. Please install it first."
-fi
+sudo ANSIBLE_ASK_VAULT_PASS=True ansible-playbook ~/.dotfiles/local.yml 
+
+if [[ "$SHELL" != *zsh ]]; then
+  chsh -s $(which zsh) 
+fi   
 
 PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash'
 curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
