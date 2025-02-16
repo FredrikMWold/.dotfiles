@@ -6,63 +6,63 @@
       import_tasks: playbooks/terminal_setup.yml
       become_user: fredrik
 
-    - name: playbooks/terminal_setup.yml
+    - name: Turn of dash-to-dock
       community.general.dconf:
         key: /org/gnome/shell/extensions/dash-to-dock/dock-fixed
         value: "false"
         state: present
       become_user: fredrik
 
-    - name: playbooks/terminal2_setup.yml
+    - name: Register custom keybindings
       community.general.dconf:
         key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings
         value: "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom2/']"
         state: present
       become_user: fredrik
 
-    - name: playbooks/terminal3_setup.yml
+    - name: Set open program keybinding name
       community.general.dconf:
         key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom1/name
         value: "'Open program'"
         state: present
       become_user: fredrik
 
-    - name: playbooks/terminal4_setup.yml
+    - name: Set open program keybinding command
       community.general.dconf:
         key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom1/command
         value: '''rofi -show combi -modes combi -combi-modes "window,drun"'''
         state: present
       become_user: fredrik
 
-    - name: playbooks/terminal5_setup.yml
+    - name: Set open program keybinding binding
       community.general.dconf:
         key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom1/binding
         value: "'<Super>space'"
         state: present
       become_user: fredrik
 
-    - name: playbooks/terminal3_setup.yml
+    - name: Set show terminal keybinding name
       community.general.dconf:
         key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom2/name
         value: "'Show terminal'"
         state: present
       become_user: fredrik
 
-    - name: playbooks/terminal4_setup.yml
+    - name: Set show terminal keybinding command
       community.general.dconf:
         key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom2/command
         value: "'wmctrl -a fredriks-kitty'"
         state: present
       become_user: fredrik
 
-    - name: playbooks/terminal5_setup.yml
+    - name: Set show terminal keybinding binding
       community.general.dconf:
         key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom2/binding
-        value: "'<Super>t'"
+        value: "'<Super>Return'"
         state: present
       become_user: fredrik
 
-    - name: copy ssh files
+    - name: Copy ssh files
       copy:
         src: "{{playbook_dir}}/.ssh"
         dest: ~/
