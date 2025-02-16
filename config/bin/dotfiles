@@ -167,6 +167,8 @@ fi
 
 PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash'
 curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+~/.dotfiles/fzf/install --all
+curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
 
 
 # Clean up

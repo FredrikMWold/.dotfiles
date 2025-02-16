@@ -20,18 +20,3 @@
     sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
   when: not oh_my_zsh.stat.exists
   become_user: fredrik
-
-- name: clone and update fzf
-  git:
-    repo: https://github.com/junegunn/fzf.git
-    depth: 1
-    dest: ~/.fzf
-  become_user: fredrik
-
-- name: install fzf
-  shell: ~/.fzf/install
-  become_user: fredrik
-
-- name: install atuin
-  shell: curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
-  become_user: fredrik

@@ -10,3 +10,6 @@
 [submodule "config/.oh-my-zsh/custom/plugins/fzf-tab"]
 	path = config/.oh-my-zsh/custom/plugins/fzf-tab
 	url = https://github.com/Aloxaf/fzf-tab
+[submodule "fzf"]
+	path = fzf
+	url = https://github.com/junegunn/fzf.git
