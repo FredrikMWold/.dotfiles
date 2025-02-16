@@ -2,10 +2,6 @@
   connection: local
   become: true
   tasks:
-    - name: flatpak setup
-      import_tasks: playbooks/flatpak_setup.yml
-      become_user: fredrik
-
     - name: terminal setup
       import_tasks: playbooks/terminal_setup.yml
       become_user: fredrik
@@ -34,7 +30,7 @@
     - name: playbooks/terminal4_setup.yml
       community.general.dconf:
         key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom1/command
-        value: "'rofi -show combi -modes combi -combi-modes \"window,drun\"'"
+        value: '''rofi -show combi -modes combi -combi-modes "window,drun"'''
         state: present
       become_user: fredrik
 

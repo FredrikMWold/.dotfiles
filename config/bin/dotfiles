@@ -146,6 +146,13 @@ else
     echo "code is already installed."
 fi
 
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install flathub com.adamcake.Bolt
+flatpak install flathub com.stremio.Stremio
+flatpak install flathub com.slack.Slack
+flatpak install flathub com.github.IsmaelMartinez.teams_for_linux
+flatpak update -y
+
 go install github.com/jesseduffield/lazygit@latest
 go install github.com/charmbracelet/gum@latest
 go install github.com/equinor/radix-cli/cli/rx@latest
