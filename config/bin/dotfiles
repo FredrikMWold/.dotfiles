@@ -10,7 +10,7 @@ else
     echo "v4l2loopback-dkms is already installed."
 fi
 
-if ! dpkg -l | grep -q "^ii  adb"; then                                                                                                   ✔  18:22:46  
+if ! dpkg -l | grep -q "^ii  adb"; then                                                                                                   
     echo "adb is not installed. Installing..."
     sudo apt install -y adb
 else
@@ -161,6 +161,8 @@ else
 fi
 
 go install github.com/jesseduffield/lazygit@latest
+go install github.com/charmbracelet/gum@latest
+go install github.com/equinor/radix-cli/cli/rx@latest
 go install github.com/FredrikMWold/radix-tui@latest
 pip3 install --upgrade pip --break-system-packages
 pip3 install psutil --break-system-packages
@@ -178,5 +180,6 @@ PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm
 curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 flatpak override --user --device=all com.obsproject.Studio
 
+fc-cache -f -v
 cd ~/.dotfiles && git remote set-url origin git@github.com:FredrikMWold/.dotfiles.git
 cd ~/.dotfiles && stow config --no-folding

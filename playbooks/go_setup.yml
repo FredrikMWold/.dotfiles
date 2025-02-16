@@ -1,7 +1,0 @@
-- name: install gum
-  shell: go install github.com/charmbracelet/gum@latest
-  become_user: fredrik
-
-- name: install radix-cli
-  shell: go install github.com/equinor/radix-cli/cli/rx@latest
-  become_user: fredrik

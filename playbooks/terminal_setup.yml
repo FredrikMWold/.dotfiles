@@ -15,9 +15,9 @@
   become_user: fredrik
 
 - name: install oh-my-zsh
-  shell: | 
-     rm -r ~/.oh-my-zsh
-     sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
+  shell: |
+    rm -r ~/.oh-my-zsh
+    sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
   when: not oh_my_zsh.stat.exists
   become_user: fredrik
 
@@ -34,8 +34,4 @@
 
 - name: install atuin
   shell: curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
-  become_user: fredrik
-
-- name: clear font cache
-  shell: fc-cache -f -v
   become_user: fredrik
