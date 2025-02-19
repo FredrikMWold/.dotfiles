@@ -16,7 +16,28 @@
     - name: Register custom keybindings
       community.general.dconf:
         key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings
-        value: "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom2/']"
+        value: "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom3/']"
+        state: present
+      become_user: fredrik
+
+    - name: Set open radix-tui keybinding name
+      community.general.dconf:
+        key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom3/name
+        value: "'open radix-tui'"
+        state: present
+      become_user: fredrik
+
+    - name: Set open radix-tui keybinding command
+      community.general.dconf:
+        key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom3/command
+        value: '''zsh -c "export PATH="/home/fredrik/go/bin:$PATH"; wmctrl -a radix-tui || /home/fredrik/.local/kitty.app/bin/kitty -e radix-tui --title radix-tui"'''
+        state: present
+      become_user: fredrik
+
+    - name: Set open radix-tui keybinding binding
+      community.general.dconf:
+        key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom3/binding
+        value: "'<Super>r'"
         state: present
       become_user: fredrik
 
@@ -51,7 +72,7 @@
     - name: Set show terminal keybinding command
       community.general.dconf:
         key: /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom2/command
-        value: "'wmctrl -a fredriks-kitty'"
+        value: '''zsh -c "wmctrl -a main-teminal || /home/fredrik/.local/kitty.app/bin/kitty --title main-teminal"'''
         state: present
       become_user: fredrik
 
