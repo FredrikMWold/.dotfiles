@@ -164,6 +164,7 @@ go install github.com/jesseduffield/lazygit@latest
 go install github.com/charmbracelet/gum@latest
 go install github.com/equinor/radix-cli/cli/rx@latest
 go install github.com/FredrikMWold/radix-tui@latest
+go install github.com/yorukot/superfile@latest
 
 sudo ANSIBLE_ASK_VAULT_PASS=True ansible-playbook ~/.dotfiles/local.yml 
 
