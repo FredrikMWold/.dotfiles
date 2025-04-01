@@ -38,6 +38,13 @@ else
     echo "curl is already installed."
 fi
 
+if ! [ -x "$(command -v peek)" ]; then
+    echo "peek is not installed. Installing now..."
+    sudo apt install -y peek
+else
+    echo "peek is already installed."
+fi
+
 if ! [ -x "$(command -v zsh)" ]; then
     echo "zsh is not installed. Installing now..."
     sudo apt install -y zsh
