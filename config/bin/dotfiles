@@ -153,6 +153,8 @@ else
     echo "code is already installed."
 fi
 
+sudo apt install gnome-shell-extension-autohidetopbar
+
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install flathub com.adamcake.Bolt
 flatpak install flathub com.stremio.Stremio
@@ -182,3 +184,9 @@ curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
 fc-cache -f -v
 cd ~/.dotfiles && git remote set-url origin git@github.com:FredrikMWold/.dotfiles.git
 cd ~/.dotfiles && stow config --no-folding
+
+gnome-extensions enable hidetopbar@mathieu.bidon.ca
+gnome-extensions enable tiling-assistant@ubuntu.com
+gnome-extensions enable ubuntu-dock@ubuntu.com
+
+dconf load / < ~/.dotfiles/gnome-settings-backup.dconf
