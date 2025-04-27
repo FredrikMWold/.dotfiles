@@ -35,8 +35,16 @@ window-maximized=false
 window-size=(360, 491)
 word-size=64
 
+[org/gnome/charmap]
+font=@ms 'FontAwesome 22'
+group-by='block'
+last-char=uint32 61132
+
+[org/gnome/charmap/window-state]
+size=(2880, 810)
+
 [org/gnome/control-center]
-last-panel='ubuntu'
+last-panel='wifi'
 window-state=(888, 627, false)
 
 [org/gnome/desktop/app-folders]
@@ -128,7 +136,7 @@ application-id='pavucontrol.desktop'
 application-id='update-manager.desktop'
 
 [org/gnome/desktop/peripherals/keyboard]
-numlock-state=false
+numlock-state=true
 
 [org/gnome/desktop/peripherals/touchpad]
 two-finger-scrolling-enabled=true
@@ -250,7 +258,7 @@ sleep-inactive-ac-type='nothing'
 [org/gnome/shell]
 disable-user-extensions=false
 disabled-extensions=['ubuntu-appindicators@ubuntu.com', 'ding@rastersoft.com']
-enabled-extensions=['tiling-assistant@leleat-on-github', 'hidetopbar@mathieu.bidon.ca', 'tiling-assistant@ubuntu.com', 'ubuntu-dock@ubuntu.com']
+enabled-extensions=['tiling-assistant@leleat-on-github', 'hidetopbar@mathieu.bidon.ca', 'tiling-assistant@ubuntu.com', 'ubuntu-dock@ubuntu.com', 'rounded-window-corners@fxgn']
 welcome-dialog-last-shown-version='46.0'
 
 [org/gnome/shell/extensions/dash-to-dock]
@@ -274,6 +282,9 @@ mouse-sensitive=false
 mouse-sensitive-fullscreen-window=false
 pressure-threshold=100
 show-in-overview=false
+
+[org/gnome/shell/extensions/rounded-window-corners-reborn]
+settings-version=uint32 7
 
 [org/gnome/shell/extensions/tiling-assistant]
 activate-layout0=@as []
@@ -353,5 +364,5 @@ sort-column='name'
 sort-directories-first=false
 sort-order='ascending'
 type-format='category'
-window-position=(3058, 205)
+window-position=(673, 256)
 window-size=(1231, 902)

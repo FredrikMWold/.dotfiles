@@ -13,3 +13,6 @@
 [submodule "fzf"]
 	path = fzf
 	url = https://github.com/junegunn/fzf.git
+[submodule "rounded-window-corners"]
+	path = rounded-window-corners
+	url = https://github.com/flexagoon/rounded-window-corners

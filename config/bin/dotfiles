@@ -122,6 +122,20 @@ else
     echo "rofi is already installed."
 fi
 
+if ! [ -x "$(command -v just)" ]; then
+    echo "just is not installed. Installing now..."
+    sudo apt install -y just
+else
+    echo "just is already installed."
+fi
+
+if ! [ -x "$(command -v gettext)" ]; then
+    echo "gettext is not installed. Installing now..."
+    sudo apt install -y gettext
+else
+    echo "gettext is already installed."
+fi
+
 if ! [ -x "$(command -v flatpak)" ]; then
     echo "flatpak is not installed. Installing now..."
     sudo apt install -y flatpak
@@ -160,7 +174,9 @@ else
     echo "code is already installed."
 fi
 
-sudo apt install gnome-shell-extension-autohidetopbar
+
+
+just -f ~/.dotfiles/rounded-window-corners/justfile
 
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install flathub com.adamcake.Bolt
@@ -195,5 +211,6 @@ cd ~/.dotfiles && stow config --no-folding
 gnome-extensions enable hidetopbar@mathieu.bidon.ca
 gnome-extensions enable tiling-assistant@ubuntu.com
 gnome-extensions enable ubuntu-dock@ubuntu.com
+gnome-extensions enable rounded-window-corners@fxgn
 
 dconf load / < ~/.dotfiles/gnome-settings-backup.dconf
