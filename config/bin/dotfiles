@@ -29,6 +29,7 @@ if ! [ -x "$(command -v pavucontrol)" ]; then
     sudo apt install -y pavucontrol
 else
     echo "pavucontrol is already installed."
+fi
     
 if ! [ -x "$(command -v pulseaudio)" ]; then
     echo "pulseaudio is not installed. Installing now..."
