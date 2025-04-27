@@ -29,6 +29,12 @@ if ! [ -x "$(command -v pavucontrol)" ]; then
     sudo apt install -y pavucontrol
 else
     echo "pavucontrol is already installed."
+    
+if ! [ -x "$(command -v pulseaudio)" ]; then
+    echo "pulseaudio is not installed. Installing now..."
+    sudo apt install -y pulseaudio
+else
+    echo "pulseaudio is already installed."
 fi
 
 if ! [ -x "$(command -v flameshot)" ]; then
@@ -176,7 +182,7 @@ fi
 
 
 
-just -f ~/.dotfiles/rounded-window-corners/justfile
+cd ~/.dotfiles/rounded-window-corners && just install
 
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install flathub com.adamcake.Bolt

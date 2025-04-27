@@ -72,6 +72,7 @@ run_cmd() {
 			elif [[ "$DESKTOP_SESSION" == 'plasma' ]]; then
 				qdbus org.kde.ksmserver /KSMServer logout 0 0 0
 			fi
+			gnome-session-quit --logout --no-prompt
 		fi
 	else
 		exit 0
