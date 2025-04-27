@@ -58,6 +58,11 @@ categories=['X-SuSE-YaST']
 name='suse-yast.directory'
 translate=true
 
+[org/gnome/desktop/background]
+picture-options='zoom'
+picture-uri='file:///home/fredrik/.config/background'
+picture-uri-dark='file:///home/fredrik/.config/background'
+
 [org/gnome/desktop/input-sources]
 sources=[('xkb', 'no')]
 xkb-options=@as []
@@ -123,7 +128,7 @@ application-id='pavucontrol.desktop'
 application-id='update-manager.desktop'
 
 [org/gnome/desktop/peripherals/keyboard]
-numlock-state=true
+numlock-state=false
 
 [org/gnome/desktop/peripherals/touchpad]
 two-finger-scrolling-enabled=true
@@ -165,7 +170,7 @@ search-filter-time-type='last_modified'
 initial-size=(1966, 715)
 
 [org/gnome/portal/filechooser/com.google.Chrome]
-last-folder-path='/home/fredrik/Documents'
+last-folder-path='/home/fredrik/Downloads'
 
 [org/gnome/portal/filechooser/rofi]
 last-folder-path='/home/fredrik/Downloads/chrome-extension-v1.0.2'
