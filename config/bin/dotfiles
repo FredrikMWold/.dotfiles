@@ -24,6 +24,13 @@ else
     echo "wmctrl is already installed."
 fi
 
+if ! [ -x "$(command -v pavucontrol)" ]; then
+    echo "pavucontrol is not installed. Installing now..."
+    sudo apt install -y pavucontrol
+else
+    echo "pavucontrol is already installed."
+fi
+
 if ! [ -x "$(command -v flameshot)" ]; then
     echo "flameshot is not installed. Installing now..."
     sudo apt install -y flameshot
