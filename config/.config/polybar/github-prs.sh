@@ -9,7 +9,7 @@ open_pr_count=0
 for repo in "${repos[@]}"; do
 
   # List open PRs for the current repo
-  open_prs=$(gh pr list --repo "$repo" --state open --search 'is:open -label:dependencies' --json number --jq 'length')
+  open_prs=$(gh pr list --repo "$repo" --state open --search 'is:open -label:dependencies -label:"autorelease: pending"' --json number --jq 'length')
 
   # Add the number of open PRs to the total count
   open_pr_count=$((open_pr_count + open_prs))
