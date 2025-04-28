@@ -27,7 +27,3 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 . "$HOME/.atuin/bin/env"
-
-if which polybar &> /dev/null; then
-  polybar example &  # Replace 'example' with your config name
-fi

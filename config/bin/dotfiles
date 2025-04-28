@@ -221,3 +221,6 @@ gnome-extensions enable ubuntu-dock@ubuntu.com
 gnome-extensions enable rounded-window-corners@fxgn
 
 dconf load / < ~/.dotfiles/gnome-settings-backup.dconf
+
+systemctl --user daemon-reload
+systemctl --user enable polybar.service

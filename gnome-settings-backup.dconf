@@ -46,7 +46,7 @@ last-char=uint32 61132
 size=(2880, 810)
 
 [org/gnome/control-center]
-last-panel='wifi'
+last-panel='keyboard'
 window-state=(888, 627, false)
 
 [org/gnome/desktop/app-folders]
@@ -84,7 +84,7 @@ gtk-theme='Yaru-dark'
 icon-theme='Yaru'
 
 [org/gnome/desktop/notifications]
-application-children=['apport-gtk', 'com-adamcake-bolt', 'com-stremio-stremio', 'com-github-ismaelmartinez-teams-for-linux', 'com-slack-slack', 'com-discordapp-discord', 'org-gnome-nautilus', 'kitty', 'com-uploadedlobster-peek', 'update-manager', 'google-chrome', 'com-obsproject-studio', 'pavucontrol', 'org-gnome-settings', 'libreoffice-calc', 'net-lutris-lutris', 'org-gnome-extensions']
+application-children=['apport-gtk', 'com-adamcake-bolt', 'com-stremio-stremio', 'com-github-ismaelmartinez-teams-for-linux', 'com-slack-slack', 'com-discordapp-discord', 'org-gnome-nautilus', 'kitty', 'com-uploadedlobster-peek', 'update-manager', 'google-chrome', 'com-obsproject-studio', 'pavucontrol', 'org-gnome-settings', 'libreoffice-calc', 'net-lutris-lutris', 'org-gnome-extensions', 'gnome-power-panel']
 
 [org/gnome/desktop/notifications/application/apport-gtk]
 application-id='apport-gtk.desktop'
@@ -109,6 +109,12 @@ application-id='com.stremio.Stremio.desktop'
 
 [org/gnome/desktop/notifications/application/com-uploadedlobster-peek]
 application-id='com.uploadedlobster.peek.desktop'
+
+[org/gnome/desktop/notifications/application/firefox-firefox]
+application-id='firefox_firefox.desktop'
+
+[org/gnome/desktop/notifications/application/gnome-power-panel]
+application-id='gnome-power-panel.desktop'
 
 [org/gnome/desktop/notifications/application/google-chrome]
 application-id='google-chrome.desktop'
@@ -147,6 +153,9 @@ two-finger-scrolling-enabled=true
 switch-input-source=@as []
 switch-input-source-backward=@as []
 
+[org/gnome/desktop/wm/preferences]
+num-workspaces=5
+
 [org/gnome/evince/default]
 continuous=true
 dual-page=false
@@ -164,6 +173,7 @@ window-ratio=(3.123319892473118, 1.2447738502470544)
 migrated=true
 
 [org/gnome/mutter]
+dynamic-workspaces=false
 edge-tiling=false
 experimental-features=['x11-randr-fractional-scaling']
 
@@ -177,7 +187,14 @@ migrated-gtk-settings=true
 search-filter-time-type='last_modified'
 
 [org/gnome/nautilus/window-state]
-initial-size=(1966, 715)
+initial-size=(1920, 715)
+
+[org/gnome/nm-applet/eap/aceff9ec-0ee4-49b5-b9d9-ebd73dfb4fe7]
+ignore-ca-cert=true
+ignore-phase2-ca-cert=false
+
+[org/gnome/portal/filechooser/com.github.IsmaelMartinez.teams_for_linux]
+last-folder-path='/home/fredrik/Videos'
 
 [org/gnome/portal/filechooser/com.google.Chrome]
 last-folder-path='/home/fredrik/Downloads'
@@ -261,6 +278,7 @@ sleep-inactive-ac-type='nothing'
 disable-user-extensions=false
 disabled-extensions=['ubuntu-appindicators@ubuntu.com', 'ding@rastersoft.com']
 enabled-extensions=['tiling-assistant@leleat-on-github', 'hidetopbar@mathieu.bidon.ca', 'tiling-assistant@ubuntu.com', 'ubuntu-dock@ubuntu.com', 'rounded-window-corners@fxgn']
+last-selected-power-profile='power-saver'
 welcome-dialog-last-shown-version='46.0'
 
 [org/gnome/shell/extensions/dash-to-dock]
@@ -272,7 +290,7 @@ dock-position='LEFT'
 height-fraction=0.90000000000000002
 intellihide-mode='ALL_WINDOWS'
 preferred-monitor=-2
-preferred-monitor-by-connector='DP-4'
+preferred-monitor-by-connector='primary'
 
 [org/gnome/shell/extensions/ding]
 icon-size='standard'
@@ -284,6 +302,17 @@ mouse-sensitive=false
 mouse-sensitive-fullscreen-window=false
 pressure-threshold=100
 show-in-overview=false
+
+[org/gnome/shell/extensions/just-perfection]
+dash=true
+dash-separator=true
+panel=true
+support-notifier-showed-version=34
+support-notifier-type=0
+window-preview-caption=true
+window-preview-close-button=true
+workspace-popup=true
+workspace-switcher-should-show=false
 
 [org/gnome/shell/extensions/rounded-window-corners-reborn]
 settings-version=uint32 7
@@ -331,7 +360,7 @@ tile-topleft-quarter=['<Super>KP_7']
 tile-topleft-quarter-ignore-ta=@as []
 tile-topright-quarter=['<Super>KP_9']
 tile-topright-quarter-ignore-ta=@as []
-tiling-popup-all-workspace=false
+tiling-popup-all-workspace=true
 toggle-always-on-top=@as []
 toggle-tiling-popup=@as []
 window-gap=10
@@ -367,5 +396,5 @@ sort-column='name'
 sort-directories-first=false
 sort-order='ascending'
 type-format='category'
-window-position=(673, 256)
+window-position=(4642, 482)
 window-size=(1231, 902)

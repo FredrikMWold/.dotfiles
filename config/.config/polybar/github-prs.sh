@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-repos=("equinor/dot-web" "equinor/warp-ui" "equinor/subsurface-portal-web")
+repos=("equinor/dot-web" "equinor/warp-ui" "equinor/subsurface-portal-web", "equinor/pressure-db-ingestion-web")
 
 # Initialize counter for open PRs
 open_pr_count=0
