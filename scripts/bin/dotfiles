@@ -10,7 +10,7 @@ else
     echo "stow is already installed."
 fi
 
-cd ~/.dotfiles && stow kitty pass atuin rofi scripts lazygit fonts oh-my-zsh vscode polybar services home ssh --adopt
+cd ~/.dotfiles && stow kitty pass atuin rofi scripts lazygit fonts oh-my-zsh vscode polybar services home ssh superfile --adopt
 
 
 if ! [ -x "$(command -v ansible)" ]; then

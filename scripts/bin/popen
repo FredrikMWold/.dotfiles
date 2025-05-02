@@ -15,6 +15,7 @@ if wmctrl -l | grep -q "$title"; then
     echo $title
     # Move the window to the current workspace and activate it
     wmctrl -r $title -t $current_ws
+    sleep 0.05
     wmctrl -a $title
 else
     # Run the command if the window is not found
