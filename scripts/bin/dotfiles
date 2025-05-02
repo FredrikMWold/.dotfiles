@@ -6,10 +6,11 @@ cd ~/.dotfiles && git pull
 if ! [ -x "$(command -v stow)" ]; then
     echo "stow is not installed. Installing now..."
     sudo apt install -y stow
-    cd ~/.dotfiles && stow config --no-folding
 else
     echo "stow is already installed."
 fi
+
+cd ~/.dotfiles && stow kitty pass atuin rofi scripts lazygit fonts oh-my-zsh vscode polybar services home  --adopt
 
 
 if ! [ -x "$(command -v ansible)" ]; then
@@ -22,6 +23,13 @@ if ! [ -x "$(command -v wmctrl)" ]; then
     sudo apt install -y wmctrl
 else
     echo "wmctrl is already installed."
+fi
+
+if ! [ -x "$(command -v pass)" ]; then
+    echo "pass is not installed. Installing now..."
+    sudo apt install -y pass
+else
+    echo "pass is already installed."
 fi
 
 if ! [ -x "$(command -v pavucontrol)" ]; then
@@ -188,8 +196,6 @@ else
     echo "code is already installed."
 fi
 
-
-
 cd ~/.dotfiles/rounded-window-corners && just install
 
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
@@ -205,7 +211,7 @@ go install github.com/equinor/radix-cli/cli/rx@latest
 go install github.com/FredrikMWold/radix-tui@latest
 go install github.com/yorukot/superfile@latest
 
-sudo ANSIBLE_ASK_VAULT_PASS=True ansible-playbook ~/.dotfiles/local.yml 
+sudo ansible-playbook ~/.dotfiles/local.yml 
 
 if [[ "$SHELL" != *zsh ]]; then
   chsh -s $(which zsh) 
@@ -220,7 +226,7 @@ curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
 # Clean up
 fc-cache -f -v
 cd ~/.dotfiles && git remote set-url origin git@github.com:FredrikMWold/.dotfiles.git
-cd ~/.dotfiles && stow config --no-folding
+cd ~/.dotfiles && stow kitty pass atuin rofi scripts lazygit fonts oh-my-zsh vscode polybar services home  --adopt
 
 gnome-extensions enable hidetopbar@mathieu.bidon.ca
 gnome-extensions enable tiling-assistant@ubuntu.com

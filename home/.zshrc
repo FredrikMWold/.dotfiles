@@ -15,7 +15,7 @@ export PATH=/home/fredrik/.local/kitty.app/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-export ZSH_CUSTOM="$HOME/.dotfiles/config/.oh-my-zsh/custom"
+export ZSH_CUSTOM="$HOME/.dotfiles/oh-my-zsh/.oh-my-zsh/custom"
 export FZF_DEFAULT_OPTS=" \
 --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
 --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \

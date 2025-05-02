@@ -5,12 +5,3 @@
     - name: terminal setup
       import_tasks: playbooks/terminal_setup.yml
       become_user: fredrik
-
-    - name: Copy ssh files
-      copy:
-        src: "{{playbook_dir}}/.ssh"
-        dest: ~/
-        owner: fredrik
-        group: fredrik
-        mode: 0700
-      become_user: fredrik
