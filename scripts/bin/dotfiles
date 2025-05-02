@@ -14,7 +14,6 @@ cd ~/.dotfiles && stow kitty pass atuin rofi scripts lazygit fonts oh-my-zsh vsc
 
 
 if ! [ -x "$(command -v ansible)" ]; then
-  ssh-keygen -t rsa -f ~/.ssh/id_rsa -q -N ""
   sudo apt install ansible -y
 fi
 
