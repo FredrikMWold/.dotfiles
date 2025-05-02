@@ -10,7 +10,7 @@ else
     echo "stow is already installed."
 fi
 
-cd ~/.dotfiles && stow kitty pass atuin rofi scripts lazygit fonts oh-my-zsh vscode polybar services home  --adopt
+cd ~/.dotfiles && stow kitty pass atuin rofi scripts lazygit fonts oh-my-zsh vscode polybar services home ssh --adopt
 
 
 if ! [ -x "$(command -v ansible)" ]; then
@@ -226,7 +226,7 @@ curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
 # Clean up
 fc-cache -f -v
 cd ~/.dotfiles && git remote set-url origin git@github.com:FredrikMWold/.dotfiles.git
-cd ~/.dotfiles && stow kitty pass atuin rofi scripts lazygit fonts oh-my-zsh vscode polybar services home  --adopt
+cd ~/.dotfiles && stow kitty pass atuin rofi scripts lazygit fonts oh-my-zsh vscode polybar services home ssh --adopt
 
 gnome-extensions enable hidetopbar@mathieu.bidon.ca
 gnome-extensions enable tiling-assistant@ubuntu.com
