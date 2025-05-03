@@ -34,7 +34,7 @@ configuration{
     grey: #6c7086;
 
     width: 600;
-    font: "MesloLGS NF 11";
+    font: "MesloLGS NF 12";
 }
 
 element-text, element-icon , mode-switcher {

@@ -1,25 +1,3 @@
-configuration{
-    modi: "drun,window,combi";
-    icon-theme: "Oranchelo";
-    terminal: "kitty";
-    drun-display-format: "{icon} {name}";
-    location: 0;
-    kb-mode-previous: "Control+Shift+Left";
-    kb-mode-next: "Control+Shift+Right";
-    disable-history: false;
-    hide-scrollbar: true;
-    display-drun: "   Apps ";
-    display-window: " 󰕰  Window";
-    sidebar-mode: true;
-    window-format: "{n} {t}";
-    filebrowser {
-        show-hidden: true;
-    }
-    window {
-        close-on-delete: false;
-    }
-}
-
 * {
     bg-col:  #1e1e2e;
     bg-col-light: #1e1e2e;
@@ -31,7 +9,7 @@ configuration{
     grey: #6c7086;
 
     width: 600;
-    font: "MesloLGS NF 11";
+    font: "MesloLGS NF 12";
 }
 
 element-text, element-icon , mode-switcher {
