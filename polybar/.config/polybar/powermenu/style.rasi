@@ -41,7 +41,7 @@ window {
 /*****----- Main Box -----*****/
 mainbox {
     enabled:                     true;
-    spacing:                     10px;
+    spacing:                     0px;
     margin:                      0px;
     padding:                     10px;
     border:                      1px solid;
@@ -155,6 +155,6 @@ element-text {
     horizontal-align:            0.0;
 }
 element selected.normal {
-    background-color:            var(selected);
-    text-color:                  var(background);
+    background-color:            var(background);
+    text-color:                  @selected;
 }
