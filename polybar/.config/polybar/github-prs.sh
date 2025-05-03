@@ -16,4 +16,4 @@ for repo in "${repos[@]}"; do
   my_open_prs=$((my_open_prs + open_prs))
 done
 
-echo "%{F#b4befe}%{F-} my $my_open_prs %{F#585b70}|%{F-} %{F#b4befe}%{F-} review $pr_to_review_count"
+echo "%{F#b4befe}%{F-} my $my_open_prs %{F#585b70}| %{F#b4befe}%{F-} review $pr_to_review_count"
