@@ -10,7 +10,7 @@ width=768
 
 [com/ubuntu/update-notifier]
 no-show-notifications=false
-release-check-time=uint32 1745066413
+release-check-time=uint32 1746293408
 
 [com/uploadedlobster/peek]
 interface-prefer-dark-theme=true
@@ -249,7 +249,7 @@ name='Open superfile'
 
 [org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom1]
 binding='<Super>space'
-command='rofi -show combi -modes combi -combi-modes "window,drun"'
+command='rofi -show combi -modes combi -theme "app-launcher" -combi-modes "window,drun"'
 name='Open program'
 
 [org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom2]

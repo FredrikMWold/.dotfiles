@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# Current Theme
-dir="$HOME/.config/polybar/powermenu"
-theme='style'
-
 # CMDs
 uptime="`uptime -p | sed -e 's/up //g'`"
 
@@ -18,7 +14,7 @@ no=' No'
 # Rofi CMD
 rofi_cmd() {
 	rofi -dmenu \
-		-theme ${dir}/${theme}.rasi
+		-theme powermenu
 }
 
 # Confirmation CMD
@@ -31,7 +27,7 @@ confirm_cmd() {
 		-dmenu \
 		-p 'Confirmation' \
 		-mesg 'Are you Sure?' \
-		-theme ${dir}/${theme}.rasi
+		-theme powermenu
 }
 
 # Ask for confirmation
