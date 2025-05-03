@@ -12,11 +12,6 @@ fi
 
 cd ~/.dotfiles && stow kitty pass atuin rofi scripts lazygit fonts oh-my-zsh vscode polybar services home ssh superfile --adopt
 
-
-if ! [ -x "$(command -v ansible)" ]; then
-  sudo apt install ansible -y
-fi
-
 if ! [ -x "$(command -v wmctrl)" ]; then
     echo "wmctrl is not installed. Installing now..."
     sudo apt install -y wmctrl
@@ -221,6 +216,25 @@ curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh 
 ~/.dotfiles/fzf/install --all
 curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
 
+OH_MY_ZSH_SH="$HOME/.oh-my-zsh/oh-my-zsh.sh"
+
+if [ ! -f "$OH_MY_ZSH_SH" ]; then
+  echo "oh-my-zsh not found, installing..."
+
+  rm -rf "$HOME/.oh-my-zsh"
+
+  # Install oh-my-zsh while preserving the existing .zshrc
+  sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
+else
+  echo "oh-my-zsh is already installed."
+fi
+
+curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
+cp ~/.local/kitty.app/share/applications/kitty-open.desktop ~/.local/share/applications/
+sed -i "s|Icon=kitty|Icon=$(readlink -f ~)/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
+sed -i "s|^Exec=kitty|Exec=$(readlink -f ~)/.local/kitty.app/bin/kitty --title fredriks-kitty|g" ~/.local/share/applications/kitty*.desktop
+sed -i "s|TryExec=kitty|TryExec=$(readlink -f ~)/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
 
 # Clean up
 fc-cache -f -v

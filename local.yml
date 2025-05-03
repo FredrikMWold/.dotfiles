@@ -1,7 +1,0 @@
-- hosts: localhost
-  connection: local
-  become: true
-  tasks:
-    - name: terminal setup
-      import_tasks: playbooks/terminal_setup.yml
-      become_user: fredrik
