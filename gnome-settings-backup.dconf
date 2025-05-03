@@ -45,6 +45,11 @@ last-char=uint32 61132
 [org/gnome/charmap/window-state]
 size=(2880, 810)
 
+[org/gnome/clocks/state/window]
+maximized=false
+panel-id='world'
+size=(870, 690)
+
 [org/gnome/control-center]
 last-panel='keyboard'
 window-state=(888, 627, false)
@@ -172,6 +177,18 @@ window-ratio=(3.123319892473118, 1.2447738502470544)
 [org/gnome/evolution-data-server]
 migrated=true
 
+[org/gnome/gnome-system-monitor]
+cpu-colors=[(uint32 0, '#e01b24'), (1, '#ff7800'), (2, '#f6d32d'), (3, '#33d17a'), (4, '#26a269'), (5, '#62a0ea'), (6, '#1c71d8'), (7, '#613583'), (8, '#9141ac'), (9, '#c061cb'), (10, '#ffbe6f'), (11, '#f9f06b'), (12, '#8ff0a4'), (13, '#2ec27e'), (14, '#1a5fb4'), (15, '#c061cb'), (16, '#7999edb4f332'), (17, '#f332d5347999'), (18, '#b1b97999f332'), (19, '#7999f3328e3d')]
+show-dependencies=false
+show-whose-processes='user'
+
+[org/gnome/gnome-system-monitor/disktreenew]
+col-6-visible=true
+col-6-width=0
+columns-order=[5]
+sort-col=1
+sort-order=0
+
 [org/gnome/mutter]
 dynamic-workspaces=false
 edge-tiling=false
@@ -276,8 +293,8 @@ sleep-inactive-ac-type='nothing'
 
 [org/gnome/shell]
 disable-user-extensions=false
-disabled-extensions=['ubuntu-appindicators@ubuntu.com', 'ding@rastersoft.com']
-enabled-extensions=['tiling-assistant@leleat-on-github', 'hidetopbar@mathieu.bidon.ca', 'tiling-assistant@ubuntu.com', 'ubuntu-dock@ubuntu.com', 'rounded-window-corners@fxgn']
+disabled-extensions=['ubuntu-appindicators@ubuntu.com', 'ding@rastersoft.com', 'ubuntu-dock@ubuntu.com']
+enabled-extensions=['tiling-assistant@leleat-on-github', 'hidetopbar@mathieu.bidon.ca', 'tiling-assistant@ubuntu.com', 'rounded-window-corners@fxgn']
 last-selected-power-profile='power-saver'
 welcome-dialog-last-shown-version='46.0'
 
@@ -290,7 +307,8 @@ dock-position='LEFT'
 height-fraction=0.90000000000000002
 intellihide-mode='ALL_WINDOWS'
 preferred-monitor=-2
-preferred-monitor-by-connector='primary'
+preferred-monitor-by-connector='eDP-1'
+transparency-mode='DEFAULT'
 
 [org/gnome/shell/extensions/ding]
 icon-size='standard'

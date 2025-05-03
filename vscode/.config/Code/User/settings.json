@@ -5,7 +5,6 @@
   },
   "files.autoSave": "afterDelay",
   "editor.fontSize": 13,
-  "explorer.": 15,
   "editor.formatOnSave": true,
   "eslint.format.enable": true,
   "terminal.integrated.fontFamily": "MesloLGS NF",

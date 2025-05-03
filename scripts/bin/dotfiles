@@ -180,10 +180,10 @@ cd ~/.dotfiles && git remote set-url origin git@github.com:FredrikMWold/.dotfile
 print_step "Stow config files"
 cd ~/.dotfiles && stow kitty pass atuin rofi scripts lazygit fonts oh-my-zsh vscode polybar services home ssh --adopt
 
-print_step "Enable gnome extensions"
+print_step "Setting up gnome extensions"
 gnome-extensions enable hidetopbar@mathieu.bidon.ca
 gnome-extensions enable tiling-assistant@ubuntu.com
-gnome-extensions enable ubuntu-dock@ubuntu.com
+gnome-extensions disable ubuntu-dock@ubuntu.com
 gnome-extensions enable rounded-window-corners@fxgn
 
 print_step "Load gnome settings"
