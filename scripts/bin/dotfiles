@@ -1,252 +1,204 @@
 #!/bin/bash
 
+print_header() {
+    echo -e "\n\033[38;5;183m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+    echo -e "\033[38;5;189m  $1\033[0m"
+    echo -e "\033[38;5;183m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m\n"
+}
+
+print_step() {
+    echo -e "\033[1;33m➜\033[0m \033[1m$1\033[0m"
+}
+
+install_nvm() {
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+}
+
+install_zoxide() {
+    curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+}
+
+install_apt_package_if_missing() {
+    dpkg-query -l $1 &> /dev/null && print_step "$1 is already installed." || (print_step "$1 is not installed. Installing now..." && sudo apt install -y $1)
+}
+
+install_fzf() {
+    ~/.dotfiles/fzf/install --all
+}
+
+install_atuin() {
+    curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
+}
+
+install_gnome_hidetopbar(){
+    print_header "Installing hidetopbar"
+    cd ~/.dotfiles/hidetopbar && make
+    gnome-extensions install ./hidetopbar.zip
+}
+
+install_oh_my_zsh() {
+    OH_MY_ZSH_SH="$HOME/.oh-my-zsh/oh-my-zsh.sh"
+
+    if [ ! -f "$OH_MY_ZSH_SH" ]; then
+        echo "oh-my-zsh not found, installing..."
+        rm -rf "$HOME/.oh-my-zsh"
+        sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
+    else
+        print_step "oh-my-zsh is already installed."
+    fi
+}
+
+install_chrome() {
+    if ! [ -x "$(command -v google-chrome)" ]; then
+        print_step "google-chrome-stable is not installed. Installing now..."
+        wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub > linux_signing_key.pub
+        sudo install -D -o root -g root -m 644 linux_signing_key.pub /etc/apt/keyrings/linux_signing_key.pub
+        sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/linux_signing_key.pub] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
+        sudo apt update
+        sudo apt install -y google-chrome-stable
+    else
+        print_step "google-chrome-stable is already installed."
+    fi
+}
+
+install_kitty() {
+    curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+    cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
+    cp ~/.local/kitty.app/share/applications/kitty-open.desktop ~/.local/share/applications/
+    sed -i "s|Icon=kitty|Icon=$(readlink -f ~)/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
+    sed -i "s|^Exec=kitty|Exec=$(readlink -f ~)/.local/kitty.app/bin/kitty --title fredriks-kitty|g" ~/.local/share/applications/kitty*.desktop
+    sed -i "s|TryExec=kitty|TryExec=$(readlink -f ~)/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
+}
+
+install_go() {
+    if ! [ -x "$(command -v go)" ]; then
+        print_step "golang-go is not installed. Installing now..."
+        sudo add-apt-repository ppa:longsleep/golang-backports
+        sudo apt update
+        sudo apt install -y golang-go
+    else
+        print_step "golang-go is already installed."
+    fi
+}
+
+install_vscode() {
+    if ! [ -x "$(command -v code)" ]; then
+        print_step "code is not installed. Installing now..."
+        sudo apt install software-properties-common apt-transport-https wget -y
+        wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+        sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+        sudo apt update
+        sudo apt install -y code
+    else
+        print_step "code is already installed."
+    fi
+}
+
+################################################
+#                                              #                               
+#             Install starts here              #
+#                                              #
+################################################
+
+print_header "Updating System"
 sudo apt update -y && sudo apt upgrade -y
 cd ~/.dotfiles && git pull
 
-if ! [ -x "$(command -v stow)" ]; then
-    echo "stow is not installed. Installing now..."
-    sudo apt install -y stow
-else
-    echo "stow is already installed."
-fi
-
+print_header "Installing Apt Packages"
+install_apt_package_if_missing stow
 cd ~/.dotfiles && stow kitty pass atuin rofi scripts lazygit fonts oh-my-zsh vscode polybar services home ssh superfile --adopt
 
-if ! [ -x "$(command -v wmctrl)" ]; then
-    echo "wmctrl is not installed. Installing now..."
-    sudo apt install -y wmctrl
-else
-    echo "wmctrl is already installed."
-fi
+install_apt_package_if_missing wmctrl
+install_apt_package_if_missing pass
+install_apt_package_if_missing pavucontrol
+install_apt_package_if_missing pulseaudio
+install_apt_package_if_missing flameshot
+install_apt_package_if_missing curl
+install_apt_package_if_missing peek
+install_apt_package_if_missing zsh
+install_apt_package_if_missing htop
+install_apt_package_if_missing jq
+install_apt_package_if_missing xclip
+install_apt_package_if_missing python3
+install_apt_package_if_missing eza
+install_apt_package_if_missing bat
+install_apt_package_if_missing python3-pip
+install_apt_package_if_missing gh
+install_apt_package_if_missing rofi
+install_apt_package_if_missing polybar
+install_apt_package_if_missing just
+install_apt_package_if_missing gettext
+install_apt_package_if_missing flatpak
 
-if ! [ -x "$(command -v pass)" ]; then
-    echo "pass is not installed. Installing now..."
-    sudo apt install -y pass
-else
-    echo "pass is already installed."
-fi
+install_chrome
+install_vscode
+install_go
 
-if ! [ -x "$(command -v pavucontrol)" ]; then
-    echo "pavucontrol is not installed. Installing now..."
-    sudo apt install -y pavucontrol
-else
-    echo "pavucontrol is already installed."
-fi
-    
-if ! [ -x "$(command -v pulseaudio)" ]; then
-    echo "pulseaudio is not installed. Installing now..."
-    sudo apt install -y pulseaudio
-else
-    echo "pulseaudio is already installed."
-fi
-
-if ! [ -x "$(command -v flameshot)" ]; then
-    echo "flameshot is not installed. Installing now..."
-    sudo apt install -y flameshot
-else
-    echo "flameshot is already installed."
-fi
-
-if ! [ -x "$(command -v curl)" ]; then
-    echo "curl is not installed. Installing now..."
-    sudo apt install -y curl
-else
-    echo "curl is already installed."
-fi
-
-if ! [ -x "$(command -v peek)" ]; then
-    echo "peek is not installed. Installing now..."
-    sudo apt install -y peek
-else
-    echo "peek is already installed."
-fi
-
-if ! [ -x "$(command -v zsh)" ]; then
-    echo "zsh is not installed. Installing now..."
-    sudo apt install -y zsh
-else
-    echo "zsh is already installed."
-fi
-
-if ! [ -x "$(command -v htop)" ]; then
-    echo "htop is not installed. Installing now..."
-    sudo apt install -y htop
-else
-    echo "htop is already installed."
-fi
-
-if ! [ -x "$(command -v jq)" ]; then
-    echo "jq is not installed. Installing now..."
-    sudo apt install -y jq
-else
-    echo "jq is already installed."
-fi
-
-if ! [ -x "$(command -v xclip)" ]; then
-    echo "xclip is not installed. Installing now..."
-    sudo apt install -y xclip
-else
-    echo "xclip is already installed."
-fi
-
-if ! [ -x "$(command -v python3)" ]; then
-    echo "python3 is not installed. Installing now..."
-    sudo apt install -y python3
-else
-    echo "python3 is already installed."
-fi
-
-if ! [ -x "$(command -v eza)" ]; then
-    echo "eza is not installed. Installing now..."
-    sudo apt install -y eza
-else
-    echo "eza is already installed."
-fi
-
-if ! [ -x "$(command -v bat)" ]; then
-    echo "bat is not installed. Installing now..."
-    sudo apt install -y bat
-else
-    echo "bat is already installed."
-fi
-
-if ! [ -x "$(command -v pip3)" ]; then
-    echo "python3-pip is not installed. Installing now..."
-    sudo apt install -y python3-pip
-else
-    echo "python3-pip is already installed."
-fi
-
-if ! [ -x "$(command -v gh)" ]; then
-    echo "gh is not installed. Installing now..."
-    sudo apt install -y gh
-else
-    echo "gh is already installed."
-fi
-
-if ! [ -x "$(command -v rofi)" ]; then
-    echo "rofi is not installed. Installing now..."
-    sudo apt install -y rofi
-else
-    echo "rofi is already installed."
-fi
-
-if ! [ -x "$(command -v polybar)" ]; then
-    echo "polybar is not installed. Installing now..."
-    sudo apt install -y polybar
-else
-    echo "polybar is already installed."
-fi
-
-if ! [ -x "$(command -v just)" ]; then
-    echo "just is not installed. Installing now..."
-    sudo apt install -y just
-else
-    echo "just is already installed."
-fi
-
-if ! [ -x "$(command -v gettext)" ]; then
-    echo "gettext is not installed. Installing now..."
-    sudo apt install -y gettext
-else
-    echo "gettext is already installed."
-fi
-
-if ! [ -x "$(command -v flatpak)" ]; then
-    echo "flatpak is not installed. Installing now..."
-    sudo apt install -y flatpak
-else
-    echo "flatpak is already installed."
-fi
-
-if ! [ -x "$(command -v go)" ]; then
-    echo "golang-go is not installed. Installing now..."
-    sudo add-apt-repository ppa:longsleep/golang-backports
-    sudo apt update
-    sudo apt install -y golang-go
-else
-    echo "golang-go is already installed."
-fi
-
-if ! [ -x "$(command -v google-chrome)" ]; then
-    echo "google-chrome-stable is not installed. Installing now..."
-    wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub > linux_signing_key.pub
-    sudo install -D -o root -g root -m 644 linux_signing_key.pub /etc/apt/keyrings/linux_signing_key.pub
-    sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/linux_signing_key.pub] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
-    sudo apt update
-    sudo apt install -y google-chrome-stable
-else
-    echo "google-chrome-stable is already installed."
-fi
-
-if ! [ -x "$(command -v code)" ]; then
-    echo "code is not installed. Installing now..."
-    sudo apt install software-properties-common apt-transport-https wget -y
-    wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
-    sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
-    sudo apt update
-    sudo apt install -y code
-else
-    echo "code is already installed."
-fi
-
+print_header "Installing rounded-window-corners"
 cd ~/.dotfiles/rounded-window-corners && just install
+install_gnome_hidetopbar
 
+print_header "Installing Flatpak Packages"
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install flathub com.adamcake.Bolt
 flatpak install flathub com.stremio.Stremio
 flatpak install flathub com.slack.Slack
 flatpak install flathub com.github.IsmaelMartinez.teams_for_linux
+flatpak install flathub com.mattjakeman.ExtensionManager
 flatpak update -y
 
+print_header "Installing Go Packages"
+print_step "Installing lazygit"
 go install github.com/jesseduffield/lazygit@latest
+print_step "Installing gum"
 go install github.com/charmbracelet/gum@latest
+print_step "Installing radix-cli"
 go install github.com/equinor/radix-cli/cli/rx@latest
+print_step "Installing radix-tui"
 go install github.com/FredrikMWold/radix-tui@latest
+print_step "Installing superfile"
 go install github.com/yorukot/superfile@latest
 
-sudo ansible-playbook ~/.dotfiles/local.yml 
+print_header "Installing nvm"
+install_nvm
+print_header "Installing zoxide"
+install_zoxide
+print_header "Installing fzf"
+install_fzf
+print_header "Installing atuin"
+install_atuin
+print_header "Installing oh-my-zsh"
+install_oh_my_zsh
+print_header "Installing kitty"
+install_kitty
 
-if [[ "$SHELL" != *zsh ]]; then
-  chsh -s $(which zsh) 
-fi   
 
-PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash'
-curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
-~/.dotfiles/fzf/install --all
-curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
-
-OH_MY_ZSH_SH="$HOME/.oh-my-zsh/oh-my-zsh.sh"
-
-if [ ! -f "$OH_MY_ZSH_SH" ]; then
-  echo "oh-my-zsh not found, installing..."
-
-  rm -rf "$HOME/.oh-my-zsh"
-
-  # Install oh-my-zsh while preserving the existing .zshrc
-  sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
-else
-  echo "oh-my-zsh is already installed."
-fi
-
-curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
-cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
-cp ~/.local/kitty.app/share/applications/kitty-open.desktop ~/.local/share/applications/
-sed -i "s|Icon=kitty|Icon=$(readlink -f ~)/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
-sed -i "s|^Exec=kitty|Exec=$(readlink -f ~)/.local/kitty.app/bin/kitty --title fredriks-kitty|g" ~/.local/share/applications/kitty*.desktop
-sed -i "s|TryExec=kitty|TryExec=$(readlink -f ~)/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
-
-# Clean up
-fc-cache -f -v
+print_header "Loading config"
+print_step "Set dotfiles git origin to ssh"
 cd ~/.dotfiles && git remote set-url origin git@github.com:FredrikMWold/.dotfiles.git
+
+print_step "Stow config files"
 cd ~/.dotfiles && stow kitty pass atuin rofi scripts lazygit fonts oh-my-zsh vscode polybar services home ssh --adopt
 
+print_step "Enable gnome extensions"
 gnome-extensions enable hidetopbar@mathieu.bidon.ca
 gnome-extensions enable tiling-assistant@ubuntu.com
 gnome-extensions enable ubuntu-dock@ubuntu.com
 gnome-extensions enable rounded-window-corners@fxgn
 
+print_step "Load gnome settings"
 dconf load / < ~/.dotfiles/gnome-settings-backup.dconf
 
+print_step "Reload systemd"
 systemctl --user daemon-reload
 systemctl --user enable polybar.service
+
+if [[ "$SHELL" != *zsh ]]; then
+    print_step "Changing default shell to zsh"
+    chsh -s $(which zsh)
+else 
+    print_step "zsh is already the default shell."
+fi 
+
+print_step "Updating font cache"
+fc-cache -f

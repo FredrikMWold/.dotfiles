@@ -16,3 +16,6 @@
 [submodule "rounded-window-corners"]
 	path = rounded-window-corners
 	url = https://github.com/flexagoon/rounded-window-corners
+[submodule "hidetopbar"]
+	path = hidetopbar
+	url = https://gitlab.gnome.org/tuxor1337/hidetopbar.git
