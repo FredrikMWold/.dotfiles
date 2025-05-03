@@ -3,14 +3,14 @@ configuration{
     icon-theme: "Oranchelo";
     show-icons: true;
     terminal: "kitty";
-    drun-display-format: "{icon} {name}";
+    drun-display-format: "{icon}{name}";
     location: 0;
     kb-mode-previous: "Control+Shift+Left";
     kb-mode-next: "Control+Shift+Right";
     disable-history: false;
     hide-scrollbar: true;
-    display-drun: "   Apps ";
-    display-window: " 󰕰  Window";
+    display-drun: " ";
+    display-window: " 󰕰";
     sidebar-mode: true;
     window-format: "{n} {t}";
     filebrowser {
@@ -20,8 +20,6 @@ configuration{
         close-on-delete: false;
     }
 }
-
-
 
 * {
     bg-col:  #1e1e2e;
@@ -33,7 +31,7 @@ configuration{
     fg-col2: #cba6f7;
     grey: #6c7086;
 
-    width: 600;
+    width: 700;
     font: "MesloLGS NF 12";
 }
 
@@ -43,11 +41,9 @@ element-text, element-icon , mode-switcher {
 }
 
 window {
-    height: 550px;
     border: 1px solid;
     border-color: #cba6f7;
     border-radius: 6px;
-    background-color: @bg-col;
 }
 
 mainbox {
@@ -92,8 +88,8 @@ entry {
 listview {
     border: 0px 0px 0px;
     padding: 6px 0px 0px;
-    margin: 10px 0px 0px 20px;
-    lines: 5;
+    margin: 10px 0px 18px 20px;
+    lines: 12;
     background-color: @bg-col;
 }
 

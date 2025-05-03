@@ -18,11 +18,9 @@ element-text, element-icon , mode-switcher {
 }
 
 window {
-    height: 550px;
     border: 1px solid;
     border-color: #cba6f7;
     border-radius: 6px;
-    background-color: @bg-col;
 }
 
 mainbox {
@@ -67,8 +65,8 @@ entry {
 listview {
     border: 0px 0px 0px;
     padding: 6px 0px 0px;
-    margin: 10px 0px 0px 20px;
-    lines: 5;
+    margin: 10px 0px 18px 20px;
+    lines: 12;
     background-color: @bg-col;
 }
 

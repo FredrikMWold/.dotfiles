@@ -222,31 +222,6 @@ last-folder-path='/home/fredrik/Downloads/chrome-extension-v1.0.2'
 [org/gnome/settings-daemon/plugins/media-keys]
 custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom4/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom5/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom6/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom7/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom8/']
 
-[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0]
-binding='<Super>s'
-command='zsh -c "wmctrl -a slack || flatpak run com.slack.Slack"'
-name='Open slack'
-
-[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1]
-binding='<Super>t'
-command='zsh -c "wmctrl -a "Microsoft Teams" || flatpak run com.github.IsmaelMartinez.teams_for_linux"'
-name='Open teams'
-
-[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2]
-binding='Print'
-command='flameshot gui'
-name='Take screenshot with flameshot'
-
-[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3]
-binding='<Shift>Print'
-command='peek -b ffmpeg'
-name='Make gif'
-
-[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4]
-binding='<Super>f'
-command="zsh -c \"export EDITOR='code'; export PATH=\"/home/fredrik/go/bin:$PATH\"; wmctrl -a superfile-tui || /home/fredrik/.local/kitty.app/bin/kitty --hold --title superfile-tui superfile\""
-name='Open superfile'
-
 [org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom1]
 binding='<Super>space'
 command='rofi -show combi -modes combi -theme "app-launcher" -combi-modes "window,drun"'
