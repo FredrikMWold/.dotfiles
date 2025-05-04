@@ -1,9 +1,19 @@
 #!/bin/zsh
 
-my_open_prs_repos="equinor/dot-web,equinor/warp-ui,equinor/subsurface-portal-web,equinor/pressure-db-ingestion-web,equinor/design-system"
-pr_to_review_repos="equinor/dot-web,equinor/warp-ui,equinor/subsurface-portal-web,equinor/pressure-db-ingestion-web"
+my_open_prs_repos=("equinor/dot-web", "equinor/warp-ui", "equinor/subsurface-portal-web", "equinor/pressure-db-ingestion-web", "equinor/design-system")
+my_open_prs_count=0
 
-pr_to_review=$(gh search prs --state open --repo $pr_to_review_repos --json number --jq 'length' -- -author:"@me" -label:dependencies -label:"autorelease: pending")
-my_open_prs=$(gh search prs --state open --author "@me" --repo $my_open_prs_repos --json number --jq 'length' -- -label:dependencies -label:"autorelease: pending")
+for repo in "${my_open_prs_repos[@]}"; do
+  open_prs=$(gh pr list --repo "$repo" --state open --search '-label:dependencies -label:"autorelease: pending" author:@me is:open' --json number --jq 'length')
+  my_open_prs_count=$((my_open_prs_count + open_prs))
+done
 
-echo "%{F#b4befe}%{F-} my $my_open_prs %{F#585b70}| %{F#b4befe}%{F-} review $pr_to_review"
+pr_to_review_repos=("equinor/dot-web", "equinor/warp-ui", "equinor/subsurface-portal-web", "equinor/pressure-db-ingestion-web")
+pr_to_review_count=0
+
+for repo in "${pr_to_review_repos[@]}"; do
+  open_prs=$(gh pr list --repo "$repo" --state open --search '-label:dependencies -label:"autorelease: pending" -author:@me is:open' --json number --jq 'length')
+  pr_to_review_count=$((pr_to_review_count + open_prs))
+done
+
+echo "%{F#b4befe}%{F-} my $my_open_prs_count %{F#585b70}| %{F#b4befe}%{F-} review $pr_to_review_count"
