@@ -17,3 +17,5 @@
 	helper = !/usr/bin/gh auth git-credential
 [rebase]
 	autoStash = true
+[commit]
+	verbose = true
