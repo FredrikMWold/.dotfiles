@@ -1,7 +1,14 @@
 [apps/update-manager]
 first-run=false
-launch-count=23
-launch-time=int64 1745574017
+launch-count=25
+launch-time=int64 1747804940
+
+[ca/desrt/dconf-editor]
+saved-pathbar-path='/org/gnome/settings-daemon/plugins/media-keys/'
+saved-view='/org/gnome/settings-daemon/plugins/media-keys/'
+window-height=500
+window-is-maximized=false
+window-width=571
 
 [com/mattjakeman/ExtensionManager]
 height=508
@@ -10,7 +17,7 @@ width=768
 
 [com/ubuntu/update-notifier]
 no-show-notifications=false
-release-check-time=uint32 1746293408
+release-check-time=uint32 1747503436
 
 [com/uploadedlobster/peek]
 interface-prefer-dark-theme=true
@@ -217,10 +224,15 @@ last-folder-path='/home/fredrik/Videos'
 last-folder-path='/home/fredrik/Downloads'
 
 [org/gnome/portal/filechooser/rofi]
-last-folder-path='/home/fredrik/Downloads/chrome-extension-v1.0.2'
+last-folder-path='/home/fredrik/Documents'
 
 [org/gnome/settings-daemon/plugins/media-keys]
-custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom4/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom5/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom6/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom7/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom8/']
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom4/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom5/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom6/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom7/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom8/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']
+
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0]
+binding='<Super>k'
+command='pass-menu'
+name='Show password manager'
 
 [org/gnome/settings-daemon/plugins/media-keys/custom-keybindings:/custom1]
 binding='<Super>space'

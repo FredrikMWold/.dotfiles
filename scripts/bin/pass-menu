@@ -1,0 +1,3 @@
+#!/bin/zsh
+
+fdfind -e gpg . ~/.dotfiles/pass/.password-store -x sh -c 'basename "$1" .gpg' sh {} | rofi -dmenu | xargs pass --clip
