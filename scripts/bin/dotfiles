@@ -129,6 +129,7 @@ install_apt_package_if_missing polybar
 install_apt_package_if_missing just
 install_apt_package_if_missing gettext
 install_apt_package_if_missing flatpak
+install_apt_package_if_missing fd-find
 
 install_chrome
 install_vscode

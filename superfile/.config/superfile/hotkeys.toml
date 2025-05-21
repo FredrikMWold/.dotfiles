@@ -5,8 +5,8 @@ quit = ['q', 'esc']
 # movement
 list_up = ['up', 'k']
 list_down = ['down', 'j']
-page_up = ['pgup', '']
-page_down = ['pgdown', '']
+page_up = ['pgup','']
+page_down = ['pgdown','']
 # file panel control
 create_new_file_panel = ['n', '']
 close_file_panel = ['w', '']
@@ -25,7 +25,7 @@ file_panel_item_rename = ['ctrl+r', '']
 # file operations
 copy_items = ['ctrl+c', '']
 cut_items = ['ctrl+x', '']
-paste_items = ['ctrl+w', '']
+paste_items = ['ctrl+v', 'ctrl+w', '']
 delete_items = ['ctrl+d', 'delete', '']
 # compress and extract
 extract_file = ['ctrl+e', '']

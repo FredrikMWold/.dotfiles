@@ -3,8 +3,11 @@
 # change your theme
 theme = 'catppuccin'
 # 
-# The editor files/directories will be opened with. (leave blank to use the EDITOR environment variable).
+# The editor files will be opened with. (Leave blank to use the EDITOR environment variable).
 editor = ""
+# 
+# The editor directories will be opened with. (Leave blank to use the default editors).
+dir_editor = ""
 #
 # Auto check for update
 auto_check_update = true
@@ -13,7 +16,10 @@ auto_check_update = true
 cd_on_quit = false
 #
 # Whether to open file preview automatically every time superfile is opened.
-default_open_file_preview = false
+default_open_file_preview = true
+#
+# Whether to show image preview
+show_image_preview = true
 # 
 # The path of the first file panel when superfile is opened.
 default_directory = "."
@@ -30,7 +36,13 @@ sort_order_reversed = false
 # Case sensitive sort by name (upper "B" comes before lower "a" if true).
 case_sensitive_sort = false
 #
+# Whether to enable debug mode.
+debug = false
+#
 # ================   Style =================
+#
+# Whether to use the builtin syntax highlighting with chroma or use bat. Values: "" for builtin chroma, "bat" for bat
+code_previewer = ''
 # 
 # If you don't have or don't want Nerdfont installed you can turn this off
 nerdfont = true
