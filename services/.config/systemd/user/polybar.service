@@ -1,6 +1,6 @@
 [Unit]
 Description=Polybar
-After=graphical-session.target
+After=graphical-session.target pulseaudio.service
 
 [Service]
 ExecStart=%h/.config/polybar/launch.sh

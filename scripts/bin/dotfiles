@@ -161,6 +161,10 @@ print_step "Installing superfile"
 go install github.com/yorukot/superfile@latest
 print_step "Installing portal"
 go install github.com/SpatiumPortae/portal/cmd/portal@latest
+print_step "Installing npm-tui"
+go install github.com/fredrikmwold/npm-tui/cmd/npm-tui@latest
+print_step "Installing rebasei-tui"
+go install github.com/fredrikmwold/rebasei-tui/cmd/rebasei-tui@latest
 
 print_header "Installing nvm"
 install_nvm

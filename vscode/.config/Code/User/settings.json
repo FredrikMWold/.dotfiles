@@ -70,9 +70,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "autoBarrel.files.disableRecursiveBarrelling": true,
-  "github.copilot.advanced": {
-    
-  },
+  "github.copilot.advanced": {},
   "gitlens.views.scm.grouped.views": {
     "commits": false,
     "branches": false,
@@ -124,5 +122,9 @@
     }
   ],
   "workbench.activityBar.location": "top",
-  "peacock.affectStatusBar": false
+  "peacock.affectStatusBar": false,
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "docker.extension.enableComposeLanguageServer": false,
+  "chat.mcp.autostart": "newAndOutdated",
+  "python.defaultInterpreterPath": "/bin/python3"
 }
