@@ -144,6 +144,8 @@ export NVM_DIR="$HOME/.nvm"
 
 alias cd='z'
 alias cat='batcat --paging=never'
+alias gc='branch-picker-tui'
+alias wt='worktree-tui'
 alias ll='eza -lha'
 
 cc() {

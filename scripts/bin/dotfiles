@@ -165,6 +165,10 @@ print_step "Installing npm-tui"
 go install github.com/fredrikmwold/npm-tui/cmd/npm-tui@latest
 print_step "Installing rebasei-tui"
 go install github.com/fredrikmwold/rebasei-tui/cmd/rebasei-tui@latest
+print_step "Installing branch-picker-tui"
+go install github.com/fredrikmwold/branch-picker-tui/cmd/branch-picker-tui@latest
+print_step "Installing git-worktree-tui"
+go install github.com/fredrikmwold/git-worktree-tui/cmd/worktree-tui@latest
 
 print_header "Installing nvm"
 install_nvm
