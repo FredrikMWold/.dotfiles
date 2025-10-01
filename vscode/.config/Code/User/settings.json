@@ -126,5 +126,21 @@
   "github.copilot.nextEditSuggestions.enabled": true,
   "docker.extension.enableComposeLanguageServer": false,
   "chat.mcp.autostart": "newAndOutdated",
-  "python.defaultInterpreterPath": "/bin/python3"
+  "search.exclude": {
+    "**/.git": true
+  },
+  "[dockercompose]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.autoIndent": "advanced",
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": false,
+      "strings": true
+    },
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  }
 }
