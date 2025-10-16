@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-my_open_prs_repos=("equinor/dot-web", "equinor/subsurface-portal-web", "equinor/pressure-db-ingestion-web", "equinor/design-system")
+my_open_prs_repos=("equinor/dot-web", "equinor/subsurface-portal-web", "equinor/pressure-db-ingestion-web", "equinor/design-system", "equinor/warp-ui")
 my_open_prs_count=0
 
 for repo in "${my_open_prs_repos[@]}"; do
@@ -8,7 +8,7 @@ for repo in "${my_open_prs_repos[@]}"; do
   my_open_prs_count=$((my_open_prs_count + open_prs))
 done
 
-pr_to_review_repos=("equinor/dot-web", "equinor/subsurface-portal-web", "equinor/pressure-db-ingestion-web")
+pr_to_review_repos=("equinor/dot-web", "equinor/subsurface-portal-web", "equinor/pressure-db-ingestion-web", "equinor/warp-ui")
 pr_to_review_count=0
 
 for repo in "${pr_to_review_repos[@]}"; do
