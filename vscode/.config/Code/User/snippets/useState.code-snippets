@@ -1,19 +1,50 @@
 {
 	"useState": {
-		"prefix": "ust",
+		"prefix": "state",
 		"body": [
-		  "const [$1, set${1/(.*)/${1:/capitalize}/}] = useState($2);",
-		  "$3"
+			"const [$1, set${1/(.*)/${1:/capitalize}/}] = useState($0);",
 		],
 		"description": "creates use state"
-	  },
-	  "React useEffect": {
-		"prefix": "uef",
+	},
+	"React useEffect": {
+		"prefix": "effect",
 		"body": [
-		  "useEffect(() => {",
-		  "  $1",
-		  "}, [$2]);"
+			"useEffect(() => {",
+			"  $1",
+			"}, [$2]);"
 		],
 		"description": "React useEffect"
-	  }
+	},
+	"React Arrow Component With Props Based On File Name": {
+		"scope": "javascriptreact,typescriptreact",
+		"prefix": "rfc",
+		"body": [
+			"import { useState } from 'react';",
+			"",
+			"export const ${TM_FILENAME_BASE} = ({}: ${TM_FILENAME_BASE}Props) => {",
+			"    return (",
+			"        <div>",
+			"            ${1:------------------------- Your component implementation here -------------------------}",
+			"        </div>",
+			"    );",
+			"};",
+			"",
+			"type ${TM_FILENAME_BASE}Props = {};",
+			"",
+		],
+		"description": "Create a React arrow component and props type using the file name."
+	},
+	"React Hook With File Name": {
+		"prefix": "hook",
+		"scope": "javascriptreact,typescriptreact",
+		"body": [
+			"import { useState } from 'react';",
+			"",
+			"export const ${TM_FILENAME_BASE} = () => {",
+			"    return {};",
+			"};",
+			""
+		],
+		"description": "Creates a React hook named after the file."
+	}
 }

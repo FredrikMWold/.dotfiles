@@ -16,6 +16,7 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
+  "editor.suggest.snippetsPreventQuickSuggestions": true,
   "git.autofetch": true,
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
