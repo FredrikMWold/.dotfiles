@@ -1,0 +1,34 @@
+#!/bin/bash
+
+if (($# == 0)); then
+  echo "Usage: omarchy-open-or-move-to-scratchpad [window-pattern] [launch-command]"
+  exit 1
+fi
+
+WINDOW_PATTERN="$1"
+LAUNCH_COMMAND="${2:-"uwsm-app -- $WINDOW_PATTERN"}"
+ACTIVE_MONITOR=$(hyprctl activeworkspace -j | jq -r '.monitor')
+WINDOW_ADDRESS=$(hyprctl clients -j | jq -r --arg p "$WINDOW_PATTERN" '.[]|select((.class|test("\\b" + $p + "\\b";"i")) or (.title|test("\\b" + $p + "\\b";"i")))|.address' | head -n1)
+
+if [[ -n $WINDOW_ADDRESS ]]; then
+  WINDOW_WORKSPACE=$(hyprctl clients -j | jq -r --arg addr "$WINDOW_ADDRESS" '.[]|select(.address==$addr)|.workspace.name')
+  ACTIVE_WORKSPACE=$(hyprctl activeworkspace -j | jq -r '.name')
+  if [[ "$WINDOW_WORKSPACE" == special:* ]]; then
+    # Window is in special workspace, move it to active workspace and monitor
+    hyprctl dispatch movetoworkspace "$ACTIVE_WORKSPACE,address:$WINDOW_ADDRESS"
+    hyprctl dispatch focuswindow "address:$WINDOW_ADDRESS"
+    hyprctl dispatch movewindow "mon:$ACTIVE_MONITOR"
+    hyprctl dispatch centerwindow
+  elif [[ "$WINDOW_WORKSPACE" != "$ACTIVE_WORKSPACE" ]]; then
+    # Window is on a different regular workspace, move it to active workspace and monitor
+    hyprctl dispatch movetoworkspace "$ACTIVE_WORKSPACE,address:$WINDOW_ADDRESS"
+    hyprctl dispatch focuswindow "address:$WINDOW_ADDRESS"
+    hyprctl dispatch movewindow "mon:$ACTIVE_MONITOR"
+    hyprctl dispatch centerwindow
+  else
+    # Window is on current workspace, move it to special workspace
+    hyprctl dispatch movetoworkspacesilent "special,address:$WINDOW_ADDRESS"
+  fi
+else
+  eval exec setsid $LAUNCH_COMMAND
+fi

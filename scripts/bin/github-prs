@@ -2,18 +2,46 @@
 
 my_open_prs_repos=("equinor/dot-web", "equinor/subsurface-portal-web", "equinor/pressure-db-ingestion-web", "equinor/design-system", "equinor/warp-ui")
 my_open_prs_count=0
+my_open_prs_details=""
 
 for repo in "${my_open_prs_repos[@]}"; do
-  open_prs=$(gh pr list --repo "$repo" --state open --search '-label:dependencies -label:"autorelease: pending" author:@me is:open' --json number --jq 'length')
-  my_open_prs_count=$((my_open_prs_count + open_prs))
+  prs=$(gh pr list --repo "$repo" --state open --search '-label:dependencies -label:"autorelease: pending" author:@me is:open' --json number,title --jq '.[] | "#\(.number) \(.title)"')
+  if [[ -n "$prs" ]]; then
+    count=$(echo "$prs" | wc -l)
+    my_open_prs_count=$((my_open_prs_count + count))
+    repo_name="${repo#*/}"
+    while IFS= read -r pr; do
+      my_open_prs_details+=$'  '"${repo_name}: ${pr}"$'\n'
+    done <<< "$prs"
+  fi
 done
 
 pr_to_review_repos=("equinor/dot-web", "equinor/subsurface-portal-web", "equinor/pressure-db-ingestion-web", "equinor/warp-ui")
 pr_to_review_count=0
+pr_to_review_details=""
 
 for repo in "${pr_to_review_repos[@]}"; do
-  open_prs=$(gh pr list --repo "$repo" --state open --search '-label:dependencies -label:"autorelease: pending" -author:@me is:open' --json number --jq 'length')
-  pr_to_review_count=$((pr_to_review_count + open_prs))
+  prs=$(gh pr list --repo "$repo" --state open --search '-label:dependencies -label:"autorelease: pending" -author:@me is:open' --json number,title,author --jq '.[] | "#\(.number) \(.title) (@\(.author.login))"')
+  if [[ -n "$prs" ]]; then
+    count=$(echo "$prs" | wc -l)
+    pr_to_review_count=$((pr_to_review_count + count))
+    repo_name="${repo#*/}"
+    while IFS= read -r pr; do
+      pr_to_review_details+=$'  '"${repo_name}: ${pr}"$'\n'
+    done <<< "$prs"
+  fi
 done
 
-echo "%{F#b4befe}%{F-} my $my_open_prs_count %{F#585b70}| %{F#b4befe}%{F-} review $pr_to_review_count"
+text=" my $my_open_prs_count |  review $pr_to_review_count"
+
+tooltip=$'<b> My PRs ('"$my_open_prs_count"$')</b>'
+if [[ -n "$my_open_prs_details" ]]; then
+  tooltip+=$'\n'"${my_open_prs_details%$'\n'}"
+fi
+tooltip+=$'\n\n<b> To Review ('"$pr_to_review_count"$')</b>'
+if [[ -n "$pr_to_review_details" ]]; then
+  tooltip+=$'\n'"${pr_to_review_details%$'\n'}"
+fi
+
+# Output JSON for waybar using jq for proper escaping (compact single-line output)
+jq -c -n --arg text "$text" --arg tooltip "$tooltip" '{text: $text, tooltip: $tooltip}'

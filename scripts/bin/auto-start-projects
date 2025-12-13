@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# ------------------------------
+# Launch Workspace 2 apps (warp-ui + ChromeWarp)
+# ------------------------------
+code ~/equinor/warp-ui &
+
+# ------------------------------
+# Launch Workspace 3 apps (dot-web + ChromeDot)
+# ------------------------------
+code ~/equinor/dot-web &
+
+sleep 4
+
+# Move VS Code windows to correct workspaces using hyprctl
+# Find VS Code windows by part of their title
+for win in $(hyprctl clients -j | jq -r '.[] | select(.class=="code") | .address'); do
+    title=$(hyprctl clients -j | jq -r ".[] | select(.address==\"$win\") | .title")
+    if [[ "$title" == *warp-ui* ]]; then
+        echo $title
+        echo $win
+        hyprctl dispatch movetoworkspacesilent 2,address:$win
+    elif [[ "$title" == *dot-web* ]]; then
+            echo $title
+        echo $win
+        hyprctl dispatch movetoworkspacesilent 3,address:$win
+    fi
+done
