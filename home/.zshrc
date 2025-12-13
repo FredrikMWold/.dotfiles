@@ -25,6 +25,7 @@ export PATH=/home/fredrik/go/bin:$PATH
 export PATH="$HOME/.local/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
 export PATH=/home/fredrik/.local/kitty.app/bin:$PATH
+export PATH=$HOME/bin:$PATH
 
 
 export ZSH="$HOME/.oh-my-zsh"
@@ -41,10 +42,11 @@ export EDITOR='code'
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 PATH=~/.console-ninja/.bin:$PATH
-export NVM_DIR="$HOME/.nvm"
+
+export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 
 alias cd='z'
 alias gc='branch-picker-tui'
@@ -58,3 +60,5 @@ cc() {
         /usr/bin/code .
     fi
 }
+
+eval "$(atuin init zsh --disable-up-arrow)"
