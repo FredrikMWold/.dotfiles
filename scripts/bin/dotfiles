@@ -14,26 +14,12 @@ install_nvm() {
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 }
 
-install_zoxide() {
-    curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
-}
-
 install_apt_package_if_missing() {
     dpkg-query -l $1 &> /dev/null && print_step "$1 is already installed." || (print_step "$1 is not installed. Installing now..." && sudo apt install -y $1)
 }
 
-install_fzf() {
-    ~/.dotfiles/fzf/install --all
-}
-
 install_atuin() {
     curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
-}
-
-install_gnome_hidetopbar(){
-    print_header "Installing hidetopbar"
-    cd ~/.dotfiles/hidetopbar && make
-    gnome-extensions install ./hidetopbar.zip
 }
 
 install_oh_my_zsh() {
@@ -124,8 +110,6 @@ install_apt_package_if_missing eza
 install_apt_package_if_missing bat
 install_apt_package_if_missing python3-pip
 install_apt_package_if_missing gh
-install_apt_package_if_missing rofi
-install_apt_package_if_missing polybar
 install_apt_package_if_missing just
 install_apt_package_if_missing gettext
 install_apt_package_if_missing flatpak
@@ -134,10 +118,6 @@ install_apt_package_if_missing fd-find
 install_chrome
 install_vscode
 install_go
-
-print_header "Installing rounded-window-corners"
-cd ~/.dotfiles/rounded-window-corners && just install
-install_gnome_hidetopbar
 
 print_header "Installing Flatpak Packages"
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
@@ -172,8 +152,6 @@ go install github.com/fredrikmwold/git-worktree-tui/cmd/worktree-tui@latest
 
 print_header "Installing nvm"
 install_nvm
-print_header "Installing zoxide"
-install_zoxide
 print_header "Installing fzf"
 install_fzf
 print_header "Installing atuin"
@@ -189,20 +167,8 @@ print_step "Set dotfiles git origin to ssh"
 cd ~/.dotfiles && git remote set-url origin git@github.com:FredrikMWold/.dotfiles.git
 
 print_step "Stow config files"
-cd ~/.dotfiles && stow kitty pass atuin rofi scripts lazygit fonts oh-my-zsh vscode polybar services home ssh --adopt
+cd ~/.dotfiles && stow kitty pass atuin scripts lazygit oh-my-zsh vscode git home ssh --adopt
 
-print_step "Setting up gnome extensions"
-gnome-extensions enable hidetopbar@mathieu.bidon.ca
-gnome-extensions enable tiling-assistant@ubuntu.com
-gnome-extensions disable ubuntu-dock@ubuntu.com
-gnome-extensions enable rounded-window-corners@fxgn
-
-print_step "Load gnome settings"
-dconf load / < ~/.dotfiles/gnome-settings-backup.dconf
-
-print_step "Reload systemd"
-systemctl --user daemon-reload
-systemctl --user enable polybar.service
 
 if [[ "$SHELL" != *zsh ]]; then
     print_step "Changing default shell to zsh"

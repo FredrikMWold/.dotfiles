@@ -1,5 +1,6 @@
-{
-  "editor.fontFamily": "'Fira Code'",
+{ "workbench.colorTheme": "Catppuccin Mocha", 
+  "editor.fontFamily": "FiraCode Nerd Font, monospace",
+  "editor.fontLigatures": true,
   "editor.quickSuggestions": {
     "strings": "on"
   },
@@ -7,16 +8,15 @@
   "editor.fontSize": 13,
   "editor.formatOnSave": true,
   "eslint.format.enable": true,
-  "terminal.integrated.fontFamily": "MesloLGS NF",
+  "terminal.integrated.fontFamily": "FiraCode Nerd Font",
   "workbench.tree.indent": 16,
-  "editor.fontLigatures": true,
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
-  "editor.suggest.snippetsPreventQuickSuggestions": true,
+  "editor.suggest.snippetsPreventQuickSuggestions": false,
   "git.autofetch": true,
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -39,7 +39,7 @@
   },
   "tailwind-fold.autoFold": false,
   "terminal.integrated.defaultProfile.linux": "zsh",
-  "workbench.colorTheme": "Catppuccin Mocha",
+  
   "workbench.colorCustomizations": {
     "[Catppuccin Mocha]": {
       "editorIndentGuide.activeBackground1": "#b4befe"
@@ -122,7 +122,6 @@
       "value": "#42b883"
     }
   ],
-  "workbench.activityBar.location": "top",
   "peacock.affectStatusBar": false,
   "github.copilot.nextEditSuggestions.enabled": true,
   "docker.extension.enableComposeLanguageServer": false,
@@ -143,5 +142,10 @@
   },
   "[github-actions-workflow]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
-  }
+  },
+  "chat.tools.terminal.autoApprove": {
+    "go": true
+  },
+  "workbench.activityBar.location": "top",
+  "diffEditor.ignoreTrimWhitespace": false
 }

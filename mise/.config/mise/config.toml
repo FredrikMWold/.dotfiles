@@ -1,0 +1,5 @@
+[tools]
+dotnet = "latest"
+go = "latest"
+node = "25.2.1"
+pnpm = "latest"

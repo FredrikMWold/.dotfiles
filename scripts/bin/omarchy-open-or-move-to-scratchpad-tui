@@ -1,0 +1,8 @@
+#!/bin/bash
+
+APP_ID="org.omarchy.$(basename $1)"
+LAUNCH_COMMAND="omarchy-launch-tui $@"
+
+echo "Launching $APP_ID with command: $LAUNCH_COMMAND"
+
+exec omarchy-open-or-move-to-scratchpad "$APP_ID" "$LAUNCH_COMMAND"
