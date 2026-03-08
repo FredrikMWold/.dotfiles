@@ -16,7 +16,6 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
-  "editor.suggest.snippetsPreventQuickSuggestions": false,
   "git.autofetch": true,
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -61,8 +60,6 @@
   },
   "git.confirmSync": false,
   "github.copilot.editor.enableAutoCompletions": true,
-  "ansible.validation.lint.enabled": false,
-  "vscodeReactRefactor.functionType": "arrowFunction",
   "svg.preview.mode": "svg",
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -147,5 +144,6 @@
     "go": true
   },
   "workbench.activityBar.location": "top",
-  "diffEditor.ignoreTrimWhitespace": false
+  "diffEditor.ignoreTrimWhitespace": false,
+  "task.allowAutomaticTasks": "on"
 }

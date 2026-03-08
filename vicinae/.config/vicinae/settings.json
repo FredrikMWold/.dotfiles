@@ -29,8 +29,7 @@
       "opacity": 1,
       "client_side_decorations": {
          "enabled": true,
-         "rounding": 10,
-         "border_width": 3
+         "rounding": 8
       },
       "size": {
          "width": 850,
@@ -55,11 +54,6 @@
       "@dagimg-dot/store.vicinae.wifi-commander": {
          "preferences": {
             "network-cli-tool": "iwctl"
-         }
-      },
-      "@fredrikmwold/hyprland-monitors": {
-         "preferences": {
-            "persist-changes": true
          }
       },
       "@leonkohli/store.vicinae.process-manager": {
@@ -94,8 +88,43 @@
             }
          }
       },
+      "core": {
+         "entrypoints": {
+            "about": {
+               "enabled": false
+            },
+            "documentation": {
+               "enabled": false
+            },
+            "keybind-settings": {
+               "enabled": false
+            },
+            "open-config-file": {
+               "enabled": false
+            },
+            "open-default-config": {
+               "enabled": false
+            },
+            "prune-memory": {
+               "enabled": false
+            },
+            "settings": {
+               "enabled": false
+            },
+            "sponsor": {
+               "enabled": false
+            }
+         }
+      },
       "developer": {
          "enabled": true
+      },
+      "files": {
+         "entrypoints": {
+            "search": {
+               "enabled": false
+            }
+         }
       }
    }
 }
