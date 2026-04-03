@@ -1,5 +1,6 @@
 [tools]
+bun = "latest"
 dotnet = "latest"
 go = "latest"
-node = "25.2.1"
+node = "latest"
 pnpm = "latest"

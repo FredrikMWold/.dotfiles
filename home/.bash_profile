@@ -28,3 +28,6 @@ export PATH=$HOME/bin:$PATH
 
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_CUSTOM="$HOME/.dotfiles/oh-my-zsh/.oh-my-zsh/custom"
+
+# Vite+ bin (https://viteplus.dev)
+. "$HOME/.vite-plus/env"

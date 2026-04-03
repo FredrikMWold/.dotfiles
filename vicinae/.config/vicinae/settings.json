@@ -12,12 +12,13 @@
    "$schema": "https://vicinae.com/schemas/config.json",
    "close_on_focus_loss": false,
    "pop_to_root_on_close": true,
+   "activate_on_single_click": true,
    "favicon_service": "twenty",
    "search_files_in_root": true,
    "font": {
       "normal": {
-         "family": "FiraCode Nerd Font",
-         "size": 12
+         "family": "FiraCode Nerd Font Med",
+         "size": 11.5
       }
    },
    "theme": {
@@ -32,7 +33,7 @@
          "rounding": 8
       },
       "size": {
-         "width": 850,
+         "width": 900,
          "height": 600
       },
       "layer_shell": {
@@ -40,10 +41,12 @@
       }
    },
    "favorites": [
-      "@leonkohli/store.vicinae.process-manager:processes",
-      "@tinkerbells/store.vicinae.pass:pass",
-      "@ShyAssassin/store.vicinae.vscode-recents:open-recents",
-      "clipboard:history"
+      "@ShyAssassin/store.vicinae.vscode-recents:open-recents"
+   ],
+   "fallbacks": [
+      "shortcuts:10516d8e-d41b-4ebb-85df-4c9aa3f8ab11",
+      "@mblode/store.raycast.google-search:index",
+      "files:search"
    ],
    "providers": {
       "@FredrikMWold/git-editor": {
@@ -52,8 +55,24 @@
          }
       },
       "@dagimg-dot/store.vicinae.wifi-commander": {
+         "enabled": true,
          "preferences": {
             "network-cli-tool": "iwctl"
+         }
+      },
+      "@fredrikmwold/store.vicinae.hyprland-monitors": {
+         "preferences": {
+            "hyprland-config-path": "~/.config/hypr/hyprland.conf",
+            "persist-changes": true,
+            "vicinae-monitors-config-path": "~/.config/hypr"
+         }
+      },
+      "@knoopx/github": {
+         "enabled": true,
+         "preferences": {
+            "defaultIssueFilter": "my",
+            "defaultRepositoryFilter": "my",
+            "numberOfResults": "50"
          }
       },
       "@leonkohli/store.vicinae.process-manager": {
@@ -64,19 +83,26 @@
             "show-system-processes": false
          }
       },
-      "@tinkerbells/store.vicinae.pass": {
-         "preferences": {
-            "action": "copy"
-         }
-      },
       "applications": {
+         "enabled": true,
          "preferences": {
             "paths": [
                "/home/fredrik/.local/share/applications",
                "/var/lib/flatpak/exports/share/applications",
                "/usr/local/share/applications",
                "/usr/share/applications"
-            ]
+            ],
+            "defaultAction": "focus",
+            "launchPrefix": "uwsm app --"
+         }
+      },
+      "browser-extension": {
+         "enabled": true
+      },
+      "calculator": {
+         "preferences": {
+            "backend": "soulver-core",
+            "refreshRatesOnStartup": true
          }
       },
       "clipboard": {
@@ -120,11 +146,15 @@
          "enabled": true
       },
       "files": {
+         "enabled": true,
          "entrypoints": {
             "search": {
                "enabled": false
             }
          }
+      },
+      "power": {
+         "enabled": true
       }
    }
 }

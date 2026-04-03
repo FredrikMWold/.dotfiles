@@ -22,7 +22,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-export PATH=/home/fredrik/go/bin:$PATH
+export PATH="$HOME/.local/share/mise/installs/go/*/bin:$PATH"
 export PATH=$HOME/bin:$PATH
 
 
@@ -41,6 +41,10 @@ export EDITOR='code'
 
 PATH=~/.console-ninja/.bin:$PATH
 
+
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -49,9 +53,17 @@ export NVM_DIR="$HOME/.config/nvm"
 alias cd='z'
 alias gc='branch-picker-tui'
 alias ll='eza -lha'
-alias npminstall='vicinae "vicinae://extensions/FredrikMWold/npm-manager/npm-install?arguments={\"pwd\":\"$(pwd)\"}"'
-alias npmuninstall='vicinae "vicinae://extensions/FredrikMWold/npm-manager/npm-uninstall?arguments={\"pwd\":\"$(pwd)\"}"'
-alias npmupdate='vicinae "vicinae://extensions/FredrikMWold/npm-manager/npm-update?arguments={\"pwd\":\"$(pwd)\"}"'
+
+npmi() {
+    vicinae 'vicinae://launch/@FredrikMWold/store.vicinae.npm/npm-install?arguments={"path":"'"$(pwd)"'"}'
+}
+npmr() {
+    vicinae 'vicinae://launch/@FredrikMWold/store.vicinae.npm/npm-uninstall?arguments={"path":"'"$(pwd)"'"}'
+}
+npmu() {
+    vicinae 'vicinae://launch/@FredrikMWold/store.vicinae.npm/npm-update?arguments={"path":"'"$(pwd)"'"}'
+}
+
 
 
 cc() {
@@ -62,4 +74,8 @@ cc() {
     fi
 }
 
+. "$HOME/.vite-plus/env"
+
 eval "$(atuin init zsh --disable-up-arrow)"
+eval "$(zoxide init zsh)"
+

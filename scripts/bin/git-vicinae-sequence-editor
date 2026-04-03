@@ -3,7 +3,7 @@ set -e
 
 FILE="$1"
 
-vicinae "vicinae://extensions/FredrikMWold/git-editor/git-sequence?arguments={\"gitFile\":\"$FILE\"}"
+vicinae "vicinae://launch/@FredrikMWold/git-editor/git-sequence?arguments={\"gitFile\":\"$FILE\"}"
 
 
 # Wait until Vicinae writes to the file

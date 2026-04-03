@@ -5,6 +5,7 @@
     "strings": "on"
   },
   "files.autoSave": "afterDelay",
+  "oxc.path.node": "/home/fredrik/.nvm/versions/node/v24.15.0/bin/node",
   "editor.fontSize": 13,
   "editor.formatOnSave": true,
   "eslint.format.enable": true,
@@ -68,7 +69,6 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "autoBarrel.files.disableRecursiveBarrelling": true,
-  "github.copilot.advanced": {},
   "gitlens.views.scm.grouped.views": {
     "commits": false,
     "branches": false,
@@ -145,5 +145,6 @@
   },
   "workbench.activityBar.location": "top",
   "diffEditor.ignoreTrimWhitespace": false,
-  "task.allowAutomaticTasks": "on"
+  "task.allowAutomaticTasks": "on",
+  "makefile.configureOnOpen": true
 }

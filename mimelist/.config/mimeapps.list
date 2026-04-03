@@ -48,3 +48,4 @@ application/ogg=mpv.desktop
 x-scheme-handler/mailto=HEY.desktop
 x-scheme-handler/aether=aether-protocol-handler.desktop
 x-scheme-handler/discord-409416265891971072=discord-409416265891971072.desktop
+x-scheme-handler/slack=slack.desktop

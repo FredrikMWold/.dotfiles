@@ -10,12 +10,3 @@
 [submodule "config/.oh-my-zsh/custom/plugins/fzf-tab"]
 	path = oh-my-zsh/.oh-my-zsh/custom/plugins/fzf-tab
 	url = https://github.com/Aloxaf/fzf-tab
-[submodule "fzf"]
-	path = fzf
-	url = https://github.com/junegunn/fzf.git
-[submodule "rounded-window-corners"]
-	path = rounded-window-corners
-	url = https://github.com/flexagoon/rounded-window-corners
-[submodule "hidetopbar"]
-	path = hidetopbar
-	url = https://gitlab.gnome.org/tuxor1337/hidetopbar.git
