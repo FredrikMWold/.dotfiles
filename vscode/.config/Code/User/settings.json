@@ -2,9 +2,10 @@
   "editor.fontFamily": "FiraCode Nerd Font, monospace",
   "editor.fontLigatures": true,
   "editor.quickSuggestions": {
+    "other": "on",
+    "comments": "off",
     "strings": "on"
   },
-  "files.autoSave": "afterDelay",
   "oxc.path.node": "/home/fredrik/.nvm/versions/node/v24.15.0/bin/node",
   "editor.fontSize": 13,
   "editor.formatOnSave": true,
@@ -144,7 +145,19 @@
     "go": true
   },
   "workbench.activityBar.location": "top",
-  "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.ignoreTrimWhitespace": true,
   "task.allowAutomaticTasks": "on",
-  "makefile.configureOnOpen": true
+  "makefile.configureOnOpen": true,
+  "files.autoSave": "afterDelay",
+  "chat.viewSessions.orientation": "stacked",
+  "json.schemaDownload.trustedDomains": {
+    "https://schemastore.azurewebsites.net/": true,
+    "https://raw.githubusercontent.com/microsoft/vscode/": true,
+    "https://raw.githubusercontent.com/devcontainers/spec/": true,
+    "https://www.schemastore.org/": true,
+    "https://json.schemastore.org/": true,
+    "https://json-schema.org/": true,
+    "https://developer.microsoft.com/json-schemas/": true,
+    "https://biomejs.dev": true
+  }
 }

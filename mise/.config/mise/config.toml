@@ -1,6 +1,6 @@
 [tools]
 bun = "latest"
-dotnet = "latest"
+dotnet = "8.0.422"
+dotnet-core = "8.0.422"
 go = "latest"
 node = "latest"
-pnpm = "latest"

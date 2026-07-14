@@ -16,9 +16,10 @@
    "favicon_service": "twenty",
    "search_files_in_root": true,
    "font": {
+      "rendering": "qt",
       "normal": {
          "family": "FiraCode Nerd Font Med",
-         "size": 11.5
+         "size": 11
       }
    },
    "theme": {
@@ -32,13 +33,12 @@
          "enabled": true,
          "rounding": 8
       },
-      "size": {
-         "width": 900,
-         "height": 600
-      },
       "layer_shell": {
          "keyboard_interactivity": "on_demand"
       }
+   },
+   "keybinds": {
+      "toggle-action-panel": "control+B"
    },
    "favorites": [
       "@ShyAssassin/store.vicinae.vscode-recents:open-recents"
@@ -52,10 +52,36 @@
       "@FredrikMWold/git-editor": {
          "preferences": {
             "commitType": "conventional"
+         },
+         "entrypoints": {
+            "git-commit": {
+               "enabled": false
+            },
+            "git-sequence": {
+               "enabled": false
+            }
+         }
+      },
+      "@FredrikMWold/store.vicinae.npm": {
+         "entrypoints": {
+            "npm-install-global": {
+               "enabled": false
+            },
+            "npm-uninstall-global": {
+               "enabled": false
+            },
+            "npm-update-global": {
+               "enabled": false
+            }
          }
       },
       "@dagimg-dot/store.vicinae.wifi-commander": {
          "enabled": true,
+         "preferences": {
+            "network-cli-tool": "iwctl"
+         }
+      },
+      "@dagimg-dot/wifi-commander": {
          "preferences": {
             "network-cli-tool": "iwctl"
          }
@@ -67,16 +93,8 @@
             "vicinae-monitors-config-path": "~/.config/hypr"
          }
       },
-      "@knoopx/github": {
-         "enabled": true,
-         "preferences": {
-            "defaultIssueFilter": "my",
-            "defaultRepositoryFilter": "my",
-            "numberOfResults": "50"
-         }
-      },
       "@leonkohli/store.vicinae.process-manager": {
-         "enabled": false,
+         "enabled": true,
          "preferences": {
             "process-limit": "500",
             "show-pid": false,
@@ -155,6 +173,16 @@
       },
       "power": {
          "enabled": true
+      },
+      "snippets": {
+         "enabled": true,
+         "preferences": {
+            "enabled": true,
+            "keyDelay": "32",
+            "layout": "",
+            "prePasteDelay": "0",
+            "undo": true
+         }
       }
    }
 }

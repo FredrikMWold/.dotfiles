@@ -5,7 +5,7 @@
   "spacing": 0,
   "height": 26,
   "modules-left": ["custom/omarchy", "hyprland/workspaces"],
-  "modules-center": ["clock", "custom/update", "custom/voxtype", "custom/screenrecording-indicator", "custom/idle-indicator", "custom/notification-silencing-indicator", "custom/github-prs"],
+  "modules-center": ["clock", "custom/weather", "custom/update", "custom/voxtype", "custom/screenrecording-indicator", "custom/idle-indicator", "custom/notification-silencing-indicator", "custom/github-prs"],
   "modules-right": [
     "group/tray-expander",
     "bluetooth",
@@ -64,6 +64,13 @@
     "tooltip": false,
     "on-click-right": "omarchy-launch-floating-terminal-with-presentation omarchy-tz-select"
   },
+  "custom/weather": {
+    "exec": "$OMARCHY_PATH/default/waybar/weather.sh",
+    "return-type": "json",
+    "interval": 60,
+    "tooltip": false,
+    "on-click": "notify-send -u low \"$(omarchy-weather-status)\""
+  },
   "network": {
     "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
     "format": "{icon}",
@@ -75,7 +82,7 @@
     "tooltip-format-disconnected": "Disconnected",
     "interval": 3,
     "spacing": 1,
-    "on-click": "vicinae vicinae://extensions/dagimg-dot/wifi-commander/scan-wifi"
+    "on-click": "vicinae vicinae://launch/@dagimg-dot/store.vicinae.wifi-commander/scan-wifi"
   },
   "battery": {
     "format": "{capacity}% {icon}",
@@ -103,8 +110,8 @@
     "format-connected": "󰂱",
     "format-no-controller": "",
     "tooltip-format": "Devices connected: {num_connections}",
-    "on-click": "vicinae vicinae://extensions/Gelei/bluetooth/devices",
-    "on-click-right": "vicinae vicinae://extensions/Gelei/bluetooth/scan"
+    "on-click": "vicinae vicinae://launch/@Gelei/store.vicinae.bluetooth/devices",
+    "on-click-right": "vicinae vicinae://launch/@Gelei/store.vicinae.bluetooth/scan"
   },
   "pulseaudio": {
     "format": "{icon}",

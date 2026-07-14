@@ -10,7 +10,7 @@ if [[ ! -f "$CACHE_FILE" ]]; then
 fi
 
 # Build menu from cache
-menu_options=$(jq -r '.[] | 
+menu_options=$(jq -r '.[] | select(.isDraft != true) |
   if .type == "my" then
     "󰓂 \(.repo): #\(.number) \(.title)|\(.url)"
   else

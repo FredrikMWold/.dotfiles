@@ -1,8 +1,6 @@
 [user]
 	name = FredrikMWold
 	email = fredrik.wold@bouvet.no
-[core]
-	editor = git-vicinae-editor
 [pull]
 	rebase = true
 [rerere]
@@ -21,3 +19,5 @@
 	verbose = true
 [sequence]
 	editor = git-vicinae-sequence-editor
+[core]
+	editor = git-vicinae-editor

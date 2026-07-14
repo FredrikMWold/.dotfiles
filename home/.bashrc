@@ -23,3 +23,11 @@ export NVM_DIR="$HOME/.config/nvm"
 
 # Vite+ bin (https://viteplus.dev)
 . "$HOME/.vite-plus/env"
+
+# pnpm
+export PNPM_HOME="/home/fredrik/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+# pnpm end

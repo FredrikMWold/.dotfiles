@@ -63,6 +63,9 @@ npmr() {
 npmu() {
     vicinae 'vicinae://launch/@FredrikMWold/store.vicinae.npm/npm-update?arguments={"path":"'"$(pwd)"'"}'
 }
+ghp() {
+    vicinae 'vicinae://launch/@knoopx/github/createPullRequest?arguments={"path":"'"$(pwd)"'"}'
+}
 
 
 

@@ -10,7 +10,8 @@ my_open_prs_count=0
 my_open_prs_cache="[]"
 
 for repo in "${my_open_prs_repos[@]}"; do
-  prs_json=$(gh pr list --repo "$repo" --state open --search '-label:dependencies -label:"autorelease: pending" author:@me is:open' --json number,title,url)
+  prs_json=$(gh pr list --repo "$repo" --state open --search '-label:dependencies -label:"autorelease: pending" author:@me is:open' --json number,title,url,isDraft)
+  prs_json=$(echo "$prs_json" | jq 'map(select(.isDraft | not))')
   if [[ "$prs_json" != "[]" && -n "$prs_json" ]]; then
     repo_name="${repo#*/}"
     # Add repo name to each PR and merge into cache
@@ -26,7 +27,8 @@ pr_to_review_count=0
 pr_to_review_cache="[]"
 
 for repo in "${pr_to_review_repos[@]}"; do
-  prs_json=$(gh pr list --repo "$repo" --state open --search '-label:dependencies -label:"autorelease: pending" -author:@me is:open' --json number,title,url,author)
+  prs_json=$(gh pr list --repo "$repo" --state open --search '-label:dependencies -label:"autorelease: pending" -author:@me is:open' --json number,title,url,author,isDraft)
+  prs_json=$(echo "$prs_json" | jq 'map(select(.isDraft | not))')
   if [[ "$prs_json" != "[]" && -n "$prs_json" ]]; then
     repo_name="${repo#*/}"
     # Add repo name to each PR and merge into cache
