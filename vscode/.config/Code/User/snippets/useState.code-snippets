@@ -1,6 +1,7 @@
 {
 	"useState": {
 		"prefix": "state",
+		"autoExpand": true,
 		"body": [
 			"const [$1, set${1/(.*)/${1:/capitalize}/}] = useState($0);",
 		],
@@ -8,6 +9,7 @@
 	},
 	"React useEffect": {
 		"prefix": "effect",
+		"autoExpand": true,
 		"body": [
 			"useEffect(() => {",
 			"  $1",
@@ -17,14 +19,15 @@
 	},
 	"React Arrow Component With Props Based On File Name": {
 		"scope": "javascriptreact,typescriptreact",
-		"prefix": "rfc",
+		"prefix": "rafc",
+		"autoExpand": true,
 		"body": [
 			"import { useState } from 'react';",
 			"",
 			"export const ${TM_FILENAME_BASE} = ({}: ${TM_FILENAME_BASE}Props) => {",
 			"    return (",
 			"        <div>",
-			"            ${1:------------------------- Your component implementation here -------------------------}",
+			"            ${1}",
 			"        </div>",
 			"    );",
 			"};",
@@ -36,7 +39,8 @@
 	},
 	"React Hook With File Name": {
 		"prefix": "hook",
-		"scope": "javascriptreact,typescriptreact",
+		"autoExpand": true,
+		"scope": "javascriptreact,typescriptreact,typescript",
 		"body": [
 			"import { useState } from 'react';",
 			"",
@@ -46,5 +50,41 @@
 			""
 		],
 		"description": "Creates a React hook named after the file."
+	},
+	"map": {
+		"prefix": ".ma",
+		"autoExpand": true,
+		"scope": "javascriptreact,typescriptreact",
+		"body": [
+			".map((${1}) => ${2})"
+		],
+		"description": "Creates a map function for an array."
+	},
+	"filter": {
+		"prefix": ".fi",
+		"autoExpand": true,
+		"scope": "javascriptreact,typescriptreact",
+		"body": [
+			".filter((x) => ${1})"
+		],
+		"description": "Creates a filter function for an array."
+	},
+	"desctructure": {
+		"prefix": "{}=",
+		"autoExpand": true,
+		"scope": "javascriptreact,typescriptreact",
+		"body": [
+			"const { $2 } = $1;"
+		],
+		"description": "Destructures an object."
+	},
+	"console.log": {
+		"prefix": "clg",
+		"autoExpand": true,
+		"scope": "javascriptreact,typescriptreact,typescript",
+		"body": [
+			"console.log($1);"
+		],
+		"description": "Creates a console log statement."
 	}
 }

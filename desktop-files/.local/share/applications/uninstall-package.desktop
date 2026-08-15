@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Uninstall package
+Exec=kitty --class org.omarchy.terminal --hold --title "Remove package" omarchy pkg remove
+Terminal=false
+Icon=/home/fredrik/.dotfiles/icons/.local/share/icons/custom/omarchy.png

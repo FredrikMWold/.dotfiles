@@ -13,8 +13,13 @@
    "close_on_focus_loss": false,
    "pop_to_root_on_close": true,
    "activate_on_single_click": true,
+   "encrypt_sensitive_data": true,
    "favicon_service": "twenty",
+   "language": "system",
    "search_files_in_root": true,
+   "global_shortcuts": {
+      "toggle": ""
+   },
    "font": {
       "rendering": "qt",
       "normal": {
@@ -28,14 +33,20 @@
       }
    },
    "launcher_window": {
-      "opacity": 1,
+      "rounding": 4,
+      "opacity": 0.95,
       "client_side_decorations": {
          "enabled": true,
-         "rounding": 8
+         "rounding": 4,
+         "border_width": 1
+      },
+      "compact_mode": {
+         "enabled": false
       },
       "layer_shell": {
          "keyboard_interactivity": "on_demand"
-      }
+      },
+      "material": "blur"
    },
    "keybinds": {
       "toggle-action-panel": "control+B"
@@ -49,30 +60,26 @@
       "files:search"
    ],
    "providers": {
-      "@FredrikMWold/git-editor": {
-         "preferences": {
-            "commitType": "conventional"
-         },
+      "@FredrikMWold/npm": {
          "entrypoints": {
-            "git-commit": {
+            "npm-install": {
                "enabled": false
             },
-            "git-sequence": {
+            "npm-search": {
+               "enabled": false
+            },
+            "npm-uninstall": {
+               "enabled": false
+            },
+            "npm-update": {
                "enabled": false
             }
          }
       },
-      "@FredrikMWold/store.vicinae.npm": {
-         "entrypoints": {
-            "npm-install-global": {
-               "enabled": false
-            },
-            "npm-uninstall-global": {
-               "enabled": false
-            },
-            "npm-update-global": {
-               "enabled": false
-            }
+      "@FredrikMWold/radix": {
+         "preferences": {
+            "applications": "warp-web,prisma-decision-web,subsurface-portal-web",
+            "context": "platform"
          }
       },
       "@dagimg-dot/store.vicinae.wifi-commander": {
@@ -93,12 +100,29 @@
             "vicinae-monitors-config-path": "~/.config/hypr"
          }
       },
+      "@knoopx/github": {
+         "preferences": {
+            "defaultIssueFilter": "my",
+            "defaultRepositoryFilter": "my",
+            "numberOfResults": "20"
+         }
+      },
       "@leonkohli/store.vicinae.process-manager": {
          "enabled": true,
          "preferences": {
             "process-limit": "500",
             "show-pid": false,
             "show-system-processes": false
+         }
+      },
+      "@nakaakist/store.raycast.storybook-search": {
+         "preferences": {
+            "baseUrl": "https://storybook.eds.equinor.com/"
+         },
+         "entrypoints": {
+            "index": {
+               "alias": "eds"
+            }
          }
       },
       "applications": {
@@ -112,6 +136,14 @@
             ],
             "defaultAction": "focus",
             "launchPrefix": "uwsm app --"
+         },
+         "entrypoints": {
+            "com.github.xournalpp.xournalpp": {
+               "alias": "notes"
+            },
+            "com.stremio.Stremio": {
+               "alias": "streamio"
+            }
          }
       },
       "browser-extension": {
@@ -143,6 +175,9 @@
             "keybind-settings": {
                "enabled": false
             },
+            "list-extensions": {
+               "enabled": false
+            },
             "open-config-file": {
                "enabled": false
             },
@@ -150,6 +185,12 @@
                "enabled": false
             },
             "prune-memory": {
+               "enabled": false
+            },
+            "refresh-apps": {
+               "enabled": true
+            },
+            "reload-scripts": {
                "enabled": false
             },
             "settings": {
@@ -167,12 +208,19 @@
          "enabled": true,
          "entrypoints": {
             "search": {
-               "enabled": false
+               "enabled": true
             }
          }
       },
       "power": {
          "enabled": true
+      },
+      "shortcuts": {
+         "entrypoints": {
+            "71c89074-6916-443a-9645-222836a8886d": {
+               "alias": "settings"
+            }
+         }
       },
       "snippets": {
          "enabled": true,

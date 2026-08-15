@@ -82,7 +82,7 @@
     "tooltip-format-disconnected": "Disconnected",
     "interval": 3,
     "spacing": 1,
-    "on-click": "vicinae vicinae://launch/@dagimg-dot/store.vicinae.wifi-commander/scan-wifi"
+    "on-click": "vicinae cmd launch @dagimg-dot/store.vicinae.wifi-commander:manage-saved-networks"
   },
   "battery": {
     "format": "{capacity}% {icon}",
@@ -110,13 +110,13 @@
     "format-connected": "󰂱",
     "format-no-controller": "",
     "tooltip-format": "Devices connected: {num_connections}",
-    "on-click": "vicinae vicinae://launch/@Gelei/store.vicinae.bluetooth/devices",
-    "on-click-right": "vicinae vicinae://launch/@Gelei/store.vicinae.bluetooth/scan"
+    "on-click": "vicinae cmd launch @Gelei/store.vicinae.bluetooth:devices",
+    "on-click-right": "vicinae cmd launch @Gelei/store.vicinae.bluetooth:scan"
   },
   "pulseaudio": {
     "format": "{icon}",
-    "on-click": "vicinae vicinae://launch/@rastsislaux/store.vicinae.pulseaudio/playback",
-    "on-click-right": "vicinae vicinae://launch/@rastsislaux/store.vicinae.pulseaudio/outputDevices",
+    "on-click": "vicinae cmd launch @rastsislaux/store.vicinae.pulseaudio:outputDevices",
+    "on-click-right": "vicinae cmd launch @rastsislaux/store.vicinae.pulseaudio:playback",
     "tooltip-format": "Playing at {volume}%",
     "scroll-step": 5,
     "format-muted": "",

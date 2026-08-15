@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Install AUR package
+Exec=kitty --class org.omarchy.terminal --hold --title "Install AUR package" omarchy pkg aur install
+Terminal=false
+Icon=/home/fredrik/.dotfiles/icons/.local/share/icons/custom/omarchy.png

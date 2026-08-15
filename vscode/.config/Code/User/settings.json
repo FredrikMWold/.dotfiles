@@ -1,163 +1,179 @@
-{ "workbench.colorTheme": "Catppuccin Mocha", 
-  "editor.fontFamily": "FiraCode Nerd Font, monospace",
-  "editor.fontLigatures": true,
-  "editor.quickSuggestions": {
-    "other": "on",
-    "comments": "off",
-    "strings": "on"
-  },
-  "oxc.path.node": "/home/fredrik/.nvm/versions/node/v24.15.0/bin/node",
-  "editor.fontSize": 13,
-  "editor.formatOnSave": true,
-  "eslint.format.enable": true,
-  "terminal.integrated.fontFamily": "FiraCode Nerd Font",
-  "workbench.tree.indent": 16,
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
-  },
-  "git.autofetch": true,
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "javascript.updateImportsOnFileMove.enabled": "always",
-  "githubPullRequests.fileListLayout": "flat",
-  "github.copilot.enable": {
-    "*": true,
-    "plaintext": false,
-    "markdown": true,
-    "scminput": false
-  },
-  "githubPullRequests.pullBranch": "never",
-  "terminal.integrated.env.linux": {},
-  "typescript.updateImportsOnFileMove.enabled": "always",
-  "redhat.telemetry.enabled": false,
-  "console-ninja.featureSet": "Community",
-  "files.associations": {
-    "*.css": "tailwindcss"
-  },
-  "tailwind-fold.autoFold": false,
-  "terminal.integrated.defaultProfile.linux": "zsh",
-  
-  "workbench.colorCustomizations": {
-    "[Catppuccin Mocha]": {
-      "editorIndentGuide.activeBackground1": "#b4befe"
-    }
-  },
-  "window.zoomLevel": 1,
-  "editor.semanticHighlighting.enabled": true,
-  "terminal.integrated.minimumContrastRatio": 1,
-  "window.titleBarStyle": "custom",
-  "workbench.iconTheme": "catppuccin-mocha",
-  "editor.stickyScroll.enabled": true,
-  "remote.SSH.remotePlatform": {
-    "sandbox.4kcjfh.csb": "linux"
-  },
-  "codesandbox.currentWorkspace": "1a53c741-67c6-47ec-be34-f76e01aa54cd",
-  "git.openRepositoryInParentFolders": "never",
-  "files.exclude": {
-    "**/.git": false
-  },
-  "git.confirmSync": false,
-  "github.copilot.editor.enableAutoCompletions": true,
-  "svg.preview.mode": "svg",
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "autoBarrel.files.disableRecursiveBarrelling": true,
-  "gitlens.views.scm.grouped.views": {
-    "commits": false,
-    "branches": false,
-    "remotes": false,
-    "stashes": false,
-    "tags": false,
-    "worktrees": false,
-    "contributors": false,
-    "repositories": false,
-    "searchAndCompare": false,
-    "launchpad": false
-  },
-  "peacock.favoriteColors": [
-    {
-      "name": "Angular Red",
-      "value": "#dd0531"
-    },
-    {
-      "name": "Azure Blue",
-      "value": "#007fff"
-    },
-    {
-      "name": "JavaScript Yellow",
-      "value": "#f9e64f"
-    },
-    {
-      "name": "Mandalorian Blue",
-      "value": "#1857a4"
-    },
-    {
-      "name": "Node Green",
-      "value": "#215732"
-    },
-    {
-      "name": "React Blue",
-      "value": "#61dafb"
-    },
-    {
-      "name": "Something Different",
-      "value": "#832561"
-    },
-    {
-      "name": "Svelte Orange",
-      "value": "#ff3d00"
-    },
-    {
-      "name": "Vue Green",
-      "value": "#42b883"
-    }
-  ],
-  "peacock.affectStatusBar": false,
-  "github.copilot.nextEditSuggestions.enabled": true,
-  "docker.extension.enableComposeLanguageServer": false,
-  "chat.mcp.autostart": "newAndOutdated",
-  "search.exclude": {
-    "**/.git": true
-  },
-  "[dockercompose]": {
-    "editor.insertSpaces": true,
-    "editor.tabSize": 2,
-    "editor.autoIndent": "advanced",
-    "editor.quickSuggestions": {
-      "other": true,
-      "comments": false,
-      "strings": true
-    },
-    "editor.defaultFormatter": "redhat.vscode-yaml"
-  },
-  "[github-actions-workflow]": {
-    "editor.defaultFormatter": "redhat.vscode-yaml"
-  },
-  "chat.tools.terminal.autoApprove": {
-    "go": true
-  },
-  "workbench.activityBar.location": "top",
-  "diffEditor.ignoreTrimWhitespace": true,
-  "task.allowAutomaticTasks": "on",
-  "makefile.configureOnOpen": true,
-  "files.autoSave": "afterDelay",
-  "chat.viewSessions.orientation": "stacked",
-  "json.schemaDownload.trustedDomains": {
-    "https://schemastore.azurewebsites.net/": true,
-    "https://raw.githubusercontent.com/microsoft/vscode/": true,
-    "https://raw.githubusercontent.com/devcontainers/spec/": true,
-    "https://www.schemastore.org/": true,
-    "https://json.schemastore.org/": true,
-    "https://json-schema.org/": true,
-    "https://developer.microsoft.com/json-schemas/": true,
-    "https://biomejs.dev": true
-  }
+{
+	"workbench.colorTheme": "Catppuccin Mocha",
+	"editor.fontFamily": "FiraCode Nerd Font, monospace",
+	"editor.fontLigatures": true,
+	"editor.quickSuggestions": {
+		"other": "on",
+		"comments": "off",
+		"strings": "on",
+	},
+	"oxc.path.node": "/home/fredrik/.nvm/versions/node/v24.15.0/bin/node",
+	"editor.fontSize": 13,
+	"eslint.format.enable": true,
+	"terminal.integrated.fontFamily": "FiraCode Nerd Font",
+	"workbench.tree.indent": 16,
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+	},
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": "explicit",
+	},
+	"git.autofetch": true,
+	"[typescript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+	},
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	"githubPullRequests.fileListLayout": "flat",
+	"github.copilot.enable": {
+		"*": true,
+		"plaintext": false,
+		"markdown": true,
+		"scminput": false,
+		"typescriptreact": true,
+	},
+	"githubPullRequests.pullBranch": "never",
+	"terminal.integrated.env.linux": {},
+	"typescript.updateImportsOnFileMove.enabled": "always",
+	"redhat.telemetry.enabled": false,
+	"console-ninja.featureSet": "Community",
+	"files.associations": {
+		"*.css": "tailwindcss",
+	},
+	"tailwind-fold.autoFold": false,
+	"terminal.integrated.defaultProfile.linux": "zsh",
+
+	"workbench.colorCustomizations": {
+		"[Catppuccin Mocha]": {
+			"editorIndentGuide.activeBackground1": "#b4befe",
+		},
+	},
+	"window.zoomLevel": 1,
+	"editor.semanticHighlighting.enabled": true,
+	"terminal.integrated.minimumContrastRatio": 1,
+	"window.titleBarStyle": "custom",
+	"workbench.iconTheme": "catppuccin-mocha",
+	"editor.stickyScroll.enabled": true,
+	"remote.SSH.remotePlatform": {
+		"sandbox.4kcjfh.csb": "linux",
+	},
+	"codesandbox.currentWorkspace": "1a53c741-67c6-47ec-be34-f76e01aa54cd",
+	"git.openRepositoryInParentFolders": "never",
+	"files.exclude": {
+		"**/.git": false,
+	},
+	"git.confirmSync": false,
+	"github.copilot.editor.enableAutoCompletions": true,
+	"svg.preview.mode": "svg",
+	"[json]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+	},
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+	},
+	"autoBarrel.files.disableRecursiveBarrelling": true,
+	"gitlens.views.scm.grouped.views": {
+		"commits": false,
+		"branches": false,
+		"remotes": false,
+		"stashes": false,
+		"tags": false,
+		"worktrees": false,
+		"contributors": false,
+		"repositories": false,
+		"searchAndCompare": false,
+		"launchpad": false,
+	},
+	"peacock.favoriteColors": [
+		{
+			"name": "Angular Red",
+			"value": "#dd0531",
+		},
+		{
+			"name": "Azure Blue",
+			"value": "#007fff",
+		},
+		{
+			"name": "JavaScript Yellow",
+			"value": "#f9e64f",
+		},
+		{
+			"name": "Mandalorian Blue",
+			"value": "#1857a4",
+		},
+		{
+			"name": "Node Green",
+			"value": "#215732",
+		},
+		{
+			"name": "React Blue",
+			"value": "#61dafb",
+		},
+		{
+			"name": "Something Different",
+			"value": "#832561",
+		},
+		{
+			"name": "Svelte Orange",
+			"value": "#ff3d00",
+		},
+		{
+			"name": "Vue Green",
+			"value": "#42b883",
+		},
+	],
+	"peacock.affectStatusBar": false,
+	"github.copilot.nextEditSuggestions.enabled": true,
+	"docker.extension.enableComposeLanguageServer": false,
+	"chat.mcp.autostart": "newAndOutdated",
+	"search.exclude": {
+		"**/.git": true,
+	},
+	"[dockercompose]": {
+		"editor.insertSpaces": true,
+		"editor.tabSize": 2,
+		"editor.autoIndent": "advanced",
+		"editor.quickSuggestions": {
+			"other": true,
+			"comments": false,
+			"strings": true,
+		},
+		"editor.defaultFormatter": "redhat.vscode-yaml",
+	},
+	"[github-actions-workflow]": {
+		"editor.defaultFormatter": "redhat.vscode-yaml",
+	},
+	"chat.tools.terminal.autoApprove": {
+		"go": true,
+	},
+	"workbench.activityBar.location": "top",
+	"diffEditor.ignoreTrimWhitespace": false,
+	"task.allowAutomaticTasks": "on",
+	"makefile.configureOnOpen": true,
+	"files.autoSave": "afterDelay",
+	"chat.viewSessions.orientation": "stacked",
+	"json.schemaDownload.trustedDomains": {
+		"https://schemastore.azurewebsites.net/": true,
+		"https://raw.githubusercontent.com/microsoft/vscode/": true,
+		"https://raw.githubusercontent.com/devcontainers/spec/": true,
+		"https://www.schemastore.org/": true,
+		"https://json.schemastore.org/": true,
+		"https://json-schema.org/": true,
+		"https://developer.microsoft.com/json-schemas/": true,
+		"https://biomejs.dev": true,
+	},
+	"yaml.disableSchemaDetection": [
+		"**/.github/workflows/*.yml",
+		"**/.github/workflows/*.yaml",
+		"**/.gitea/workflows/*.yml",
+		"**/.gitea/workflows/*.yaml",
+		"**/.forgejo/workflows/*.yml",
+		"**/.forgejo/workflows/*.yaml",
+	],
+	"editor.formatOnSave": true,
+	"js/ts.experimental.useTsgo": true,
+	"peacock.affectActivityBar": false,
+	"peacock.showColorInStatusBar": false,
+	"workbench.editor.useModal": "some",
+	"dictation.enabled": false,
+	"chat.sessionSync.enabled": true,
 }

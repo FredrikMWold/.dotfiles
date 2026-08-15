@@ -53,19 +53,10 @@ export NVM_DIR="$HOME/.config/nvm"
 alias cd='z'
 alias gc='branch-picker-tui'
 alias ll='eza -lha'
-
-npmi() {
-    vicinae 'vicinae://launch/@FredrikMWold/store.vicinae.npm/npm-install?arguments={"path":"'"$(pwd)"'"}'
-}
-npmr() {
-    vicinae 'vicinae://launch/@FredrikMWold/store.vicinae.npm/npm-uninstall?arguments={"path":"'"$(pwd)"'"}'
-}
-npmu() {
-    vicinae 'vicinae://launch/@FredrikMWold/store.vicinae.npm/npm-update?arguments={"path":"'"$(pwd)"'"}'
-}
-ghp() {
-    vicinae 'vicinae://launch/@knoopx/github/createPullRequest?arguments={"path":"'"$(pwd)"'"}'
-}
+alias ghp='vicinae cmd launch @knoopx/github:createPullRequest'
+alias npmi='vicinae cmd launch @FredrikMWold/npm:npm-install'
+alias npmr='vicinae cmd launch @FredrikMWold/npm:npm-uninstall'
+alias npmu='vicinae cmd launch @FredrikMWold/npm:npm-update'
 
 
 

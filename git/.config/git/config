@@ -18,6 +18,6 @@
 [commit]
 	verbose = true
 [sequence]
-	editor = git-vicinae-sequence-editor
+	editor = vicinae cmd launch @FredrikMWold/git-editor:git-sequence --wait
 [core]
-	editor = git-vicinae-editor
+	editor = vicinae cmd launch @FredrikMWold/git-editor:git-commit --wait

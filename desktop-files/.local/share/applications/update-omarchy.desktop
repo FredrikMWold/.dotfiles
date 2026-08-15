@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Update omarchy
+Exec=kitty --class org.omarchy.terminal --hold --title "Update omarchy" omarchy update
+Terminal=false
+Icon=/home/fredrik/.dotfiles/icons/.local/share/icons/custom/omarchy.png

@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Install Arch package
+Exec=kitty --class org.omarchy.terminal --hold --title "Install Arch package" omarchy pkg install
+Terminal=false
+Icon=/home/fredrik/.dotfiles/icons/.local/share/icons/custom/omarchy.png
