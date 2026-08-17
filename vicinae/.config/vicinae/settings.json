@@ -34,7 +34,7 @@
    },
    "launcher_window": {
       "rounding": 4,
-      "opacity": 0.95,
+      "opacity": 0.97,
       "client_side_decorations": {
          "enabled": true,
          "rounding": 4,
@@ -138,11 +138,11 @@
             "launchPrefix": "uwsm app --"
          },
          "entrypoints": {
-            "com.github.xournalpp.xournalpp": {
-               "alias": "notes"
-            },
             "com.stremio.Stremio": {
                "alias": "streamio"
+            },
+            "omawrite": {
+               "alias": "notes"
             }
          }
       },
@@ -151,7 +151,7 @@
       },
       "calculator": {
          "preferences": {
-            "backend": "soulver-core",
+            "backend": "qalculate",
             "refreshRatesOnStartup": true
          }
       },
