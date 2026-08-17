@@ -45,10 +45,6 @@ PATH=~/.console-ninja/.bin:$PATH
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 
 alias cd='z'
 alias gc='branch-picker-tui'
@@ -67,9 +63,7 @@ cc() {
         /usr/bin/code .
     fi
 }
-
-. "$HOME/.vite-plus/env"
-
+. "$HOME/.atuin/bin/env"
 eval "$(atuin init zsh --disable-up-arrow)"
 eval "$(zoxide init zsh)"
 

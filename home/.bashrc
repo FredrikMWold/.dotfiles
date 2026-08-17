@@ -11,19 +11,6 @@ if command -v zsh &> /dev/null; then
   fi
 fi
 
-# All the default Omarchy aliases and functions
-# (don't mess with these directly, just overwrite them here!)
-source ~/.local/share/omarchy/default/bash/rc
-
-# Add your own exports, aliases, and functions below.
-
-export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# Vite+ bin (https://viteplus.dev)
-. "$HOME/.vite-plus/env"
-
 # pnpm
 export PNPM_HOME="/home/fredrik/.local/share/pnpm"
 case ":$PATH:" in
@@ -31,3 +18,6 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME/bin:$PATH" ;;
 esac
 # pnpm end
+
+. "$HOME/.atuin/bin/env"
+eval "$(atuin init bash)"

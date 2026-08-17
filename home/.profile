@@ -26,6 +26,4 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-
-# Vite+ bin (https://viteplus.dev)
-. "$HOME/.vite-plus/env"
+. "$HOME/.atuin/bin/env"
