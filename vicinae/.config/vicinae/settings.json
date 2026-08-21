@@ -85,7 +85,7 @@
       "@dagimg-dot/store.vicinae.wifi-commander": {
          "enabled": true,
          "preferences": {
-            "network-cli-tool": "iwctl"
+            "network-cli-tool": "nmcli"
          }
       },
       "@dagimg-dot/wifi-commander": {

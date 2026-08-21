@@ -116,16 +116,18 @@ o.bind("SUPER + SHIFT + ALT + RIGHT", "Move window to next workspace", hl.dsp.wi
 o.bind("CTRL + ALT + DELETE", "Process manager", "vicinae cmd launch @leonkohli/store.vicinae.process-manager:processes")
 o.bind("SUPER + ALT + SPACE", "Omarchy menu", "omarchy menu")
 o.bind("SUPER + CTRL + E", "Emoji picker", "vicinae cmd launch core:search-emojis")
-o.bind("SUPER + P", "Password menu", "vicinae cmd launch @fredrikmwold/store.vicinae.hyprland-monitors:configure-monitors")
+o.bind("SUPER + P", "Password menu", "vicinae cmd launch @fredrikmwold/hyprland-monitors:configure-monitors")
 o.bind("SUPER + CTRL + V", "Clipboard menu", "vicinae cmd launch clipboard:history")
-o.bind("SUPER + K", "Hotkeys help", "vicinae cmd launch @tinkerbells/pass:pass")
+o.bind("SUPER + K", "Hotkeys help", "vicinae cmd launch @tinkerbells/store.vicinae.pass:pass")
 o.bind("SUPER + R", "Radix TUI", "vicinae cmd launch @FredrikMWold/radix:pipeline-jobs")
 o.bind("SUPER + SPACE", "Launcher", "vicinae toggle")
 
-o.bind("SUPER + T", "Floating Teams", open_or_move_to_scratchpad("teams-for-linux", "uwsm-app -- /opt/teams-for-linux/teams-for-linux"))
+o.bind("SUPER + T", "Floating Teams",
+	open_or_move_to_scratchpad("teams-for-linux", "uwsm-app -- /opt/teams-for-linux/teams-for-linux"))
 o.bind("SUPER + S", "Floating Slack", open_or_move_to_scratchpad("slack", "uwsm-app -- slack"))
 o.bind("SUPER + D", "Floating Discord", open_or_move_to_scratchpad("discord", "uwsm-app -- discord"))
-o.bind("SUPER + RETURN", "Terminal", open_or_move_to_scratchpad("floating-terminal", "uwsm-app -- kitty --class floating-terminal"))
+o.bind("SUPER + RETURN", "Terminal",
+	open_or_move_to_scratchpad("floating-terminal", "uwsm-app -- kitty --class floating-terminal"))
 o.bind("SUPER + L", "Lock screen", "omarchy-system-lock")
 
 -- Logitech MX Keys examples:

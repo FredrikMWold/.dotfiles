@@ -3,15 +3,15 @@
 -- https://wiki.hypr.land/Configuring/Basics/Variables/#general
 hl.config({
 	general = {
-		gaps_in = 4,
-		gaps_out = 4,
+		gaps_in = 1,
+		gaps_out = 2,
 	},
 })
 
 -- https://wiki.hypr.land/Configuring/Basics/Variables/#decoration
 hl.config({
 	decoration = {
-		rounding = 8,
+		rounding = 4,
 	},
 })
 
