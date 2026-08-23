@@ -123,7 +123,8 @@ o.bind("SUPER + R", "Radix TUI", "vicinae cmd launch @FredrikMWold/radix:pipelin
 o.bind("SUPER + SPACE", "Launcher", "vicinae toggle")
 
 o.bind("SUPER + T", "Floating Teams",
-	open_or_move_to_scratchpad("teams-for-linux", "uwsm-app -- /opt/teams-for-linux/teams-for-linux"))
+	open_or_move_to_scratchpad("chrome-teams.microsoft.com__v2_-Default",
+		"omarchy-launch-webapp https://teams.microsoft.com/v2/"))
 o.bind("SUPER + S", "Floating Slack", open_or_move_to_scratchpad("slack", "uwsm-app -- slack"))
 o.bind("SUPER + D", "Floating Discord", open_or_move_to_scratchpad("discord", "uwsm-app -- discord"))
 o.bind("SUPER + RETURN", "Terminal",

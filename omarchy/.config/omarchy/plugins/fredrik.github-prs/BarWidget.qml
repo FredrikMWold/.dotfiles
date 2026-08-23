@@ -1,4 +1,5 @@
 import QtQuick
+import Quickshell
 import Quickshell.Io
 import qs.Commons
 import qs.Ui
@@ -6,8 +7,10 @@ import qs.Ui
 BarWidget {
   id: root
   moduleName: "fredrik.github-prs"
+  visible: cacheLoaded
 
   property var pullRequests: []
+  property var refreshResults: []
   property var queryQueue: []
   property var activeQuery: null
   property string processOutput: ""
@@ -15,6 +18,9 @@ BarWidget {
   property string errorMessage: ""
   property bool loading: false
   property bool refreshQueued: false
+  property bool refreshFailed: false
+  property bool cacheLoaded: false
+  property bool hasCompletedRefresh: false
 
   readonly property var defaultMyRepositories: [
     "equinor/prisma-decision-web",
@@ -30,8 +36,11 @@ BarWidget {
     "equinor/warp-ui"
   ]
   readonly property string defaultFilter: "-label:dependencies -label:\"autorelease: pending\""
+  readonly property string cacheHome: Quickshell.env("XDG_CACHE_HOME") || Quickshell.env("HOME") + "/.cache"
+  readonly property string cachePath: cacheHome + "/fredrik-github-prs.json"
   readonly property int myCount: countForType("my")
   readonly property int reviewCount: countForType("review")
+  readonly property bool showLoading: loading && cacheLoaded && pullRequests.length === 0
   readonly property int refreshMinutes: Math.max(1, parseInt(setting("refreshMinutes", 5), 10) || 5)
 
   function repositories(name, fallback) {
@@ -54,15 +63,51 @@ BarWidget {
     }
   }
 
+  function loadCache(raw) {
+    if (cacheLoaded) return
+
+    try {
+      var text = String(raw || "").trim()
+      var payload = text === "" ? null : JSON.parse(text)
+      if (!payload || payload.version !== 1 || !Array.isArray(payload.pullRequests)) {
+        cacheLoaded = true
+        return
+      }
+
+      var cached = []
+      for (var i = 0; i < payload.pullRequests.length; i++) {
+        var item = payload.pullRequests[i]
+        if (!item || (item.type !== "my" && item.type !== "review")) continue
+        if (!item.title || !item.url || !item.repositoryName || item.number === undefined) continue
+        cached.push(item)
+      }
+
+      if (!hasCompletedRefresh) pullRequests = cached
+    } catch (error) {
+      console.warn("github-prs: cache parse failed:", error)
+    }
+    cacheLoaded = true
+  }
+
+  function persistCache() {
+    var payload = {
+      version: 1,
+      updatedAt: new Date().toISOString(),
+      pullRequests: pullRequests
+    }
+    cacheFile.setText(JSON.stringify(payload, null, 2) + "\n")
+  }
+
   function refresh() {
     if (fetchProcess.running) {
       refreshQueued = true
       return
     }
 
-    pullRequests = []
+    refreshResults = []
     queryQueue = []
     errorMessage = ""
+    refreshFailed = false
     loading = true
     enqueue(repositories("myRepositories", defaultMyRepositories), "my")
     enqueue(repositories("reviewRepositories", defaultReviewRepositories), "review")
@@ -71,6 +116,11 @@ BarWidget {
 
   function runNextQuery() {
     if (queryQueue.length === 0) {
+      if (!refreshFailed || pullRequests.length === 0) {
+        pullRequests = refreshResults
+      }
+      if (!refreshFailed) persistCache()
+      hasCompletedRefresh = true
       loading = false
       syncPanel()
       if (refreshQueued) {
@@ -101,7 +151,7 @@ BarWidget {
     if (exitCode === 0) {
       try {
         var response = JSON.parse(processOutput || "[]")
-        var next = pullRequests.slice()
+        var next = refreshResults.slice()
         for (var i = 0; i < response.length; i++) {
           var item = response[i]
           if (item.isDraft === true) continue
@@ -110,12 +160,16 @@ BarWidget {
           item.type = activeQuery.type
           next.push(item)
         }
-        pullRequests = next
+        refreshResults = next
       } catch (error) {
+        refreshFailed = true
         errorMessage = "GitHub returned invalid PR data"
       }
     } else if (errorMessage === "") {
+      refreshFailed = true
       errorMessage = processError.trim() || "Could not load GitHub pull requests"
+    } else {
+      refreshFailed = true
     }
 
     syncPanel()
@@ -137,6 +191,7 @@ BarWidget {
     if (!target) return
     target.pullRequests = root.pullRequests
     target.loading = root.loading
+    target.cacheReady = root.cacheLoaded
     target.errorMessage = root.errorMessage
     target.myCount = root.myCount
     target.reviewCount = root.reviewCount
@@ -164,6 +219,7 @@ BarWidget {
   }
   onPullRequestsChanged: syncPanel()
   onLoadingChanged: syncPanel()
+  onCacheLoadedChanged: syncPanel()
   onErrorMessageChanged: syncPanel()
 
   Loader {
@@ -175,6 +231,16 @@ BarWidget {
       root.injectPanel()
       Qt.callLater(root.injectPanel)
     }
+  }
+
+  FileView {
+    id: cacheFile
+    path: root.cachePath
+    watchChanges: false
+    atomicWrites: true
+    printErrors: false
+    onLoaded: root.loadCache(text())
+    onLoadFailed: root.loadCache("")
   }
 
   Process {
@@ -204,7 +270,7 @@ BarWidget {
     id: button
     anchors.fill: parent
     bar: root.bar
-    text: root.loading && root.pullRequests.length === 0
+    text: root.showLoading
       ? " loading"
       : " my " + root.myCount + " | review " + root.reviewCount
     tooltipText: root.errorMessage !== "" ? root.errorMessage : "GitHub pull requests"

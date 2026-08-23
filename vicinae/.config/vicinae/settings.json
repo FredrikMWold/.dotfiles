@@ -52,6 +52,7 @@
       "toggle-action-panel": "control+B"
    },
    "favorites": [
+      "@knoopx/github:favoriteRepositories",
       "@ShyAssassin/store.vicinae.vscode-recents:open-recents"
    ],
    "fallbacks": [

@@ -39,7 +39,7 @@ o.window("^(floating-terminal)$", {
 })
 
 for _, app in ipairs({
-	{ name = "windowrule-3", class = "teams-for-linux" },
+	{ name = "windowrule-3", class = "chrome-teams.microsoft.com__v2_-Default" },
 	{ name = "windowrule-4", class = "slack" },
 	{ name = "windowrule-5", class = "net-runelite-client-RuneLite" },
 	{ name = "windowrule-6", class = "com.stremio.stremio" },

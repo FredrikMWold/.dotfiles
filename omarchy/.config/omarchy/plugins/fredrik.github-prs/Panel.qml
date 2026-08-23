@@ -13,6 +13,7 @@ Panel {
   property var hostWidget: null
   property var pullRequests: []
   property bool loading: false
+  property bool cacheReady: false
   property string errorMessage: ""
   property int myCount: 0
   property int reviewCount: 0
@@ -35,6 +36,9 @@ Panel {
   function moveSelection(delta) {
     if (pullRequests.length === 0) return
     selectedIndex = Math.max(0, Math.min(pullRequests.length - 1, selectedIndex + delta))
+    Qt.callLater(function() {
+      pullRequestList.positionViewAtIndex(selectedIndex, ListView.Contain)
+    })
   }
 
   function activateSelection() {
@@ -49,9 +53,48 @@ Panel {
   }
 
   function authorLabel(pullRequest) {
-    if (pullRequest.type === "my") return "Your pull request"
+    if (pullRequest.type === "my") return "Opened by you"
     var login = pullRequest.author && pullRequest.author.login ? pullRequest.author.login : "unknown"
-    return "Review · @" + login
+    return "Review requested · @" + login
+  }
+
+  function sectionLabel(pullRequest) {
+    return pullRequest.type === "my" ? "YOUR PULL REQUESTS" : "READY FOR YOUR REVIEW"
+  }
+
+  function typeColor(pullRequest) {
+    return pullRequest.type === "review" ? root.bar.urgent : Color.accent
+  }
+
+  function scrollWheel(event) {
+    var angleDelta = event.angleDelta.y
+    var pixelDelta = angleDelta === 0 ? event.pixelDelta.y : 0
+    var change = angleDelta !== 0
+      ? angleDelta / 120 * pullRequestList.wheelStepSize
+      : pixelDelta
+    if (change === 0) return
+
+    var minimumY = pullRequestList.originY - pullRequestList.topMargin
+    var maximumY = Math.max(minimumY, pullRequestList.originY
+      + pullRequestList.contentHeight + pullRequestList.bottomMargin - pullRequestList.height)
+    var animationBase = wheelScrollAnimation.running
+      ? pullRequestList.wheelTargetY
+      : pullRequestList.contentY
+    var targetY = Math.max(minimumY, Math.min(maximumY, animationBase - change))
+    var distance = Math.abs(targetY - pullRequestList.contentY)
+
+    wheelScrollAnimation.stop()
+    pullRequestList.wheelTargetY = targetY
+    if (distance > 2) {
+      wheelScrollAnimation.from = pullRequestList.contentY
+      wheelScrollAnimation.to = targetY
+      wheelScrollAnimation.duration = Math.max(50, Math.min(200,
+        Math.round(distance * 200 / pullRequestList.wheelStepSize)))
+      wheelScrollAnimation.start()
+    } else {
+      pullRequestList.contentY = targetY
+    }
+    event.accepted = true
   }
 
   onPullRequestsChanged: {
@@ -135,7 +178,7 @@ Panel {
         }
 
         Text {
-          visible: root.loading && root.pullRequests.length === 0
+          visible: root.loading && root.cacheReady && root.pullRequests.length === 0
           width: parent.width
           text: "Loading pull requests…"
           color: root.bar.foreground
@@ -154,34 +197,87 @@ Panel {
 
         ListView {
           id: pullRequestList
+          readonly property real wheelStepSize: Style.space(60)
+          property real wheelTargetY: contentY
           visible: root.pullRequests.length > 0
           width: parent.width
           height: Math.min(contentHeight, Style.space(280))
           spacing: 0
           clip: true
           boundsBehavior: Flickable.StopAtBounds
-          interactive: contentHeight > height
+          interactive: false
           model: root.pullRequests
           currentIndex: root.selectedIndex
-          onCurrentIndexChanged: if (currentIndex >= 0) positionViewAtIndex(currentIndex, ListView.Contain)
 
-          ScrollBar.vertical: ScrollBar { policy: ScrollBar.AsNeeded }
+          NumberAnimation {
+            id: wheelScrollAnimation
+            target: pullRequestList
+            property: "contentY"
+            easing.type: Easing.OutCubic
+          }
+
+          ScrollBar.vertical: ScrollBar {
+            policy: ScrollBar.AsNeeded
+            active: wheelScrollAnimation.running || hovered || pressed
+          }
 
           delegate: Item {
             id: delegateRoot
             required property var modelData
             required property int index
+            readonly property bool startsSection: index === 0
+              || root.pullRequests[index - 1].type !== modelData.type
             width: ListView.view.width
-            height: Style.space(48)
+            height: Style.space(48) + (startsSection ? Style.space(28) : 0)
+
+            Row {
+              visible: delegateRoot.startsSection
+              width: parent.width
+              height: delegateRoot.startsSection ? Style.space(28) : 0
+              spacing: Style.space(8)
+
+              Text {
+                anchors.verticalCenter: parent.verticalCenter
+                text: root.sectionLabel(delegateRoot.modelData)
+                color: root.typeColor(delegateRoot.modelData)
+                font.family: root.bar.fontFamily
+                font.pixelSize: Style.font.caption
+                font.bold: true
+              }
+
+              Rectangle {
+                width: parent.width - parent.children[0].implicitWidth - parent.spacing
+                height: Style.space(1)
+                anchors.verticalCenter: parent.verticalCenter
+                color: root.typeColor(delegateRoot.modelData)
+                opacity: 0.35
+              }
+
+              MouseArea {
+                anchors.fill: parent
+                acceptedButtons: Qt.NoButton
+                onWheel: function(wheel) { root.scrollWheel(wheel) }
+              }
+            }
 
             Rectangle {
-              anchors.fill: parent
+              anchors.left: parent.left
+              anchors.right: parent.right
+              anchors.bottom: parent.bottom
+              height: Style.space(48)
               radius: Math.min(4, Style.cornerRadius)
-              color: delegateRoot.index === root.selectedIndex
+              color: delegateRoot.index === root.selectedIndex || rowMouse.containsMouse
                 ? Style.hoverFillFor(root.bar.foreground, Color.accent)
-                : rowMouse.containsMouse
-                  ? Style.hoverFillFor(root.bar.foreground, Color.accent)
-                  : "transparent"
+                : "transparent"
+
+              Rectangle {
+                width: Style.space(2)
+                height: parent.height - Style.space(12)
+                anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter
+                color: root.typeColor(delegateRoot.modelData)
+                opacity: delegateRoot.index === root.selectedIndex || rowMouse.containsMouse ? 1 : 0.55
+              }
 
               Column {
                 anchors.left: parent.left
@@ -197,17 +293,43 @@ Panel {
                   color: root.bar.foreground
                   font.family: root.bar.fontFamily
                   font.pixelSize: Style.font.body
-                  font.bold: delegateRoot.index === root.selectedIndex
                   elide: Text.ElideRight
                 }
 
-                Text {
+                Row {
                   width: parent.width
-                  text: delegateRoot.modelData.repositoryName + " #" + delegateRoot.modelData.number + " · " + root.authorLabel(delegateRoot.modelData)
-                  color: Qt.darker(root.bar.foreground, 1.35)
-                  font.family: root.bar.fontFamily
-                  font.pixelSize: Style.font.bodySmall
-                  elide: Text.ElideRight
+                  spacing: Style.space(4)
+
+                  Text {
+                    id: repositoryLabel
+                    width: Math.min(implicitWidth, parent.width * 0.5)
+                    text: delegateRoot.modelData.repositoryName + " #" + delegateRoot.modelData.number
+                    color: Color.accent
+                    font.family: root.bar.fontFamily
+                    font.pixelSize: Style.font.bodySmall
+                    font.bold: true
+                    elide: Text.ElideRight
+                  }
+
+                  Text {
+                    id: metadataSeparator
+                    text: "·"
+                    color: Qt.darker(root.bar.foreground, 1.35)
+                    font.family: root.bar.fontFamily
+                    font.pixelSize: Style.font.bodySmall
+                  }
+
+                  Text {
+                    width: Math.max(0, parent.width - repositoryLabel.width
+                      - metadataSeparator.implicitWidth - parent.spacing * 2)
+                    text: root.authorLabel(delegateRoot.modelData)
+                    color: delegateRoot.modelData.type === "review"
+                      ? root.bar.foreground
+                      : Qt.darker(root.bar.foreground, 1.2)
+                    font.family: root.bar.fontFamily
+                    font.pixelSize: Style.font.bodySmall
+                    elide: Text.ElideRight
+                  }
                 }
               }
 
@@ -216,8 +338,8 @@ Panel {
                 anchors.fill: parent
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
-                onEntered: root.selectedIndex = delegateRoot.index
                 onClicked: root.openPullRequest(delegateRoot.modelData)
+                onWheel: function(wheel) { root.scrollWheel(wheel) }
               }
             }
           }
