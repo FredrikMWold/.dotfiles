@@ -1,9 +1,8 @@
 [tools]
 bun = "latest"
-dotnet = "8.0.422"
-dotnet-core = "8.0.422"
+dotnet = "10.0.400"
 go = "latest"
-node = "24.19.0"
+node = "26.7.0"
 codex = "latest"
 gh = "latest"
 copilot = "latest"

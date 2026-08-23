@@ -1,0 +1,7 @@
+{
+  "allowedUrls": [
+    "https://wiki.hypr.land"
+  ],
+  "model": "gpt-5.6-sol",
+  "effortLevel": "high"
+}
