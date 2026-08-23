@@ -1,5 +1,13 @@
 {
     "ansible.python.interpreterPath": "/usr/bin/python3",
+    "Lua.workspace.library": [
+        "/usr/share/hypr/stubs"
+    ],
+    "Lua.workspace.checkThirdParty": false,
+    "Lua.diagnostics.globals": [
+        "hl",
+        "o"
+    ],
     "workbench.colorCustomizations": {
         "sash.hoverBorder": "#65c89b",
         "commandCenter.border": "#15202b99",

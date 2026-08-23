@@ -3,4 +3,4 @@ Type=Application
 Name=Screen Record
 Exec=omarchy capture screenrecording
 Terminal=false
-Icon=camera-web
+Icon=camera-app

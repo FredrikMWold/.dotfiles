@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Visual Studio Code (New Window)
+GenericName=Text Editor
+Exec=/usr/share/code/code --new-window %F
+Icon=vscode
+Type=Application
+NoDisplay=true
+StartupNotify=false
+StartupWMClass=Code
+Categories=TextEditor;Development;IDE;
+MimeType=text/plain;
