@@ -5,7 +5,6 @@
 import QtQuick
 import QtLocation as QL
 import QtPositioning as QP
-import Qt.labs.animation
 
 Item {
   id: root
@@ -27,7 +26,6 @@ Item {
       property QP.geoCoordinate lockedCenter
 
       onActiveChanged: {
-        flickAnimation.stop()
         if (active) {
           startZoom = map.zoomLevel
           lockedCenter = map.center
@@ -52,10 +50,19 @@ Item {
 
     WheelHandler {
       id: wheel
-      acceptedDevices: PointerDevice.Mouse
+      acceptedDevices: Qt.platform.pluginName === "wayland"
+        ? PointerDevice.Mouse | PointerDevice.TouchPad
+        : PointerDevice.Mouse
       onWheel: function(event) {
+        if (event.pixelDelta.x !== 0 || event.pixelDelta.y !== 0) {
+          event.accepted = false
+          return
+        }
         var location = map.toCoordinate(point.position)
-        map.zoomLevel += event.angleDelta.y / 120
+        map.zoomLevel = Math.max(
+          root.minimumZoomLevel,
+          Math.min(root.maximumZoomLevel, map.zoomLevel + event.angleDelta.y / 480)
+        )
         map.alignCoordinateToPoint(location, point.position)
       }
     }
@@ -65,43 +72,15 @@ Item {
       target: null
       minimumPointCount: 1
       maximumPointCount: 1
-      onTranslationChanged: function(delta) {
-        map.pan(-delta.x, -delta.y)
-      }
+      property QP.geoCoordinate draggedCoordinate
       onActiveChanged: {
-        if (active) flickAnimation.stop()
-        else flickAnimation.restart(centroid.velocity)
+        if (!active) return
+        draggedCoordinate = map.toCoordinate(centroid.pressPosition)
+        map.alignCoordinateToPoint(draggedCoordinate, centroid.position)
       }
-    }
-
-    property vector3d animationDestination
-    onAnimationDestinationChanged: {
-      if (!flickAnimation.running) return
-      var delta = Qt.vector2d(
-        animationDestination.x - flickAnimation.lastDestination.x,
-        animationDestination.y - flickAnimation.lastDestination.y
-      )
-      map.pan(-delta.x, -delta.y)
-      flickAnimation.lastDestination = animationDestination
-    }
-
-    Vector3dAnimation on animationDestination {
-      id: flickAnimation
-      property vector3d lastDestination
-      from: Qt.vector3d(0, 0, 0)
-      duration: 500
-      easing.type: Easing.OutQuad
-
-      function restart(velocity) {
-        stop()
-        map.animationDestination = Qt.vector3d(0, 0, 0)
-        lastDestination = Qt.vector3d(0, 0, 0)
-        to = Qt.vector3d(
-          velocity.x / duration * 100,
-          velocity.y / duration * 100,
-          0
-        )
-        start()
+      onTranslationChanged: {
+        if (active)
+          map.alignCoordinateToPoint(draggedCoordinate, centroid.position)
       }
     }
   }

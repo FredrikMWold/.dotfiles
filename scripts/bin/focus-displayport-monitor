@@ -1,0 +1,26 @@
+#!/bin/bash
+
+focus_displayport_monitor() {
+  sleep 2
+
+  for _ in {1..12}; do
+    if hyprctl -j monitors all | jq -e '.[] | select(.name == "DP-2" and .dpmsStatus == true)' >/dev/null; then
+      hyprctl dispatch focusmonitor DP-2 >/dev/null
+      return 0
+    fi
+
+    sleep 0.5
+  done
+
+  return 1
+}
+
+focus_displayport_monitor
+
+dbus-monitor --system \
+  "type='signal',sender='org.freedesktop.login1',interface='org.freedesktop.login1.Manager',member='PrepareForSleep'" |
+  while IFS= read -r line; do
+    if [[ $line == *"boolean false"* ]]; then
+      focus_displayport_monitor
+    fi
+  done

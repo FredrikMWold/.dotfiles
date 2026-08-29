@@ -48,16 +48,17 @@ Panel surfaces, markers, text, and light/dark map tiles follow the active
 Omarchy theme. Geofence polygons are not shown because the feed's zone rules
 must be interpreted before a boundary can be labelled accurately.
 
-Map interaction is based on Qt Location's `MapView`. Pinch rotation, tilt,
-duplicate touchpad-wheel handling, and release-velocity panning are disabled
+Map interaction is based on Qt Location's `MapView`. Mouse dragging pans
+directly without release acceleration, and mouse-wheel zoom handles Wayland's
+mouse/touchpad wheel-device ambiguity. Pinch rotation and tilt are disabled,
 and the geographic center is locked for the complete pinch gesture so
 releasing it cannot move the map.
 
 Individual scooter coordinates are cached without clustering. The QML panel
 clusters them by screen distance at the current zoom level, expands clusters
-as the map zooms in, and separates overlapping individual markers at close
-zoom. clicking a cluster zooms into it. The nearest and selected scooters receive
-additional visual emphasis.
+as the map zooms in, and applies a capped, gentle repulsion to overlapping
+individual markers from zoom level 18. Clicking a cluster zooms into it. The
+nearest and selected scooters receive additional visual emphasis.
 
 Ryde publishes `max_range_meters: 56300` for its standing scooter type, so the
 panel treats 0 km as 0% and 56.3 km as 100%. The displayed percentage is the

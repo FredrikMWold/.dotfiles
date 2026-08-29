@@ -209,7 +209,8 @@ Panel {
 
   function clusterRadius() {
     var zoom = mapView.map.zoomLevel
-    if (zoom >= 17) return 0
+    if (zoom >= 18) return 0
+    if (zoom >= 17) return 18
     if (zoom >= 16) return 24
     if (zoom >= 15) return 36
     if (zoom >= 14) return 48
@@ -251,52 +252,69 @@ Panel {
   }
 
   function individualMarkers(vehicles) {
-    var buckets = []
+    var markers = []
     for (var i = 0; i < vehicles.length; i++) {
       var vehicle = vehicles[i]
       var point = mapView.map.fromCoordinate(
         coordinate(vehicle.lat, vehicle.lon), false
       )
-      var bucket = null
-      for (var j = 0; j < buckets.length; j++) {
-        var dx = point.x - buckets[j].x
-        var dy = point.y - buckets[j].y
-        if (Math.sqrt(dx * dx + dy * dy) <= 18) {
-          bucket = buckets[j]
-          break
-        }
-      }
-      if (!bucket) {
-        bucket = { x: point.x, y: point.y, vehicles: [] }
-        buckets.push(bucket)
-      }
-      bucket.vehicles.push(vehicle)
+      markers.push({
+        vehicleId: vehicle.vehicleId,
+        lat: vehicle.lat,
+        lon: vehicle.lon,
+        count: 1,
+        distanceKm: vehicle.distanceKm,
+        rangeKm: vehicle.rangeKm,
+        batteryPercent: vehicle.batteryPercent,
+        elevationM: vehicle.elevationM,
+        endpointGainM: vehicle.endpointGainM,
+        effectiveUphillM: vehicle.effectiveUphillM,
+        uphillAdjustedDistanceKm: vehicle.uphillAdjustedDistanceKm,
+        screenX: point.x,
+        screenY: point.y,
+        offsetX: 0,
+        offsetY: 0
+      })
     }
 
-    var result = []
-    for (var b = 0; b < buckets.length; b++) {
-      var members = buckets[b].vehicles
-      for (var m = 0; m < members.length; m++) {
-        var angle = members.length > 1 ? Math.PI * 2 * m / members.length : 0
-        var offset = members.length > 1 ? 15 : 0
-        result.push({
-          vehicleId: members[m].vehicleId,
-          lat: members[m].lat,
-          lon: members[m].lon,
-          count: 1,
-          distanceKm: members[m].distanceKm,
-          rangeKm: members[m].rangeKm,
-          batteryPercent: members[m].batteryPercent,
-          elevationM: members[m].elevationM,
-          endpointGainM: members[m].endpointGainM,
-          effectiveUphillM: members[m].effectiveUphillM,
-          uphillAdjustedDistanceKm: members[m].uphillAdjustedDistanceKm,
-          offsetX: Math.cos(angle) * offset,
-          offsetY: Math.sin(angle) * offset
-        })
+    var minimumDistance = 42
+    var maximumOffset = 28
+    for (var iteration = 0; iteration < 10; iteration++) {
+      for (var first = 0; first < markers.length; first++) {
+        for (var second = first + 1; second < markers.length; second++) {
+          var dx = markers[second].screenX + markers[second].offsetX
+            - markers[first].screenX - markers[first].offsetX
+          var dy = markers[second].screenY + markers[second].offsetY
+            - markers[first].screenY - markers[first].offsetY
+          var distance = Math.sqrt(dx * dx + dy * dy)
+          if (distance >= minimumDistance) continue
+          if (distance < 0.01) {
+            var angle = (first * 2.399963 + second * 0.618034)
+              % (Math.PI * 2)
+            dx = Math.cos(angle)
+            dy = Math.sin(angle)
+            distance = 1
+          }
+          var push = (minimumDistance - distance) * 0.24
+          var pushX = dx / distance * push
+          var pushY = dy / distance * push
+          markers[first].offsetX -= pushX
+          markers[first].offsetY -= pushY
+          markers[second].offsetX += pushX
+          markers[second].offsetY += pushY
+        }
+      }
+      for (var markerIndex = 0; markerIndex < markers.length; markerIndex++) {
+        var marker = markers[markerIndex]
+        var offsetLength = Math.sqrt(
+          marker.offsetX * marker.offsetX + marker.offsetY * marker.offsetY
+        )
+        if (offsetLength <= maximumOffset) continue
+        marker.offsetX = marker.offsetX / offsetLength * maximumOffset
+        marker.offsetY = marker.offsetY / offsetLength * maximumOffset
       }
     }
-    return result
+    return markers
   }
 
   function rebuildClusters() {
