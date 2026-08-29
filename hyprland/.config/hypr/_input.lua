@@ -1,5 +1,5 @@
--- Keep only your personal input overrides here. Uncommented settings below
--- replace Omarchy's defaults.
+-- Shared input overrides. Uncommented settings below replace Omarchy's
+-- defaults.
 hl.config({
      input = {
           kb_layout = "no",

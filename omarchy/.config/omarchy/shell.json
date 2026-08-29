@@ -6,15 +6,12 @@
   },
   "bar": {
     "position": "top",
-    "transparent": true,
+    "transparent": false,
     "centerAnchor": "omarchy.clock",
     "layout": {
       "left": [
         {
-          "id": "omarchy.menu"
-        },
-        {
-          "id": "omarchy.workspaces"
+          "id": "fredrik.workspaces"
         }
       ],
       "center": [
@@ -68,6 +65,9 @@
         },
         {
           "id": "shavanced.notification-center"
+        },
+        {
+          "id": "fredrik.lunch"
         },
         {
           "id": "bylund.presenter-overlay"

@@ -3,7 +3,8 @@
 -- Omarchy's bootstrap keeps path setup out of this user config.
 dofile((os.getenv("OMARCHY_PATH") or "/usr/share/omarchy") .. "/default/hypr/bootstrap.lua")
 
--- Disable all Omarchy default bindings. Add your own in hypr/bindings.lua.
+-- Disable all Omarchy default bindings. Add shared bindings in _bindings.lua
+-- and computer-specific bindings in bindings.lua.
 -- omarchy_default_bindings = false
 --
 -- Or disable only bindings for Omarchy's preinstalled apps/web apps while
@@ -13,9 +14,8 @@ dofile((os.getenv("OMARCHY_PATH") or "/usr/share/omarchy") .. "/default/hypr/boo
 -- Load Omarchy defaults.
 require("default.hypr.omarchy")
 
--- Put your personal overrides in these files. They're loaded after Omarchy's
--- defaults so package updates can improve the defaults without rewriting your
--- ~/.config/hypr files.
+-- Load each computer's local overlays. Each file imports its shared
+-- underscored base first, then applies computer-specific overrides.
 require("hypr.monitors")
 require("hypr.input")
 require("hypr.bindings")
@@ -25,7 +25,7 @@ require("hypr.autostart")
 -- Toggle config flags dynamically.
 require("default.hypr.toggles")
 
--- Add any other personal Hyprland configuration below.
+-- Add any other shared Hyprland configuration below.
 -- o.window("qemu", { workspace = "5" })
 
 

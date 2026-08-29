@@ -1,11 +1,10 @@
--- Keep only your personal keybinding overrides here. Add new bindings or
--- unbind defaults before replacing them.
+-- Shared keybinding overrides for every computer.
 
 -- See current bindings and descriptions:
 --   omarchy menu keybindings --print
 
 -- To disable every Omarchy default binding, set this in
--- ~/.config/hypr/hyprland.lua before require("default.hypr.omarchy"), then add
+-- ~/.config/hypr/_hyprland.lua before require("default.hypr.omarchy"), then add
 -- only the bindings you want below:
 --   omarchy_default_bindings = false
 
