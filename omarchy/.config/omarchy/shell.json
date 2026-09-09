@@ -11,7 +11,7 @@
     "layout": {
       "left": [
         {
-          "id": "fredrik.workspaces"
+          "id": "omarchy.workspaces"
         }
       ],
       "center": [
@@ -90,5 +90,9 @@
       ]
     }
   },
-  "plugins": []
+  "plugins": [
+    {
+      "id": "bobbynicholas.omaland"
+    }
+  ]
 }

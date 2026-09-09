@@ -35,6 +35,11 @@ o.window("^(floating-terminal)$", {
 	size = { 1200, 800 },
 })
 
+o.window("^(org\\.localsend\\.localsend_app)$", {
+	name = "windowrule-localsend",
+	float = true,
+})
+
 for _, app in ipairs({
 	{ name = "windowrule-3", class = "chrome-teams.microsoft.com__v2_-Default" },
 	{ name = "windowrule-4", class = "slack" },

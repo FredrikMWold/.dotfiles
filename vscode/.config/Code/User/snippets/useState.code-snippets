@@ -1,7 +1,6 @@
 {
 	"useState": {
 		"prefix": "state",
-		"autoExpand": true,
 		"body": [
 			"const [$1, set${1/(.*)/${1:/capitalize}/}] = useState($0);",
 		],
@@ -9,7 +8,6 @@
 	},
 	"React useEffect": {
 		"prefix": "effect",
-		"autoExpand": true,
 		"body": [
 			"useEffect(() => {",
 			"  $1",

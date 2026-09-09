@@ -1,7 +1,14 @@
 {
-  "allowedUrls": [
-    "https://wiki.hypr.land"
-  ],
   "model": "gpt-5.6-sol",
-  "effortLevel": "high"
+  "effortLevel": "high",
+  "allowedUrls": [
+    "https://wiki.hypr.land",
+    "https://github.com",
+    "https://api.github.com",
+    "https://gitlab.gnome.org",
+    "https://wayland.app",
+    "https://flatpak.github.io",
+    "https://wiki.hyprland.org",
+    "https://raw.githubusercontent.com"
+  ]
 }

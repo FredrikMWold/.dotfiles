@@ -2,7 +2,7 @@
 bun = "latest"
 dotnet = "10.0.400"
 go = "latest"
-node = "26.7.0"
+node = "24.19.0"
 codex = "latest"
 gh = "latest"
 copilot = "latest"
@@ -11,3 +11,10 @@ viteplus = "latest"
 "npm:playwright" = "latest"
 poetry = "latest"
 "dotnet:dotnet-ef" = "10.0.11"
+"npm:@xai-official/grok" = "latest"
+opencode = "latest"
+claude = "latest"
+pi = "latest"
+
+[settings.upgrade]
+auto_prune = false

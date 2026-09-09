@@ -173,5 +173,6 @@
 "peacock.showColorInStatusBar": false,
 "workbench.editor.useModal": "some",
 "dictation.enabled": false,
-"chat.sessionSync.enabled": true
+"chat.sessionSync.enabled": true,
+"chat.mcp.gallery.enabled": true
 }

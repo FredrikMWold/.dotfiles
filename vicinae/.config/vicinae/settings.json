@@ -152,7 +152,7 @@
       },
       "calculator": {
          "preferences": {
-            "backend": "qalculate",
+            "backend": "numen",
             "refreshRatesOnStartup": true
          }
       },

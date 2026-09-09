@@ -1,1 +1,13 @@
 .uuid
+
+# Machine-local Hyprland overlays (stowed but never committed).
+/hyprland/.config/hypr/hyprland.lua
+/hyprland/.config/hypr/bindings.lua
+/hyprland/.config/hypr/monitors.lua
+/hyprland/.config/hypr/input.lua
+/hyprland/.config/hypr/looknfeel.lua
+/hyprland/.config/hypr/autostart.lua
+
+# Machine-local Omarchy shell configuration and plugins.
+/omarchy/.config/omarchy/shell.json
+/omarchy/.config/omarchy/plugins/

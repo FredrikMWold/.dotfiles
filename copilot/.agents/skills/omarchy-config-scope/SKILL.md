@@ -57,8 +57,7 @@ When the user requests dotfiles management:
 5. Resolve conflicts without overwriting files or adopting machine-local
    content.
 6. Apply with the same command without `--no`.
-7. Verify shared paths are symlinks into `~/.dotfiles` and machine-local paths
-   are regular files.
+7. Verify managed paths resolve into `~/.dotfiles`.
 
 Never stow an entire configuration directory when it contains a mix of shared
 and machine-specific files. Stow the shared leaf files instead.
@@ -71,8 +70,8 @@ For composable files in `~/.config/hypr/`:
   `_monitors.lua`, `_input.lua`, `_looknfeel.lua`, and `_autostart.lua`.
 - Those underscored files are symlinked from
   `~/.dotfiles/hyprland/.config/hypr/`.
-- Regular files without the underscore are machine-local and must not be
-  symlinks.
+- Regular files without the underscore are machine-local, ignored by Git, and
+  stowed from the same package so all Hyprland configuration is kept together.
 - The first statement in every machine-local file imports its matching base:
 
 ```lua
@@ -94,7 +93,7 @@ Use the Omarchy skill's component-specific reload and validation steps after
 editing. Confirm that:
 
 - every local overlay imports its base first;
-- shared files resolve into `~/.dotfiles`;
-- local files are not symlinks;
+- shared and local files resolve into `~/.dotfiles`;
+- local overlay files remain ignored by Git;
 - no machine-specific values leaked into shared files;
 - the target application accepts the resulting configuration.
