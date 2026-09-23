@@ -18,3 +18,6 @@ fi
 
 . "$HOME/.atuin/bin/env"
 eval "$(atuin init bash)"
+
+# Vite+ bin (https://viteplus.dev)
+. "/home/fredrik/.config/vite-plus/env"

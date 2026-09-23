@@ -27,3 +27,6 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 . "$HOME/.atuin/bin/env"
+
+# Vite+ bin (https://viteplus.dev)
+. "/home/fredrik/.config/vite-plus/env"

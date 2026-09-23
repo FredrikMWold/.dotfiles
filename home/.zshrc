@@ -44,3 +44,6 @@ cc() {
 eval "$(atuin init zsh --disable-up-arrow)"
 eval "$(zoxide init zsh)"
 eval "$(mise activate zsh)"
+
+# Vite+ bin (https://viteplus.dev)
+. "/home/fredrik/.config/vite-plus/env"
