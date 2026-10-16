@@ -174,5 +174,7 @@
 "workbench.editor.useModal": "some",
 "dictation.enabled": false,
 "chat.sessionSync.enabled": true,
-"chat.mcp.gallery.enabled": true
+"chat.mcp.gallery.enabled": true,
+"workbench.experimental.modernUI": false,
+"workbench.modernUIFrostedGlass": false
 }

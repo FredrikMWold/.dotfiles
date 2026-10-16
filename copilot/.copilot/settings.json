@@ -1,6 +1,4 @@
 {
-  "model": "gpt-5.6-sol",
-  "effortLevel": "high",
   "allowedUrls": [
     "https://wiki.hypr.land",
     "https://github.com",
@@ -10,5 +8,16 @@
     "https://flatpak.github.io",
     "https://wiki.hyprland.org",
     "https://raw.githubusercontent.com"
-  ]
+  ],
+  "effortLevel": "high",
+  "hooks": {
+    "SessionStart": [
+      {
+        "bash": "bash '/home/fredrik/.copilot/hooks/herdr-agent-state.sh'",
+        "timeoutSec": 10,
+        "type": "command"
+      }
+    ]
+  },
+  "model": "gpt-6.1-sol"
 }

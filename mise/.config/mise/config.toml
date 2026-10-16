@@ -15,7 +15,7 @@ poetry = "latest"
 "npm:@xai-official/grok" = "latest"
 opencode = "latest"
 claude = "latest"
-pi = "latest"
+pi = "0.86.1"
 
 [settings.upgrade]
 auto_prune = false

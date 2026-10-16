@@ -1,0 +1,111 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+die() {
+    printf 'Error: %s\n' "$*" >&2
+    exit 1
+}
+
+if [[ ${1:-} == --help && $# -eq 1 ]]; then
+    printf 'Usage: update-custom-vscode [--no-install]\n'
+    printf 'Clone or update ~/vscode, rebase the custom commit onto the latest stable release,\n'
+    printf 'keep custom tracking origin/custom, then run npm run build-and-install.\n'
+    printf 'Backups are local tags; branches and tags are never pushed automatically.\n'
+    exit 0
+fi
+if [[ $# -gt 1 || ( $# -eq 1 && $1 != --no-install ) ]]; then
+    die 'Usage: update-custom-vscode [--no-install]'
+fi
+
+for required_command in git gh node npm; do
+    command -v "$required_command" >/dev/null 2>&1 || die "Missing required command: $required_command"
+done
+
+repo_dir="$HOME/vscode"
+fork_url='git@github.com:FredrikMWold/vscode.git'
+upstream_url='https://github.com/microsoft/vscode.git'
+custom_branch='custom'
+
+latest_tag=$(gh api repos/microsoft/vscode/releases/latest --jq .tag_name)
+[[ $latest_tag =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]] || die "Unexpected upstream release tag: $latest_tag"
+
+if [[ ! -e $repo_dir ]]; then
+    printf '\n==> Cloning custom VS Code into %s\n' "$repo_dir"
+    git clone --branch "$custom_branch" "$fork_url" "$repo_dir"
+fi
+[[ -d $repo_dir ]] || die "$repo_dir exists but is not a directory."
+cd -- "$repo_dir"
+repo_root=$(git rev-parse --show-toplevel) || die "$repo_dir is not a Git checkout."
+[[ $repo_root == "$(pwd -P)" ]] || die "$repo_dir is not the root of a Git checkout."
+
+case $(git config --get remote.origin.url) in
+    git@github.com:FredrikMWold/vscode.git|https://github.com/FredrikMWold/vscode.git|https://github.com/FredrikMWold/vscode)
+        ;;
+    *) die "$repo_dir does not have FredrikMWold/vscode as its origin." ;;
+esac
+
+for operation in rebase-merge rebase-apply MERGE_HEAD CHERRY_PICK_HEAD REVERT_HEAD; do
+    [[ ! -e $(git rev-parse --git-path "$operation") ]] || die "Finish or abort the existing Git operation in $repo_dir first."
+done
+[[ -z $(git status --porcelain) ]] || die "$repo_dir has uncommitted changes. Commit or stash them first."
+
+if git config --get remote.upstream.url >/dev/null; then
+    case $(git config --get remote.upstream.url) in
+        git@github.com:microsoft/vscode.git|https://github.com/microsoft/vscode.git|https://github.com/microsoft/vscode)
+            ;;
+        *) die 'The upstream remote does not point to microsoft/vscode.' ;;
+    esac
+else
+    git remote add upstream "$upstream_url"
+fi
+
+printf '\n==> Fetching custom and upstream release %s\n' "$latest_tag"
+git fetch --prune origin
+git fetch --no-tags upstream "refs/tags/$latest_tag:refs/tags/$latest_tag"
+
+git show-ref --verify --quiet "refs/remotes/origin/$custom_branch" \
+    || die "Your fork does not have a $custom_branch branch."
+
+if git show-ref --verify --quiet "refs/heads/$custom_branch"; then
+    git switch "$custom_branch"
+else
+    git switch --create "$custom_branch" --track "origin/$custom_branch"
+fi
+[[ -f scripts/build-and-install.sh ]] || die "$custom_branch does not contain the custom build-and-install script."
+
+base_tag=$(git describe --tags --abbrev=0 --match '[0-9]*.[0-9]*.[0-9]*' HEAD) \
+    || die 'The custom branch has no ancestor release tag.'
+[[ $base_tag =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || die "Unexpected base release tag: $base_tag"
+[[ $(git rev-list --count "$base_tag..HEAD") -eq 1 ]] \
+    || die "Expected exactly one custom commit above $base_tag; refusing to rebase other history."
+[[ $(printf '%s\n' "$base_tag" "$latest_tag" | LC_ALL=C sort -V | tail -n 1) == "$latest_tag" ]] \
+    || die "The custom branch is already based on $base_tag, which is newer than $latest_tag."
+
+git config --local --replace-all "branch.$custom_branch.remote" origin
+git config --local --replace-all "branch.$custom_branch.merge" "refs/heads/$custom_branch"
+git config --local --replace-all "branch.$custom_branch.pushRemote" origin
+git config --local remote.pushDefault origin
+
+if [[ $base_tag != "$latest_tag" ]]; then
+    backup_tag="backup/custom-vscode-${base_tag}-$(date +%Y%m%d-%H%M%S)-$$"
+    git tag "$backup_tag" HEAD
+    printf '\n==> Saved backup tag %s\n' "$backup_tag"
+
+    printf '\n==> Rebasing the custom commit onto %s\n' "$latest_tag"
+    if ! git -c rebase.updateRefs=false rebase --no-autostash --onto "$latest_tag" "$base_tag"; then
+        printf '\nRebase failed; build and installation were not started.\n' >&2
+        printf 'Resolve the conflicts in %s, then run git rebase --continue and rerun this script.\n' "$repo_dir" >&2
+        printf 'Or run git rebase --abort to restore the previous branch.\n' >&2
+        exit 1
+    fi
+
+    printf '\n==> To publish the rebased custom branch, run: git push --force-with-lease\n'
+fi
+
+printf '\n==> Building custom VS Code %s on %s (no branches or tags will be pushed)\n' "$latest_tag" "$custom_branch"
+if [[ $# -eq 0 ]]; then
+    npm run build-and-install
+else
+    npm run build-and-install -- "$@"
+fi
