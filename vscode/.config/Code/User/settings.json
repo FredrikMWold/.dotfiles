@@ -176,5 +176,6 @@
 "chat.sessionSync.enabled": true,
 "chat.mcp.gallery.enabled": true,
 "workbench.experimental.modernUI": false,
-"workbench.modernUIFrostedGlass": false
+"workbench.modernUIFrostedGlass": false,
+"git.detectWorktrees": true
 }

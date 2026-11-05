@@ -79,7 +79,7 @@
       },
       "@FredrikMWold/radix": {
          "preferences": {
-            "applications": "warp-web,prisma-decision-web,subsurface-portal-web",
+            "applications": "warp-web,prisma-decision-web",
             "context": "platform"
          }
       },

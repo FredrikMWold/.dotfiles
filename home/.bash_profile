@@ -18,3 +18,6 @@ fi
 
 # Vite+ bin (https://viteplus.dev)
 . "/home/fredrik/.config/vite-plus/env"
+
+# Vite+ bin (https://viteplus.dev)
+. "/home/fredrik/.vite-plus/env"
