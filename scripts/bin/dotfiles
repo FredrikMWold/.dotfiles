@@ -10,28 +10,12 @@ print_step() {
     echo -e "\033[1;33m➜\033[0m \033[1m$1\033[0m"
 }
 
-install_nvm() {
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-}
-
 install_apt_package_if_missing() {
     dpkg-query -l $1 &> /dev/null && print_step "$1 is already installed." || (print_step "$1 is not installed. Installing now..." && sudo apt install -y $1)
 }
 
 install_atuin() {
     curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
-}
-
-install_oh_my_zsh() {
-    OH_MY_ZSH_SH="$HOME/.oh-my-zsh/oh-my-zsh.sh"
-
-    if [ ! -f "$OH_MY_ZSH_SH" ]; then
-        echo "oh-my-zsh not found, installing..."
-        rm -rf "$HOME/.oh-my-zsh"
-        sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
-    else
-        print_step "oh-my-zsh is already installed."
-    fi
 }
 
 install_chrome() {
@@ -92,7 +76,7 @@ cd ~/.dotfiles && git pull
 
 print_header "Installing Apt Packages"
 install_apt_package_if_missing stow
-cd ~/.dotfiles && stow kitty pass atuin rofi scripts lazygit fonts oh-my-zsh vscode polybar services home ssh superfile --adopt
+cd ~/.dotfiles && stow kitty pass atuin rofi scripts lazygit fonts starship vscode polybar services home ssh superfile --adopt
 
 install_apt_package_if_missing wmctrl
 install_apt_package_if_missing pass
@@ -101,7 +85,6 @@ install_apt_package_if_missing pulseaudio
 install_apt_package_if_missing flameshot
 install_apt_package_if_missing curl
 install_apt_package_if_missing peek
-install_apt_package_if_missing zsh
 install_apt_package_if_missing htop
 install_apt_package_if_missing jq
 install_apt_package_if_missing xclip
@@ -150,14 +133,10 @@ go install github.com/fredrikmwold/branch-picker-tui/cmd/branch-picker-tui@lates
 print_step "Installing git-worktree-tui"
 go install github.com/fredrikmwold/git-worktree-tui/cmd/worktree-tui@latest
 
-print_header "Installing nvm"
-install_nvm
 print_header "Installing fzf"
 install_fzf
 print_header "Installing atuin"
 install_atuin
-print_header "Installing oh-my-zsh"
-install_oh_my_zsh
 print_header "Installing kitty"
 install_kitty
 
@@ -167,15 +146,8 @@ print_step "Set dotfiles git origin to ssh"
 cd ~/.dotfiles && git remote set-url origin git@github.com:FredrikMWold/.dotfiles.git
 
 print_step "Stow config files"
-cd ~/.dotfiles && stow kitty pass atuin scripts lazygit oh-my-zsh vscode git home ssh --adopt
+cd ~/.dotfiles && stow kitty pass atuin scripts lazygit starship vscode git home ssh --adopt
 
-
-if [[ "$SHELL" != *zsh ]]; then
-    print_step "Changing default shell to zsh"
-    chsh -s $(which zsh)
-else 
-    print_step "zsh is already the default shell."
-fi 
 
 print_step "Updating font cache"
 fc-cache -f

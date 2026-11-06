@@ -1,0 +1,103 @@
+"$schema" = "https://starship.rs/config-schema.json"
+
+add_newline = false
+command_timeout = 500
+format = "$os[](fg:244 bg:236)$directory([](fg:244 bg:236)$git_branch$git_commit$git_state$git_status)[](fg:236) "
+right_format = "[](fg:236)$status$cmd_duration$jobs$python$conda$nodejs$golang$time"
+
+[os]
+disabled = false
+format = "[ $symbol ]($style)"
+style = "fg:255 bg:236"
+
+[os.symbols]
+Arch = ""
+
+[directory]
+format = "[ $path$read_only ]($style)"
+repo_root_format = "[ $before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path$read_only ]($style)"
+style = "fg:31 bg:236"
+before_repo_root_style = "fg:103 bg:236"
+repo_root_style = "bold fg:39 bg:236"
+truncate_to_repo = false
+truncation_length = 4
+truncation_symbol = "…/"
+fish_style_pwd_dir_length = 1
+read_only = " "
+
+[git_branch]
+format = "[ $symbol$branch(:$remote_branch)]($style)"
+symbol = " "
+style = "fg:76 bg:236"
+truncation_length = 32
+truncation_symbol = "…"
+
+[git_commit]
+format = "[ @$hash$tag]($style)"
+style = "fg:76 bg:236"
+commit_hash_length = 8
+tag_disabled = false
+
+[git_state]
+format = "[ $state( $progress_current/$progress_total)]($style)"
+style = "fg:196 bg:236"
+
+[git_status]
+format = "([ $ahead_behind$stashed$conflicted$staged$modified$untracked$renamed$deleted ]($style))"
+style = "fg:178 bg:236"
+ahead = "[⇡${count}](fg:76 bg:236)"
+behind = "[⇣${count}](fg:76 bg:236)"
+diverged = "[⇣${behind_count}⇡${ahead_count}](fg:76 bg:236)"
+stashed = "[*${count} ](fg:76 bg:236)"
+conflicted = "[~${count} ](fg:196 bg:236)"
+staged = "+${count} "
+modified = "!${count} "
+untracked = "[?${count} ](fg:39 bg:236)"
+renamed = "»${count} "
+deleted = "-${count} "
+
+[status]
+disabled = false
+format = "[ $symbol$common_meaning$signal_name$maybe_int ]($style)"
+symbol = "✘ "
+# This text checkmark is included in FiraCode Nerd Font.
+success_symbol = "✓"
+style = "fg:160 bg:236"
+success_style = "fg:70 bg:236"
+pipestatus = true
+pipestatus_format = "[ $pipestatus ]($style)"
+pipestatus_separator = "[|](fg:244 bg:236)"
+
+[cmd_duration]
+min_time = 3000
+format = "[](fg:244 bg:236)[ $duration ]($style)"
+style = "fg:248 bg:236"
+
+[jobs]
+format = "[](fg:244 bg:236)[ $symbol$number ]($style)"
+symbol = ""
+style = "fg:37 bg:236"
+
+[python]
+format = "[](fg:244 bg:236)[ $symbol$version( $virtualenv) ]($style)"
+style = "fg:37 bg:236"
+
+[conda]
+format = "[](fg:244 bg:236)[ $symbol$environment ]($style)"
+style = "fg:37 bg:236"
+
+[nodejs]
+format = "[](fg:244 bg:236)[ $symbol$version ]($style)"
+symbol = " "
+style = "fg:70 bg:236"
+
+[golang]
+format = "[](fg:244 bg:236)[ $symbol$version ]($style)"
+symbol = " "
+style = "fg:37 bg:236"
+
+[time]
+disabled = false
+format = "[](fg:244 bg:236)[ $time ]($style)"
+style = "fg:66 bg:236"
+time_format = "%H:%M:%S"

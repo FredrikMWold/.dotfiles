@@ -1,10 +1,35 @@
 ## Installation
 
 ```bash
-git clone --recursive-submodules https://github.com/FredrikMWold/.dotfiles.git
+git clone https://github.com/FredrikMWold/.dotfiles.git
 cd .dotfiles
 ./config/bin/dotfiles
 ```
+
+No Git submodules are required.
+
+## Omarchy terminal shell
+
+The shared shell uses Omarchy's packaged Bash defaults, Starship, ble.sh, and
+Atuin. Install Starship with `omarchy pkg add starship` and ble.sh with
+`omarchy pkg aur add blesh-git`; Atuin, mise, and zoxide must also be installed.
+The general installation script above is a legacy apt-based installer, not an
+Omarchy setup command.
+
+Preview the shell links with
+`stow --no --verbose=2 --restow --dir="$HOME/.dotfiles" --target="$HOME" home starship`,
+then apply the same command without `--no` after resolving any conflicts.
+`home/.bashrc`, `home/.bash_profile`, `home/.profile`, `home/.blerc`, and
+`starship/.config/starship.toml` are shared; package installation and the login
+shell are machine-local.
+
+Bash loads ble.sh before Omarchy initializes Starship, mise, and zoxide.
+ble.sh provides syntax highlighting and inline suggestions; Atuin provides
+Ctrl-R history search and a suggestion source, leaving the Up arrow unchanged.
+The prompt retains the compact Powerline layout with a right-aligned status
+and clock, without cloud account or infrastructure context. The `oh-my-zsh`
+package is retired and must not be stowed.
+There is no Bun, NVM, or Vite+ shell initialization.
 
 ## Custom VS Code
 
