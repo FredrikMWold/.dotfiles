@@ -1,6 +1,6 @@
 # Mise migration: condensed assessment
 
-**Baseline:** `hyprland` is treated as main. Research performed on 2026-11-06 against installed Omarchy 4.5.0-3 and current mise documentation. No system configuration was changed.
+**Baseline:** `hyprland` is treated as main. System audit performed on 2026-11-06 against installed Omarchy 4.5.0-3; shell assessment updated on 2026-11-07. No system configuration was changed by this research.
 
 ## Verdict
 
@@ -9,6 +9,10 @@
 Use **`mise bootstrap`** for packages, tools, services, and source checkouts; **`mise dotfiles`** for reviewed configuration and its history. Both are stable features. Mise does **not** automatically discover customizations against Omarchy defaults: it tracks only declared resources and enrolled files. [Bootstrap](https://mise.jdx.dev/bootstrap.html) · [Dotfiles](https://mise.jdx.dev/dotfiles.html)
 
 ## What the system audit found
+
+**Shell update:** Zsh/Oh My Zsh/Powerlevel10k has been replaced by **Bash + Starship + ble.sh**, bringing the setup closer to Omarchy defaults. Bash and Starship reuse Omarchy's shell initialization; ble.sh remains an added integration. Migrate the remaining Bash overrides and ble.sh setup, not the old Zsh stack. Sources: live `~/.dotfiles/home/.bashrc`; `/usr/share/omarchy/default/bash/{rc,init}`.
+
+The counts below remain the **2026-11-06 snapshot**, not a fresh inventory after the shell change.
 
 | Comparison | Result |
 |---|---|
@@ -21,7 +25,7 @@ Use **`mise bootstrap`** for packages, tools, services, and source checkouts; **
 
 | Treatment | Settings and applications |
 |---|---|
-| **Already shared; preserve** | Generic Hyprland Lua bases, bindings/input/appearance, shell preferences, Kitty and VS Code settings |
+| **Already shared; preserve** | Generic Hyprland Lua bases, bindings/input/appearance, current Bash overrides and ble.sh integration, Kitty and VS Code settings |
 | **Additional sharing candidates** | FiraCode font choice; Btop refresh/sort/tree preferences; Herdr agent sorting; preferred browser/editor/terminal; optional application and development modules |
 | **Keep machine-specific** | Monitor layouts/scaling, GPU/kernel/boot settings, device plugins and services, hardware-oriented Btop layout |
 | **Do not capture as personal config** | Stock Neovim line-number/autoformat/clipboard behavior, stock terminal key encodings, generated themes, receipts, backups, caches, sessions, and histories |
@@ -45,7 +49,7 @@ Review-only discrepancies include missing core entries `fcitx5-table-extra` and 
 
 Before migration, reconcile the active global mise file with the `hyprland` branch's tracked version, preserve ignored-local Lua overlays and their base-first imports, and retain custom script/build payloads. Do not import obsolete `master` configuration. The canonical branch's inherited APT installer is not a reliable specification of this Omarchy system. [Canonical repository](https://github.com/FredrikMWold/.dotfiles/tree/391eb0c572193809a350fa43df2dd057fddf73ae)
 
-Test mappings before live deployment: existing symlinks can be retargeted, `--force` is not a backup, and submodule deployment needs verification. [Deployment behavior](https://mise.jdx.dev/dotfiles/managed.html)
+Test mappings before live deployment: existing symlinks can be retargeted, `--force` is not a backup, and any retained submodules need deployment verification. Do not retain obsolete Zsh plugin/theme dependencies merely because they remain in the repository. [Deployment behavior](https://mise.jdx.dev/dotfiles/managed.html)
 
 ## Coverage limit
 
